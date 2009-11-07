@@ -4,7 +4,7 @@ class CreateKnights < ActiveRecord::Migration
     create_table :knights do |t|
       t.integer :player_id, {:null => false}
       t.integer :level
-      t.boolean :activated
+      t.boolean :activated, {:default => false}
       t.timestamps
     end
   end

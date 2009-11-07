@@ -3,7 +3,7 @@ require 'test_helper'
 class LimitPerPlayerTest < ActiveSupport::TestCase
   
   def setup
-    @player = Player.make(:game => StandardGame.make)
+    @player = Player.make
   end
   
   def test_roads
