@@ -10,3 +10,7 @@ Player.blueprint do
   color
   game
 end
+
+Road.blueprint do
+  player
+end

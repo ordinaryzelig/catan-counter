@@ -5,6 +5,7 @@ class Player < ActiveRecord::Base
   has_many :knights
   has_many :settlements
   has_many :cities
+  has_many :roads
   belongs_to :game
   
   validates_presence_of :game_id
