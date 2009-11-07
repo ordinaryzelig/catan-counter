@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(:version => 20091107144429) do
   end
 
   create_table "knights", :force => true do |t|
-    t.integer  "player_id",  :null => false
+    t.integer  "player_id",                     :null => false
     t.integer  "level"
-    t.boolean  "activated"
+    t.boolean  "activated",  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
