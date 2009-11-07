@@ -1,0 +1,6 @@
+.DS_Store
+*.tmproj
+*.log
+*.sqlite3
+tmp/
+/app/rails_app/config/database.yml
