@@ -1,0 +1,4 @@
+- form_for @game do |game_form|
+  = game_form.select :game_type_attribute, Game.container
+  %br/
+  = game_form.submit 'create'
