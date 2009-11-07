@@ -1,0 +1,10 @@
+play to points
+6 colors
+swipe to switch  player
+player
+  name
+  picture
+  choose from contacts
+
+lite
+  track only up to 70% of required victory points
