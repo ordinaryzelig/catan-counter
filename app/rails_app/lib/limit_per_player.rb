@@ -5,9 +5,9 @@ module LimitPerPlayer
   def set_limit_per_player(limit_per_player)
     @limit_per_player = limit_per_player
     validate do |record|
-      player_owned_objects = record.player.send(self.name.tableize).all
+      player_owned_objects = record.player.send(record.class.name.tableize).all
       if player_owned_objects.size >= limit_per_player
-        record.errors.add_to_base "player can only have #{limit_per_player} #{record.class.tableize}"
+        record.errors.add_to_base "player can only have #{limit_per_player} #{record.class.name.tableize}"
       end
     end
   end
