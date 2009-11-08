@@ -15,7 +15,13 @@ class Player < ActiveRecord::Base
   has_many :knights
   belongs_to :game
   
+  # default name to color.
+  before_validation do |player|
+    player.name ||= player.color
+  end
+  
   validates_presence_of :game_id
+  validates_presence_of :name
   validates_inclusion_of :color, :in => COLORS
   validates_uniqueness_of :color, :scope => :game_id
   

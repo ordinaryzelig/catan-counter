@@ -14,6 +14,7 @@ class Game < ActiveRecord::Base
   end
   
   attr_accessor :game_type_attribute
+  accepts_nested_attributes_for :players, :reject_if => proc { |atts| atts['name'].blank? }
   
   def self.types
     @types ||= [StandardGame].freeze
