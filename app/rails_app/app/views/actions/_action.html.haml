@@ -1,0 +1,5 @@
+- disabled ||= false
+%div{:class => 'action' + (disabled ? ' disabled' : '')}
+  = image_tag(image)
+  %br/
+  = action
