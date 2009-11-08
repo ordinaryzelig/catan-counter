@@ -15,8 +15,10 @@ class GamesController < ApplicationController
     players_attributes = params[:game].delete(:players_attributes)
     @game = game_type.new(params[:game])
     @game.save!
-    @game.players_attributes = players_attributes
-    @game.save!
+    if players_attributes
+      @game.players_attributes = players_attributes
+      @game.save!
+    end
     flash[:success] = "game on!"
     redirect_to game_url(@game)
   end
