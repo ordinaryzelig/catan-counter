@@ -38,4 +38,22 @@ class PlayerTest < ActiveSupport::TestCase
     assert_equal color, player.name
   end
   
+  def test_deactivate_knights
+    player = Player.make
+    2.times { player.knights.make(:activated => true) }
+    assert !player.knights.deactivate.any?(&:activated)
+  end
+  
+  def test_can_promote_knight?
+    player = Player.make
+    # no knights to promote.
+    assert !player.can_promote_knight?(1)
+    # one knight to promote with no other knights.
+    player.knights.make(:level => 1)
+    assert player.can_promote_knight?(1)
+    # already has 2 level 2 knights.
+    2.times { player.knights.make(:level => 2) }
+    assert !player.can_promote_knight?(1)
+  end
+  
 end

@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   
   def show
-    @game = Game.find(params[:id])
+    @game = Game.find(params[:id], :include => {:players => [:settlements, :cities, :knights]})
   end
   
   def new

@@ -12,7 +12,11 @@ class Player < ActiveRecord::Base
       4 - size
     end
   end
-  has_many :knights
+  has_many :knights do
+    def deactivate
+      each &:deactivate
+    end
+  end
   belongs_to :game
   
   # default name to color.
@@ -39,6 +43,17 @@ class Player < ActiveRecord::Base
   
   def can_build_city?
     settlements.any? && cities.left > 0
+  end
+  
+  def can_build_knight?(level)
+    knights.level(level).size < 2
+  end
+  
+  def can_promote_knight?(level)
+    return false if level == 3
+    knights_to_promote = knights.level(level)
+    higher_level_knights = knights.level(level + 1)
+    knights_to_promote.any? && higher_level_knights.size < 2
   end
   
 end

@@ -1,5 +1,4 @@
 play to points
-6 colors
 swipe to switch  player
 player
   name
@@ -8,3 +7,6 @@ player
 
 lite
   track only up to 70% of required victory points
+
+hide/show victory points
+drag knight to desert
