@@ -1,0 +1,14 @@
+#gameTitle
+  %span#number= "game ##{@game.id}"
+  %br/
+  %span#type= "(#{@game.type.to_s.titleize})"
+  
+%table.players{:border => 1}
+  %tr
+    - @game.players.each do |player|
+      %td.player{:width => "#{100 / @game.players.size}%"}
+        .color{:style => "background-color: #{player.color}"}
+          %span.name= player.color
+        .victoryPoints= pluralize(player.victory_points, 'victory point')
+        = render :partial => 'cities/cities', :locals => {:player => player}
+        = render :partial => 'settlements/settlements', :locals => {:player => player}
