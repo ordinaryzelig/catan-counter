@@ -1,5 +1,1 @@
-- disabled ||= false
-%div{:class => 'action' + (disabled ? ' disabled' : '')}
-  = image_tag('add.png')
-  %br/
-  build
+= render :partial => 'actions/action', :locals => {:disabled => disabled, :image => 'add.png', :action => 'build'}
