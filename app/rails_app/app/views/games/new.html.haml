@@ -1,4 +1,15 @@
-- form_for @game do |game_form|
-  = game_form.select :game_type_attribute, Game.container
-  %br/
+- form_for @game, :url => games_url, :method => :post do |game_form|
+  = game_form.error_messages
+  .type
+    = game_form.label :game_type_attribute, 'type'
+    = game_form.select :game_type_attribute, Game.container
+  .players
+    players
+    - Player::COLORS.each do |color|
+      - game_form.fields_for :players, @game.players.new(:color => color) do |player_form|
+        .player{:style => "background-color: #{color}"}
+          %span.color= color
+          %span.name= player_form.text_field :name
+          = player_form.hidden_field :color
+          
   = game_form.submit 'create'

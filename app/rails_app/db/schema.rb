@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(:version => 20091106055904) do
   end
 
   create_table "players", :force => true do |t|
-    t.string   "color"
-    t.integer  "game_id"
+    t.integer  "game_id",    :null => false
+    t.string   "color",      :null => false
+    t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

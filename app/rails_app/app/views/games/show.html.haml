@@ -7,8 +7,8 @@
   %tr
     - @game.players.each do |player|
       %td.player{:width => "#{100 / @game.players.size}%"}
-        .color{:style => "background-color: #{player.color}"}
-          %span.name= player.color
+        .name{:style => "background-color: #{player.color}"}
+          %span= player.name
         .victoryPoints= pluralize(player.victory_points, 'victory point')
         = render :partial => 'cities/cities', :locals => {:player => player}
         = render :partial => 'settlements/settlements', :locals => {:player => player}

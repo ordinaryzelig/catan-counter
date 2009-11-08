@@ -9,4 +9,13 @@ class GamesControllerTest < ActionController::TestCase
     assert game.is_a?(StandardGame)
   end
   
+  def test_create_with_players_attributes
+    player = Player.make_unsaved(:name => 'asdf')
+    assert_difference('Game.all.size') do
+      assert_difference('Player.all.size') do
+        post :create, :game => {:game_type_attribute => 'StandardGame', :players_attributes => {0 => player.attributes, 1 => {:name => ''}}}
+      end
+    end
+  end
+  
 end

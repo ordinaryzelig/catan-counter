@@ -32,4 +32,10 @@ class PlayerTest < ActiveSupport::TestCase
     assert !player.can_build_city?
   end
   
+  def test_default_name_to_color
+    color = Player::COLORS.first
+    player = Player.make(:color => color, :name => nil)
+    assert_equal color, player.name
+  end
+  
 end
