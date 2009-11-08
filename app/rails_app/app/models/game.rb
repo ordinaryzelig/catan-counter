@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
       map &:color
     end
     def colors_left
-      colors_left = Player::COLORS - colors
+      colors_left = proxy_owner.class.colors - colors
       def colors_left.container
         map { |color| [color, color] }
       end

@@ -1,7 +1,5 @@
 class Player < ActiveRecord::Base
   
-  COLORS = ['blue', 'red', 'white', 'orange', 'brown', 'green']
-  
   has_many :settlements do
     def left
       5 - size
@@ -26,7 +24,12 @@ class Player < ActiveRecord::Base
   
   validates_presence_of :game_id
   validates_presence_of :name
-  validates_inclusion_of :color, :in => COLORS
+  # custom validates_inclusion_of.
+  validate do |player|
+    unless player.errors.on(:game_id)
+      player.add(:color, 'is not in the list') unless player.game.class.colors.include?(player.color)
+    end
+  end
   validates_uniqueness_of :color, :scope => :game_id
   
   after_create do |player|

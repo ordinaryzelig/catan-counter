@@ -3,6 +3,9 @@
   %br/
   %span#type= "(#{@game.type.to_s.titleize})"
 
+- if @game.players
+  = link_to Player.new
+
 %table.players{:border => 1}
   %tr
     - @game.players.each do |player|

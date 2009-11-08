@@ -4,7 +4,7 @@ require 'sham'
 StandardGame.blueprint do
 end
 
-Sham.color { |i| Player::COLORS[i -1] }
+Sham.color { |i| StandardGame.colors[i -1] }
 
 Player.blueprint do
   color
