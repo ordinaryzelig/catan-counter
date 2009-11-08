@@ -1,15 +1,4 @@
 .settlements
   %span.image= "#{image_tag('settlement.png')} = "
   %span.number= player.settlements.size
-  - if player.can_build_settlement?
-    - link_to player_settlements_url(player), :method => :post do
-      .action
-        = image_tag('add.png')
-        %br/
-        build
-  - if player.can_build_city?
-    - link_to settlement_upgrade_to_city_url(player.settlements.first), :method => :post do
-      .action
-        = image_tag('up.png')
-        %br/
-        upgrade to city
+  = link_to_if player.can_build_settlement?, render(:partial => 'actions/build', :locals => {:disabled => !player.can_build_settlement?}), player_settlements_url(player), :method => :post
