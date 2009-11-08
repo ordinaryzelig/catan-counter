@@ -5,7 +5,7 @@
     = game_form.select :game_type_attribute, Game.container
   .players
     players
-    - Player::COLORS.each do |color|
+    - @game.colors.each do |color|
       - game_form.fields_for :players, @game.players.new(:color => color) do |player_form|
         .player{:style => "background-color: #{color}"}
           %span.color= color

@@ -1,6 +1,12 @@
 class StandardGame < Game
   
-  DEFAULT_VICTORY_POINTS_TO_WIN = 10
+  def self.default_victory_points_to_win
+    10
+  end
+  
+  def self.colors
+    ['blue', 'red', 'white', 'orange']
+  end
   
   def create_starter_buildings(player)
     2.times { player.settlements.create! }

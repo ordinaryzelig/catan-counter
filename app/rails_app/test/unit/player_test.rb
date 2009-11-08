@@ -33,7 +33,7 @@ class PlayerTest < ActiveSupport::TestCase
   end
   
   def test_default_name_to_color
-    color = Player::COLORS.first
+    color = 'blue'
     player = Player.make(:color => color, :name => nil)
     assert_equal color, player.name
   end

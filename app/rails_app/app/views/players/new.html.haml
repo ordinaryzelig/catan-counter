@@ -1,4 +1,1 @@
-- form_for [@game, @player], :url => game_players_url(@game), :method => :post do |f|
-  = f.select :color, @game.players.colors_left.container
-  %br/
-  = f.submit 'create'
+= render :partial => 'form'
