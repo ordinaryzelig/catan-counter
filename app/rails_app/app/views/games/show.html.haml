@@ -12,3 +12,4 @@
         .victoryPoints= pluralize(player.victory_points, 'victory point')
         = render :partial => 'cities/cities', :locals => {:player => player}
         = render :partial => 'settlements/settlements', :locals => {:player => player}
+        = render :partial => 'knights/knights', :locals => {:player => player}

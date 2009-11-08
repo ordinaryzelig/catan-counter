@@ -21,6 +21,6 @@ end
 
 Knight.blueprint do
   player { Player.make }
-  level
+  level { 1 }
   activated { false }
 end

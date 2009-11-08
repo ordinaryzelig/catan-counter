@@ -10,8 +10,9 @@ ActionController::Routing::Routes.draw do |map|
     player.resources :knights
   end
   
-  map.settlement_upgrade_to_city 'settlements/:id/upgrade_to_city', :controller => 'settlements', :action => 'upgrade_to_city', :conditions => {:method => :post}
-  map.city_downgrade_to_settlement 'cities/:id/downgrade_to_settlement', :controller => 'cities', :action => 'downgrade_to_settlement', :conditions => {:method => :post}
-  # map.knight_promote 'knights/:id/promote', :controller => 'knights', :action => 'promote', :conditions => {:method => :post}
+  map.upgrade_to_city_settlement 'settlements/:id/upgrade_to_city', :controller => 'settlements', :action => 'upgrade_to_city', :conditions => {:method => :post}
+  map.downgrade_to_settlement_city 'cities/:id/downgrade_to_settlement', :controller => 'cities', :action => 'downgrade_to_settlement', :conditions => {:method => :post}
+  
+  map.resources :knights, :member => {:promote => :post}
   
 end

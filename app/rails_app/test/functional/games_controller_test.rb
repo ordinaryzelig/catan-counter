@@ -18,4 +18,10 @@ class GamesControllerTest < ActionController::TestCase
     end
   end
   
+  def test_show
+    player = Player.make
+    get :show, :id => player.game.to_param
+    assert_response :success
+  end
+  
 end

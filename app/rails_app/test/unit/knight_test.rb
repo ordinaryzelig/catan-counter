@@ -6,7 +6,29 @@ class KnightTest < ActiveSupport::TestCase
     player = Player.make
     level_1s = 2.times.map { Knight.make(:player => player, :level => 1) }
     Knight.make(:player => player, :level => 2)
-    assert_raise(ActiveRecord::RecordInvalid) { Knight.make(:player => player, :level => 1) }
+    assert_raise(ActiveRecord::RecordInvalid) do
+      Knight.make(:player => player, :level => 1)
+    end
+  end
+  
+  def test_promote
+    knight = Knight.make
+    knight.promote
+    assert_equal 2, knight.level
+  end
+  
+  def test_bad_promotion
+    player = Player.make
+    2.times { player.knights.make(:level => 2) }
+    assert_raise(ActiveRecord::RecordInvalid) { player.knights.make.promote }
+  end
+  
+  def test_toggle_activation
+    knight = Knight.make(:activated => true)
+    knight.toggle_activation
+    assert !knight.activated
+    knight.toggle_activation
+    assert knight.activated
   end
   
 end
