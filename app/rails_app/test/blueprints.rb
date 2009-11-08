@@ -11,8 +11,12 @@ Player.blueprint do
   game { StandardGame.make }
 end
 
-Road.blueprint do
-  player { Player.make }
+Settlement.blueprint do
+  player
+end
+
+City.blueprint do
+  player
 end
 
 Knight.blueprint do

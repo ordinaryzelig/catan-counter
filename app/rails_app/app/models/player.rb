@@ -2,9 +2,16 @@ class Player < ActiveRecord::Base
   
   COLORS = ['blue', 'red', 'white', 'orange', 'brown', 'green']
   
-  has_many :settlements
-  has_many :cities
-  has_many :roads
+  has_many :settlements do
+    def left
+      5 - size
+    end
+  end
+  has_many :cities do
+    def left
+      4 - size
+    end
+  end
   has_many :knights
   belongs_to :game
   
@@ -17,7 +24,15 @@ class Player < ActiveRecord::Base
   end
   
   def victory_points
-    settlements.size + cities.size
+    settlements.size + (cities.size * 2)
+  end
+  
+  def can_build_settlement?
+    settlements.left > 0
+  end
+  
+  def can_build_city?
+    settlements.any? && cities.left > 0
   end
   
 end

@@ -4,10 +4,13 @@ ActionController::Routing::Routes.draw do |map|
     game.resources :players
   end
   
-  map.resources :cities
+  map.resources :players do |player|
+    player.resources :settlements
+    player.resources :cities
+    player.resources :knights
+  end
   
-  map.resources :settlements
-  
-  map.resources :knights
+  map.settlement_upgrade_to_city 'settlements/:id/upgrade_to_city', :controller => 'settlements', :action => 'upgrade_to_city', :conditions => {:method => :post}
+  map.knight_promote 'knights/:id/promote', :controller => 'knights', :action => 'promote', :conditions => {:method => :post}
   
 end

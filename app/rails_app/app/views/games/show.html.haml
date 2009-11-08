@@ -2,7 +2,7 @@
   %span#number= "game ##{@game.id}"
   %br/
   %span#type= "(#{@game.type.to_s.titleize})"
-  
+
 %table.players{:border => 1}
   %tr
     - @game.players.each do |player|
