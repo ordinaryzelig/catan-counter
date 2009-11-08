@@ -6,4 +6,9 @@ class Settlement < ActiveRecord::Base
   
   set_limit_per_player 5
   
+  def upgrade_to_city
+    destroy
+    player.cities.create!
+  end
+  
 end
