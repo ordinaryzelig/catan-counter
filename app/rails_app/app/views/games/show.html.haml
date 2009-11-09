@@ -1,6 +1,8 @@
 #gameTitle
-  %span#number= "game ##{@game.id}"
-  %br/
+  #number= "game ##{@game.id}"
+  #expansions
+    - @game.expansions.each do |expansion|
+      = expansion.display_name
 
 - if @game.players
   = link_to Player.new
