@@ -4,9 +4,8 @@
   
   .expansions
     - Expansion.all.each do |expansion|
-      - game_form.fields_for :expansion_ids do |expansion_form|
-        = expansion_form.check_box :name
-        = expansion_form.label :name, expansion.name.titleize
+      = check_box_tag "game[expansion_ids][]", expansion.id, @game.expansion_ids.include?(expansion.id), :id => dom_id(expansion)
+      = label_tag dom_id(expansion), expansion.name
         
   .players
     players
