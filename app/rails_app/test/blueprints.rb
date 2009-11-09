@@ -1,14 +1,14 @@
 require 'machinist/active_record'
 require 'sham'
 
-StandardGame.blueprint do
-end
+Sham.color { |i| ['blue', 'red', 'white', 'orange'][i -1] }
 
-Sham.color { |i| StandardGame.colors[i -1] }
+Game.blueprint do
+end
 
 Player.blueprint do
   color
-  game { StandardGame.make }
+  game { Game.make }
 end
 
 Settlement.blueprint do

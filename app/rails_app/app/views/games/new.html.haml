@@ -1,11 +1,8 @@
 - form_for @game, :url => games_url, :method => :post do |game_form|
   = game_form.error_messages
-  .type
-    = game_form.label :game_type_attribute, 'type'
-    = game_form.select :game_type_attribute, Game.container
   .players
     players
-    - @game.colors.each do |color|
+    - @game.class.colors.each do |color|
       - game_form.fields_for :players, @game.players.new(:color => color) do |player_form|
         .player{:style => "background-color: #{color}"}
           %span.color= color

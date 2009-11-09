@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
+  map.root :controller => 'games', :action => 'new'
+  
   map.resources :games do |game|
     game.resources :players
   end
