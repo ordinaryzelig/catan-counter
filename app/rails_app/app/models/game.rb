@@ -41,4 +41,6 @@ class Game < ActiveRecord::Base
     2.times { player.settlements.create! }
   end
   
+  alias_method :uses?, :is_a?
+  
 end
