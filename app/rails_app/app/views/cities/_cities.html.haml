@@ -1,6 +1,4 @@
 .cities
   %span.image= "#{image_tag('city.png')} x "
   %span.number= player.cities.size
-  - can_build = player.can_build_city?
-  = link_to_if can_build, action_partial('build', image_tag('add.png'), !can_build), upgrade_to_city_settlement_url(player.settlements.first), :method => :post
   = link_to_if player.cities.any?, action_partial('downgrade', image_tag('down.png'), player.cities.empty?), downgrade_to_settlement_city_url(player.cities.first), :method => :post
