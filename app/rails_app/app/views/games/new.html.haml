@@ -3,10 +3,12 @@
   = game_form.error_messages
   
   .expansions
-    - Expansion.all.each do |expansion|
-      = check_box_tag "game[expansion_ids][]", expansion.id, @game.expansion_ids.include?(expansion.id), :id => dom_id(expansion)
-      = label_tag dom_id(expansion), expansion.display_name
-        
+    %table
+      - Expansion.all.each do |expansion|
+        %tr
+          %td= check_box_tag "game[expansion_ids][]", expansion.id, @game.expansion_ids.include?(expansion.id), :id => dom_id(expansion)
+          %td= label_for_expansion(expansion)
+          
   .players
     players
     - @game.colors.each do |color|
