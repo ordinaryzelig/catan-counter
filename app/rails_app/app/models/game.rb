@@ -33,7 +33,7 @@ class Game < ActiveRecord::Base
   end
   
   def colors
-    ['blue', 'red', 'white', 'orange']
+    ['blue', 'red', 'white', 'orange', 'green', 'brown'].freeze
   end
   
   def create_starter_buildings(player)
