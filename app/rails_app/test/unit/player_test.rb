@@ -11,6 +11,11 @@ class PlayerTest < ActiveSupport::TestCase
     assert_equal 6, player.victory_points
   end
   
+  def test_create_starter_buildings
+    player = Player.make
+    assert_equal 2, player.reload.settlements.size
+  end
+  
   def test_can_build_settlement?
     player = Player.make
     player.settlements.left.times { player.settlements.make  }

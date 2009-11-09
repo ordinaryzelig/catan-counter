@@ -3,7 +3,7 @@
   #expansions
     - @game.expansions.each do |expansion|
       = expansion.display_name
-
+      
 %table.players{:border => 1}
   %tr
     - @game.players.each do |player|

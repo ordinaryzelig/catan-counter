@@ -10,10 +10,4 @@ class GameTest < ActiveSupport::TestCase
     assert_equal [game.colors.last], game.players.colors_left
   end
   
-  def test_create_starter_buildings
-    game = Game.make
-    player = game.players.make
-    assert_equal 2, player.reload.settlements.size
-  end
-  
 end
