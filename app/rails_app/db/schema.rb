@@ -9,10 +9,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091106055904) do
+ActiveRecord::Schema.define(:version => 20091109034140) do
 
   create_table "cities", :force => true do |t|
     t.integer  "player_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expansions", :force => true do |t|
+    t.string   "name",         :null => false
+    t.string   "display_name", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expansions_games", :id => false, :force => true do |t|
+    t.integer  "game_id",      :null => false
+    t.integer  "expansion_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
