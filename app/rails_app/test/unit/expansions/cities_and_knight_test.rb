@@ -6,6 +6,10 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     @game = Game.make(:expansions => [Expansion.make(:cities_and_knights)])
   end
   
+  def test_uses?
+    assert @game.uses?(CitiesAndKnights)
+  end
+  
   def test_default_victory_points_to_win
     assert_equal 13, @game.reload.default_victory_points_to_win
   end
