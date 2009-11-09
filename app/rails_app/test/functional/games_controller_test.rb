@@ -24,4 +24,13 @@ class GamesControllerTest < ActionController::TestCase
     end
   end
   
+  def test_cities_and_knights_shows_knights
+    game = Player.make.game
+    get :show, :id => game.to_param
+    assert_no_tag :div, :attributes => {:class => 'knights'}
+    game.expansions << Expansion.make(:cities_and_knights)
+    get :show, :id => game.to_param
+    assert_tag :div, :attributes => {:class => 'knights'}
+  end
+  
 end
