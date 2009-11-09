@@ -1,5 +1,7 @@
 class Game < ActiveRecord::Base
   
+  include ExpansionModelMethods
+  
   has_many :players do
     def colors
       map &:color
@@ -15,19 +17,7 @@ class Game < ActiveRecord::Base
   has_and_belongs_to_many :expansions
   has_many :knights, :through => :players
   
-  after_create :extend_expansions
-  
   accepts_nested_attributes_for :players, :reject_if => proc { |atts| atts['name'].blank? }
-  
-  def extend_expansions
-    expansions.each do |expansion|
-      extend expansion.name.constantize
-    end
-  end
-  
-  def after_find
-    extend_expansions
-  end
   
   def default_victory_points_to_win
     10
@@ -36,11 +26,5 @@ class Game < ActiveRecord::Base
   def colors
     ['blue', 'red', 'white', 'orange', 'green', 'brown'].freeze
   end
-  
-  def create_starter_buildings(player)
-    2.times { player.settlements.create! }
-  end
-  
-  alias_method :uses?, :is_a?
   
 end

@@ -1,5 +1,7 @@
 class Player < ActiveRecord::Base
   
+  include ExpansionModelMethods
+  
   has_many :settlements do
     def left
       5 - size
@@ -17,6 +19,8 @@ class Player < ActiveRecord::Base
   end
   belongs_to :game
   
+  delegate :expansions, :to => :game
+  
   # default name to color.
   before_validation do |player|
     player.name ||= player.color
@@ -32,8 +36,10 @@ class Player < ActiveRecord::Base
   end
   validates_uniqueness_of :color, :scope => :game_id
   
-  after_create do |player|
-    player.game.create_starter_buildings(player)
+  after_create :create_starter_buildings
+  
+  def create_starter_buildings
+    2.times { settlements.create! }
   end
   
   def victory_points
