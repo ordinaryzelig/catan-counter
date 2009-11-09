@@ -14,7 +14,7 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   config.load_paths += [
     "#{RAILS_ROOT}/extras",
-    "#{RAILS_ROOT}/app/models/game_types"
+    "#{RAILS_ROOT}/app/models/expansions"
   ]
 
   # Specify gems that this application depends on and have them installed with rake gems:install
