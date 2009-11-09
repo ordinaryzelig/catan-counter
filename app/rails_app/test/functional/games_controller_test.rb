@@ -2,6 +2,12 @@ require 'test_helper'
 
 class GamesControllerTest < ActionController::TestCase
   
+  def test_show
+    player = Player.make
+    get :show, :id => player.game.to_param
+    assert_response :success
+  end
+  
   def test_create
     post :create, :game => {}
     game = assigns('game')
@@ -16,12 +22,6 @@ class GamesControllerTest < ActionController::TestCase
         post :create, :game => {:players_attributes => {0 => player.attributes, 1 => {:name => ''}}}
       end
     end
-  end
-  
-  def test_show
-    player = Player.make
-    get :show, :id => player.game.to_param
-    assert_response :success
   end
   
 end
