@@ -1,7 +1,6 @@
 #gameTitle
   %span#number= "game ##{@game.id}"
   %br/
-  %span#type= "(#{@game.type.to_s.titleize})"
 
 - if @game.players
   = link_to Player.new

@@ -14,15 +14,18 @@ class Game < ActiveRecord::Base
   end
   has_many :knights, :through => :players
   
-  attr_accessor :game_type_attribute
   accepts_nested_attributes_for :players, :reject_if => proc { |atts| atts['name'].blank? }
   
-  def self.types
-    @types ||= [StandardGame].freeze
+  def self.default_victory_points_to_win
+    10
   end
   
-  def self.container
-    types.map { |type| [type.name.titleize, type.name] }
+  def self.colors
+    ['blue', 'red', 'white', 'orange']
+  end
+  
+  def create_starter_buildings(player)
+    2.times { player.settlements.create! }
   end
   
 end

@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(:version => 20091106055904) do
   end
 
   create_table "games", :force => true do |t|
-    t.string   "type",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
