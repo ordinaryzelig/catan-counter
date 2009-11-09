@@ -1,8 +1,16 @@
 - form_for @game, :url => games_url, :method => :post do |game_form|
+  
   = game_form.error_messages
+  
+  .expansions
+    - Expansion.all.each do |expansion|
+      - game_form.fields_for :expansion_ids do |expansion_form|
+        = expansion_form.check_box :name
+        = expansion_form.label :name, expansion.name.titleize
+        
   .players
     players
-    - @game.class.colors.each do |color|
+    - @game.colors.each do |color|
       - game_form.fields_for :players, @game.players.new(:color => color) do |player_form|
         .player{:style => "background-color: #{color}"}
           %span.color= color

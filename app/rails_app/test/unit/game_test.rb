@@ -4,10 +4,10 @@ class GameTest < ActiveSupport::TestCase
   
   def test_players_colors_left
     game = Game.make
-    game.class.colors[0...-1].each do |color|
+    game.colors[0...-1].each do |color|
       game.players.make(:color => color)
     end
-    assert_equal [game.class.colors.last], game.players.colors_left
+    assert_equal [game.colors.last], game.players.colors_left
   end
   
   def test_create_starter_buildings

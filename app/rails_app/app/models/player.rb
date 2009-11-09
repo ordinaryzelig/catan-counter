@@ -27,7 +27,7 @@ class Player < ActiveRecord::Base
   # custom validates_inclusion_of.
   validate do |player|
     unless player.errors.on(:game_id)
-      player.add(:color, 'is not in the list') unless player.game.class.colors.include?(player.color)
+      player.add(:color, 'is not in the list') unless player.game.colors.include?(player.color)
     end
   end
   validates_uniqueness_of :color, :scope => :game_id
