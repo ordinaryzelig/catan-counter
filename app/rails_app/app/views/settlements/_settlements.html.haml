@@ -3,3 +3,5 @@
   %span.number= player.settlements.size
   - can_build = player.can_build_settlement?
   = link_to_if can_build, action_partial('build', image_tag('add.png'), !can_build), player_settlements_url(player), :method => :post
+  - can_build = player.can_build_city?
+  = link_to_if can_build, action_partial('upgrade', image_tag('up.png'), !can_build), upgrade_to_city_settlement_url(player.settlements.first), :method => :post
