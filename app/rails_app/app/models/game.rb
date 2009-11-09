@@ -13,6 +13,7 @@ class Game < ActiveRecord::Base
     end
   end
   has_and_belongs_to_many :expansions
+  has_many :knights, :through => :players
   
   after_create :extend_expansions
   
