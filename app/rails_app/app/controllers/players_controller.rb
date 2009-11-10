@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
     @player = @game.players.build(params[:player])
     if @player.save
       flash[:success] = "#{@player.color} has entered catan"
-      redirect_to game_url(@game)
+      redirect_to @game
     else
       render 'new'
     end

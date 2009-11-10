@@ -3,10 +3,12 @@ require 'test_helper'
 class CitiesAndKnightTest < ActiveSupport::TestCase
   
   def setup
-    @game = Game.make(:expansions => [Expansion.make(:cities_and_knights)])
+    @expansion = Expansion.make(:cities_and_knights)
+    @game = Game.make(:expansions => [@expansion])
   end
   
   def test_uses?
+    assert @game.uses?(@expansion)
     assert @game.uses?(CitiesAndKnights)
   end
   
