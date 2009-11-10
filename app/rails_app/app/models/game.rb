@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   
-  include ExpansionModelMethods
+  include ExpandedModelMethods
   
   has_many :players do
     def colors
@@ -35,8 +35,15 @@ class Game < ActiveRecord::Base
       proxy_target.detect { |player| player.color == color.to_s }
     end
   end
-  has_and_belongs_to_many :expansions
+  has_and_belongs_to_many :expansions, :after_add => :expansion_added
   has_many :knights, :through => :players
+  
+  before_validation do |game|
+    game.extend_expansions
+    game.victory_points_to_win ||= game.default_victory_points_to_win
+  end
+  
+  validates_presence_of :victory_points_to_win
   
   after_save do |game|
     game.players.save! if game.players_attributes_changed

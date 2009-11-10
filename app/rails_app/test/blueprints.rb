@@ -4,6 +4,7 @@ require 'sham'
 Sham.color { |i| ['blue', 'red', 'white', 'orange'][i -1] }
 
 Game.blueprint do
+  victory_points_to_win {}
 end
 
 Player.blueprint do

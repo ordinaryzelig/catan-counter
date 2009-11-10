@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20091109034140) do
   end
 
   create_table "games", :force => true do |t|
+    t.integer  "victory_points_to_win", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

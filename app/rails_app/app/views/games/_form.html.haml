@@ -14,13 +14,4 @@
           %span.name= player_form.text_field :name
           = player_form.hidden_field :color
           
-  - if @game.new_record?
-    .expansions
-      expansions
-      %table{:border => 1}
-        - Expansion.all.each do |expansion|
-          %tr
-            %td= check_box_tag "game[expansion_ids][]", expansion.id, @game.expansion_ids.include?(expansion.id), :id => dom_id(expansion)
-            %td= label_for_expansion(expansion)
-            
   = game_form.submit 'save'

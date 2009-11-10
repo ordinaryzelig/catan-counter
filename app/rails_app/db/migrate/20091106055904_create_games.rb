@@ -2,6 +2,7 @@ class CreateGames < ActiveRecord::Migration
   
   def self.up
     create_table :games do |t|
+      t.integer :victory_points_to_win, {:null => false}
       t.timestamps
     end
   end
