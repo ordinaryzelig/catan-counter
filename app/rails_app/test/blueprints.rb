@@ -25,6 +25,7 @@ end
 Expansion.blueprint(:cities_and_knights) do
   name { 'CitiesAndKnights' }
   display_name { 'cities and knights' }
+  description { 'adds knights, metropolises, and barbarians. first to 13 wins.' }
 end
 
 Knight.blueprint do

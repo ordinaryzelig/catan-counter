@@ -10,7 +10,11 @@ class GamesControllerTest < ActionController::TestCase
   
   def test_create
     post :create, :game => {}
-    game = assigns('game')
+    assert_redirected_to game_url(Game.first)
+  end
+  
+  def test_create_and_add_expansions
+    post :create, :game => {}, :add_expansions => '1'
     assert_redirected_to game_expansions_url(Game.first)
   end
   

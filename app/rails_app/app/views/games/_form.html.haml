@@ -13,5 +13,12 @@
           %span.color= color
           %span.name= player_form.text_field :name
           = player_form.hidden_field :color
-          
+  
+  - if @game.new_record?        
+    = check_box_tag :add_expansions
+    = label_tag :add_expansions, 'add expansions'
+    %br/
+  - else
+    = game_form.label :victory_points_to_win
+    = game_form.text_field :victory_points_to_win, {:size => 2}
   = game_form.submit 'save'
