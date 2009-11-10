@@ -1,6 +1,6 @@
 class Player < ActiveRecord::Base
   
-  include ExpansionModelMethods
+  include ExpandedModelMethods
   
   has_many :settlements do
     def left

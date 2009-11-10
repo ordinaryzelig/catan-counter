@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :games do |game|
     game.resources :players
+    game.resources :expansions
   end
   
   map.resources :players do |player|

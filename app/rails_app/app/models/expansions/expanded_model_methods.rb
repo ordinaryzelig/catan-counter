@@ -1,4 +1,4 @@
-module ExpansionModelMethods
+module ExpandedModelMethods
   
   def self.included(base)
     base.class_eval do
@@ -19,10 +19,20 @@ module ExpansionModelMethods
     extend_expansions
   end
   
+  # tried overwriting extend, but that didn't work.
+  def extend_expansion(expansion)
+    extend expansion.name.constantize
+  end
+  
   def extend_expansions
     expansions.each do |expansion|
-      extend expansion.name.constantize
+      extend_expansion expansion
     end
+  end
+  
+  def expansion_added(expansion)
+    extend_expansion expansion
+    expansion_added(expansion) # this should call newly defined method in expansion module.
   end
   
 end
