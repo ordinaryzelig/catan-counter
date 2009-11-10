@@ -3,7 +3,7 @@
   #expansions
     - @game.expansions.each do |expansion|
       = expansion.display_name
-  = link_to 'edit/add players', edit_game_url(@game)
+  = link_to 'edit/add players or customize', edit_game_url(@game)
 
 %table.players{:border => 1}
   %tr

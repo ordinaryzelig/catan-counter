@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20091109034140) do
   create_table "expansions", :force => true do |t|
     t.string   "name",         :null => false
     t.string   "display_name", :null => false
+    t.string   "description",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

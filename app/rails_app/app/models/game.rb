@@ -43,7 +43,7 @@ class Game < ActiveRecord::Base
     game.victory_points_to_win ||= game.default_victory_points_to_win
   end
   
-  validates_presence_of :victory_points_to_win
+  validates_numericality_of :victory_points_to_win
   
   after_save do |game|
     game.players.save! if game.players_attributes_changed

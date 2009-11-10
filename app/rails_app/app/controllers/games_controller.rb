@@ -21,7 +21,11 @@ class GamesController < ApplicationController
       game.players_attributes = players_attributes
       game.save!
     end
-    redirect_to game_expansions_url(game)
+    if params[:add_expansions] == '1'
+      redirect_to game_expansions_url(game)
+    else
+      redirect_to game
+    end
   end
   
   def update
