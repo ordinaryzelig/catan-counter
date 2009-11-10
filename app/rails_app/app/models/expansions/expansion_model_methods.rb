@@ -6,7 +6,14 @@ module ExpansionModelMethods
     end
   end
   
-  alias_method :uses?, :is_a?
+  def uses?(expansion_object_or_module)
+    case expansion_object_or_module
+    when Expansion
+      expansion_object_or_module.name.constantize
+    when Module
+      is_a? expansion_object_or_module
+    end
+  end
   
   def after_find
     extend_expansions

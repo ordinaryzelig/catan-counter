@@ -8,17 +8,26 @@ class GamesController < ApplicationController
     @game = Game.new
   end
   
+  def edit
+    @game = Game.find(params[:id])
+  end
+  
   def create
     # get players_attributes because game needs to be saved before adding players.
     players_attributes = params[:game].delete(:players_attributes)
-    @game = Game.new(params[:game])
-    @game.save!
+    game = Game.new(params[:game])
+    game.save!
     if players_attributes
-      @game.players_attributes = players_attributes
-      @game.save!
+      game.players_attributes = players_attributes
+      game.save!
     end
-    flash[:success] = "game on!"
-    redirect_to game_url(@game)
+    redirect_to game
+  end
+  
+  def update
+    game = Game.find(params[:id])
+    game.update_attributes! params[:game]
+    redirect_to game
   end
   
 end

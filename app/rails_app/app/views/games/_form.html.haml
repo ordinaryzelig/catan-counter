@@ -1,0 +1,26 @@
+- form_for @game, :html => {:class => 'gameForm'} do |game_form|
+  
+  = game_form.error_messages
+  
+  .players
+    players
+    - if @game.new_record?
+      (leave color blank if not playing)
+    - @game.colors.each do |color|
+      - player = @game.players.send(color) || @game.players.new(:color => color)
+      - game_form.fields_for :players, player do |player_form|
+        .player{:style => "background-color: #{color}"}
+          %span.color= color
+          %span.name= player_form.text_field :name
+          = player_form.hidden_field :color
+          
+  - if @game.new_record?
+    .expansions
+      expansions
+      %table{:border => 1}
+        - Expansion.all.each do |expansion|
+          %tr
+            %td= check_box_tag "game[expansion_ids][]", expansion.id, @game.expansion_ids.include?(expansion.id), :id => dom_id(expansion)
+            %td= label_for_expansion(expansion)
+            
+  = game_form.submit 'save'
