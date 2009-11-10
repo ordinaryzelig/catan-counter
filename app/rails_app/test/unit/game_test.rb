@@ -35,4 +35,12 @@ class GameTest < ActiveSupport::TestCase
     assert_equal new_name, game.reload.players.blue.name
   end
   
+  def test_reached_victory_points_to_win
+    game = Game.make
+    2.times { game.players.make }
+    player = game.players.first
+    player.win
+    assert_equal [player], game.players.reached_victory_points_to_win
+  end
+  
 end

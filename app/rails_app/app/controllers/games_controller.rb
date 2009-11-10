@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   
   def show
     @game = Game.find(params[:id], :include => {:players => [:settlements, :cities, :knights]})
+    @winners = @game.players.reached_victory_points_to_win
   end
   
   def new

@@ -5,6 +5,13 @@
       = expansion.display_name
   = link_to 'edit/add players or customize', edit_game_url(@game)
 
+%table#winners.centered
+  - @winners.each do |player|
+    %tr.player
+      %td
+        %span.name{:style => "color: #{player.color}"}= player.name
+        %span.message= 'has enough victory points to win'
+
 %table.players{:border => 1}
   %tr
     - @game.players.each do |player|

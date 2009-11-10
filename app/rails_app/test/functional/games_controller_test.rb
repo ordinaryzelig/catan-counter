@@ -40,4 +40,13 @@ class GamesControllerTest < ActionController::TestCase
     assert game.uses?(expansion)
   end
   
+  def test_winners
+    game = Game.make
+    game.players.make.win
+    get :show, :id => game
+    winners = assigns(:winners)
+    assert winners.any?
+    assert_tag :tag => 'table', :attributes => {:id => 'winners'}, :content => winners.first.name
+  end
+  
 end

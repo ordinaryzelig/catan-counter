@@ -33,3 +33,14 @@ Knight.blueprint do
   level { 1 }
   activated { false }
 end
+
+class Player
+  def win
+    while can_build_settlement?
+      settlements.make
+    end
+    while can_build_city?
+      cities.make
+    end
+  end
+end

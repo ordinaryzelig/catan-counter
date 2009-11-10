@@ -16,6 +16,9 @@ class Game < ActiveRecord::Base
     def save!
       each(&:save!)
     end
+    def reached_victory_points_to_win
+      self.select { |player| player.victory_points >= proxy_owner.victory_points_to_win }
+    end
     # override method_missing and send so that we can do either of the following:
     # game.players.blue
     # game.players.send('blue')
