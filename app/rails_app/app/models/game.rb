@@ -60,8 +60,8 @@ class Game < ActiveRecord::Base
   end
   after_save :create_longest_road
   # create soldiers.
-  after_save do |game|
-    game.class.number_of_soldiers.times { game.soldiers.create! }
+  after_create do |game|
+    Soldier.limit_per_game.times { game.soldiers.create! }
   end
   
   attr_reader :players_attributes_changed
@@ -98,10 +98,6 @@ class Game < ActiveRecord::Base
   
   def player_with_longest_road
     longest_road.player
-  end
-  
-  def self.number_of_soldiers
-    14
   end
   
 end
