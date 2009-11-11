@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091109034140) do
+ActiveRecord::Schema.define(:version => 20091111010755) do
 
   create_table "cities", :force => true do |t|
     t.integer  "player_id",  :null => false
@@ -46,6 +46,12 @@ ActiveRecord::Schema.define(:version => 20091109034140) do
     t.datetime "updated_at"
   end
 
+  create_table "longest_roads", :force => true do |t|
+    t.integer  "player_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "players", :force => true do |t|
     t.integer  "game_id",    :null => false
     t.string   "color",      :null => false
@@ -53,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20091109034140) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "players", ["game_id", "color"], :name => "index_players_on_game_id_and_color", :unique => true
 
   create_table "settlements", :force => true do |t|
     t.integer  "player_id",  :null => false
