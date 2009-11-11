@@ -7,6 +7,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.string :name, {:null => false}
       t.timestamps
     end
+    add_index :players, [:game_id, :color], :unique => true
   end
   
   def self.down

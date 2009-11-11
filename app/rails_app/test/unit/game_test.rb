@@ -43,4 +43,14 @@ class GameTest < ActiveSupport::TestCase
     assert_equal [player], game.players.reached_victory_points_to_win
   end
   
+  def test_players_with_longest_road
+    longest_road = LongestRoad.make
+    assert_equal longest_road.player, longest_road.game.players.with_longest_road
+  end
+  
+  def test_longest_road
+    longest_road = LongestRoad.make
+    assert_equal longest_road, longest_road.game.longest_road
+  end
+  
 end

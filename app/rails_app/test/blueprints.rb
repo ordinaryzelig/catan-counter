@@ -20,6 +20,10 @@ City.blueprint do
   player { Player.make }
 end
 
+LongestRoad.blueprint do
+  player { Player.make }
+end
+
 Expansion.blueprint do
 end
 Expansion.blueprint(:cities_and_knights) do

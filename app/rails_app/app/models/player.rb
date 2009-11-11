@@ -14,10 +14,11 @@ class Player < ActiveRecord::Base
   end
   has_many :knights do
     def deactivate
-      each &:deactivate
+      each(&:deactivate)
     end
   end
   belongs_to :game
+  has_one :longest_road
   
   delegate :expansions, :to => :game
   
@@ -43,7 +44,9 @@ class Player < ActiveRecord::Base
   end
   
   def victory_points
-    settlements.size + (cities.size * 2)
+    settlements.size +
+    (cities.size * 2) +
+    (self.longest_road(true) ? 2 : 0)
   end
   
   def can_build_settlement?
@@ -63,6 +66,14 @@ class Player < ActiveRecord::Base
     knights_to_promote = knights.level(level)
     higher_level_knights = knights.level(level + 1)
     knights_to_promote.any? && higher_level_knights.size < 2
+  end
+  
+  def take_longest_road
+    if longest_road = game.longest_road
+      longest_road.update_attributes! :player => self
+    else
+      build_longest_road.save!
+    end
   end
   
 end

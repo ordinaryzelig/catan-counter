@@ -1,19 +1,9 @@
 class PlayersController < ApplicationController
   
-  before_filter :load_game
-  
-  def new
-    @player = @game.players.build
-  end
-  
-  def create
-    @player = @game.players.build(params[:player])
-    if @player.save
-      flash[:success] = "#{@player.color} has entered catan"
-      redirect_to @game
-    else
-      render 'new'
-    end
+  def take_longest_road
+    @player = Player.find(params[:id])
+    @player.take_longest_road
+    redirect_to @player.game
   end
   
   protected

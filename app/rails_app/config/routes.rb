@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
     game.resources :expansions
   end
   
-  map.resources :players do |player|
+  map.resources :players, :member => {:take_longest_road => :put} do |player|
     player.resources :settlements
     player.resources :cities
     player.resources :knights

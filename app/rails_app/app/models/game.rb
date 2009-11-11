@@ -19,6 +19,9 @@ class Game < ActiveRecord::Base
     def reached_victory_points_to_win
       self.select { |player| player.victory_points >= proxy_owner.victory_points_to_win }
     end
+    def with_longest_road
+      detect(&:longest_road)
+    end
     # override method_missing and send so that we can do either of the following:
     # game.players.blue
     # game.players.send('blue')
@@ -40,6 +43,8 @@ class Game < ActiveRecord::Base
   end
   has_and_belongs_to_many :expansions, :after_add => :expansion_added
   has_many :knights, :through => :players
+  
+  delegate :longest_road, :to => 'players.with_longest_road', :allow_nil => true
   
   before_validation do |game|
     game.extend_expansions

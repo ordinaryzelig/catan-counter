@@ -13,7 +13,7 @@ class PlayerTest < ActiveSupport::TestCase
   
   def test_create_starter_buildings
     player = Player.make
-    assert_equal 2, player.reload.settlements.size
+    assert_equal 2, player.settlements.size
   end
   
   def test_can_build_settlement?
@@ -59,6 +59,35 @@ class PlayerTest < ActiveSupport::TestCase
     # already has 2 level 2 knights.
     2.times { player.knights.make(:level => 2) }
     assert !player.can_promote_knight?(1)
+  end
+  
+  def test_longest_road_points
+    player = Player.make
+    assert_difference('player.victory_points', 2) do
+      player.create_longest_road
+    end
+  end
+  
+  def test_take_longest_road_creates_road
+    player = Player.make
+    assert_difference('LongestRoad.all.size') do
+      player.take_longest_road
+    end
+  end
+  
+  def test_take_longest_road_from_another_player
+    game = Game.make
+    player1, player2 = 2.times.map { game.players.make }
+    assert_difference('LongestRoad.all.size') do
+      assert_difference('player1.victory_points', 2) do
+        player1.take_longest_road
+      end
+    end
+    assert_difference('player1.victory_points', -2) do
+      assert_difference('player2.victory_points', 2) do
+        player2.take_longest_road
+      end
+    end
   end
   
 end
