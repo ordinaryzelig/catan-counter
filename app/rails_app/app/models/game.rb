@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
   
   has_many :players do
     def colors
-      map &:color
+      map(&:color)
     end
     def colors_left
       colors_left = proxy_owner.colors - colors
@@ -44,7 +44,9 @@ class Game < ActiveRecord::Base
   has_and_belongs_to_many :expansions, :after_add => :expansion_added
   has_many :knights, :through => :players
   has_one :longest_road
+  has_many :soldiers
   
+  # assign default victory points.
   before_validation do |game|
     game.extend_expansions
     game.victory_points_to_win ||= game.default_victory_points_to_win
@@ -57,6 +59,10 @@ class Game < ActiveRecord::Base
     game.players.save! if game.players_attributes_changed
   end
   after_save :create_longest_road
+  # create soldiers.
+  after_save do |game|
+    game.class.number_of_soldiers.times { game.soldiers.create! }
+  end
   
   attr_reader :players_attributes_changed
   
@@ -92,6 +98,10 @@ class Game < ActiveRecord::Base
   
   def player_with_longest_road
     longest_road.player
+  end
+  
+  def self.number_of_soldiers
+    14
   end
   
 end

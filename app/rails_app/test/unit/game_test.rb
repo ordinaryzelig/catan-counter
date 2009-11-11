@@ -52,4 +52,16 @@ class GameTest < ActiveSupport::TestCase
     assert_equal game.longest_road.player, game.player_with_longest_road
   end
   
+  def test_create_soldiers
+    assert_equal 14, Game.make.soldiers.size
+  end
+  
+  def test_limit_to_14_soldiers
+    game = Game.make
+    ex = assert_raise(Game::LimitExceeded) do
+      game.soldiers.create!
+    end
+    assert_equal ex.klass, Soldier
+  end
+  
 end

@@ -19,6 +19,7 @@ class Player < ActiveRecord::Base
   end
   belongs_to :game
   has_one :longest_road
+  has_many :soldiers
   
   delegate :expansions, :to => :game
   
