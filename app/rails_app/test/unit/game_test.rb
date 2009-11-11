@@ -56,12 +56,4 @@ class GameTest < ActiveSupport::TestCase
     assert_equal 14, Game.make.soldiers.size
   end
   
-  def test_limit_to_14_soldiers
-    game = Game.make
-    ex = assert_raise(Game::LimitExceeded) do
-      game.soldiers.create!
-    end
-    assert_equal ex.klass, Soldier
-  end
-  
 end
