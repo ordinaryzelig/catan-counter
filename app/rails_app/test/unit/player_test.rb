@@ -64,24 +64,16 @@ class PlayerTest < ActiveSupport::TestCase
   def test_longest_road_points
     player = Player.make
     assert_difference('player.victory_points', 2) do
-      player.create_longest_road
-    end
-  end
-  
-  def test_take_longest_road_creates_road
-    player = Player.make
-    assert_difference('LongestRoad.all.size') do
       player.take_longest_road
     end
   end
   
   def test_take_longest_road_from_another_player
     game = Game.make
+    longest_road = game.create_longest_road
     player1, player2 = 2.times.map { game.players.make }
-    assert_difference('LongestRoad.all.size') do
-      assert_difference('player1.victory_points', 2) do
-        player1.take_longest_road
-      end
+    assert_difference('player1.victory_points', 2) do
+      player1.take_longest_road
     end
     assert_difference('player1.victory_points', -2) do
       assert_difference('player2.victory_points', 2) do

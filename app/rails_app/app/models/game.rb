@@ -43,8 +43,7 @@ class Game < ActiveRecord::Base
   end
   has_and_belongs_to_many :expansions, :after_add => :expansion_added
   has_many :knights, :through => :players
-  
-  delegate :longest_road, :to => 'players.with_longest_road', :allow_nil => true
+  has_one :longest_road
   
   before_validation do |game|
     game.extend_expansions
@@ -53,9 +52,11 @@ class Game < ActiveRecord::Base
   
   validates_numericality_of :victory_points_to_win
   
+  # save players from players_attributes.
   after_save do |game|
     game.players.save! if game.players_attributes_changed
   end
+  after_save :create_longest_road
   
   attr_reader :players_attributes_changed
   
@@ -87,6 +88,10 @@ class Game < ActiveRecord::Base
   
   def colors
     self.class.colors
+  end
+  
+  def player_with_longest_road
+    longest_road.player
   end
   
 end

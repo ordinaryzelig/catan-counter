@@ -69,11 +69,7 @@ class Player < ActiveRecord::Base
   end
   
   def take_longest_road
-    if longest_road = game.longest_road
-      longest_road.update_attributes! :player => self
-    else
-      build_longest_road.save!
-    end
+    game.longest_road.update_attributes! :player => self
   end
   
 end
