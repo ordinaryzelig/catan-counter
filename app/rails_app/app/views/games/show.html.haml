@@ -15,16 +15,5 @@
 %table.players
   %tr
     - @game.players.each do |player|
-      %td.player{:width => "#{100 / @game.players.size}%"}
-        %div{:style => "border: 5px solid #{player.color == 'white' ? 'black' : player.color}"}
-          .name{:style => "background-color: #{player.color}"}
-            %span= player.name
-          .victory_points= pluralize(player.victory_points, 'victory point')
-          = render :partial => 'longest_roads/longest_road', :locals => {:player => player}
-          = render :partial => 'largest_armies/largest_army', :locals => {:player => player}
-          = render :partial => 'cities/cities', :locals => {:player => player}
-          = render :partial => 'settlements/settlements', :locals => {:player => player}
-          - if @game.uses?(CitiesAndKnights)
-            = render :partial => 'knights/knights', :locals => {:player => player}
-          - else
-            = render :partial => 'soldiers/soldiers', :locals => {:player => player}
+      %td{:width => "#{100 / @game.players.size}%"}
+        = render player
