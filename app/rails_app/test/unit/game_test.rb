@@ -47,6 +47,10 @@ class GameTest < ActiveSupport::TestCase
     assert Game.make.longest_road.id
   end
   
+  def test_create_largest_army
+    assert Game.make.largest_army.id
+  end
+  
   def test_players_with_longest_road
     game = Game.make
     assert_equal game.longest_road.player, game.player_with_longest_road
@@ -54,6 +58,13 @@ class GameTest < ActiveSupport::TestCase
   
   def test_create_soldiers
     assert_equal 14, Game.make.soldiers.size
+  end
+  
+  def test_soldiers_not_taken
+    player = Player.make
+    assert_difference('player.game.soldiers.not_taken.size', -1) do
+      player.get_soldier
+    end
   end
   
 end
