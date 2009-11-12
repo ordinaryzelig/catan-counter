@@ -3,11 +3,10 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'games', :action => 'new'
   
   map.resources :games do |game|
-    game.resources :players
     game.resources :expansions
   end
   
-  map.resources :players, :member => {:take_longest_road => :put} do |player|
+  map.resources :players, :member => {:take_longest_road => :put, :play_soldier => :put} do |player|
     player.resources :settlements
     player.resources :cities
     player.resources :knights

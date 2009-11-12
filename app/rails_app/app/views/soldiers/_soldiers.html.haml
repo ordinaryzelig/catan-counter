@@ -2,4 +2,4 @@
   %span.image= "#{image_tag('soldier.png')} x "
   %span.number= player.soldiers.size
   - soldiers_not_taken = player.game.soldiers.not_taken
-  = link_to_if soldiers_not_taken.any?, action_partial('get', image_tag('add.png'), soldiers_not_taken.empty?), get_soldier_player_url(player), :method => :put
+  = link_to_if soldiers_not_taken.any?, action_partial('use', image_tag('add.png'), soldiers_not_taken.empty?), play_soldier_player_url(player), :method => :put

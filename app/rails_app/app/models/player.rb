@@ -48,7 +48,8 @@ class Player < ActiveRecord::Base
   def victory_points
     settlements.size +
     (cities.size * 2) +
-    (self.longest_road(true) ? 2 : 0)
+    (self.longest_road(true) ? 2 : 0) +
+    (self.largest_army(true) ? 2 : 0)
   end
   
   def can_build_settlement?
@@ -74,7 +75,7 @@ class Player < ActiveRecord::Base
     game.longest_road.update_attributes! :player => self
   end
   
-  def get_soldier
+  def play_soldier
     soldier = game.soldiers.not_taken.first
     raise Soldier::NoMore unless soldier
     soldiers << soldier
