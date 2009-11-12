@@ -8,6 +8,11 @@ class GamesControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  def test_new
+    get :new
+    assert_response :success
+  end
+  
   def test_create
     post :create, :game => {}
     assert_redirected_to game_url(Game.first)

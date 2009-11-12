@@ -13,4 +13,19 @@ class PlayersControllerTest < ActionController::TestCase
     end
   end
   
+  def test_play_soldier
+    player = Player.make
+    assert_difference('player.reload.soldiers.size') do
+      put :play_soldier, :id => player
+    end
+  end
+  
+  def test_player_soldier_when_none_left_to_take
+    player = Player.make
+    player.game.soldiers.each { player.play_soldier }
+    assert_raise(Soldier::NoMore) do
+      put :play_soldier, :id => player
+    end
+  end
+  
 end

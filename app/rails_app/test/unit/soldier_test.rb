@@ -12,7 +12,7 @@ class SoldierTest < ActiveSupport::TestCase
   
   def test_assign_largest_army
     player = Player.make
-    3.times { player.get_soldier }
+    3.times { player.play_soldier }
     assert player.largest_army.id
   end
   
@@ -20,12 +20,12 @@ class SoldierTest < ActiveSupport::TestCase
     game = Game.make
     players = 2.times.map do
       player = game.players.make
-      3.times { player.get_soldier }
+      3.times { player.play_soldier }
       player
     end
     assert players.shift.largest_army
     player_about_to_have_largest_army = players.shift
-    player_about_to_have_largest_army.get_soldier
+    player_about_to_have_largest_army.play_soldier
     assert player_about_to_have_largest_army.largest_army
   end
   

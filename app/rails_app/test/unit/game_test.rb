@@ -63,7 +63,7 @@ class GameTest < ActiveSupport::TestCase
   def test_soldiers_not_taken
     player = Player.make
     assert_difference('player.game.soldiers.not_taken.size', -1) do
-      player.get_soldier
+      player.play_soldier
     end
   end
   

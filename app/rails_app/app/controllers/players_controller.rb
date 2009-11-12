@@ -6,10 +6,12 @@ class PlayersController < ApplicationController
     redirect_to player.game
   end
   
-  protected
-  
-  def load_game
-    @game = Game.find params[:game_id]
+  def play_soldier
+    @player = Player.find(params[:id])
+    @player.play_soldier
+    redirect_to @player.game
   end
+  
+  protected
   
 end
