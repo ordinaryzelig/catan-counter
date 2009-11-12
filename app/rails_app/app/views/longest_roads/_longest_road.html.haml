@@ -1,5 +1,5 @@
 - player_has_longest_road = player.longest_road
-.longest_road{:class => player_has_longest_road ? 'owned' : ''}
+%span.longest_road{:class => player_has_longest_road ? 'owned' : ''}
   - check_box = check_box_tag("take_longest_road_#{player}", 1, player_has_longest_road, :disabled => player_has_longest_road)
   - if player_has_longest_road
     = check_box
