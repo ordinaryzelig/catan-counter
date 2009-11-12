@@ -20,10 +20,10 @@
           .name{:style => "background-color: #{player.color}"}
             %span= player.name
           .victoryPoints= pluralize(player.victory_points, 'victory point')
-          .longestRoad
-            = link_to check_box_tag("take_longest_road_#{player}", 1, player.longest_road), take_longest_road_player_url(player), :method => :put
-            = label_tag "take_longest_road_#{player}", 'longest road'
+          = render :partial => 'longest_roads/longest_road', :locals => {:player => player}
           = render :partial => 'cities/cities', :locals => {:player => player}
           = render :partial => 'settlements/settlements', :locals => {:player => player}
           - if @game.uses?(CitiesAndKnights)
             = render :partial => 'knights/knights', :locals => {:player => player}
+          - else
+            = render :partial => 'soldiers/soldiers', :locals => {:player => player}

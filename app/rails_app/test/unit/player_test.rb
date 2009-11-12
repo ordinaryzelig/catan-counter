@@ -82,4 +82,17 @@ class PlayerTest < ActiveSupport::TestCase
     end
   end
   
+  def test_get_soldier
+    player = Player.make
+    assert_difference('player.soldiers.size') do
+      player.get_soldier
+    end
+  end
+  
+  def test_no_more_soldiers_to_get
+    player = Player.make
+    player.game.soldiers.not_taken.each { player.get_soldier }
+    assert_raise(Soldier::NoMore) { player.get_soldier }
+  end
+  
 end

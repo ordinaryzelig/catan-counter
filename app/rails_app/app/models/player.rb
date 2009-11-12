@@ -20,6 +20,7 @@ class Player < ActiveRecord::Base
   belongs_to :game
   has_one :longest_road
   has_many :soldiers
+  has_one :largest_army
   
   delegate :expansions, :to => :game
   
@@ -71,6 +72,12 @@ class Player < ActiveRecord::Base
   
   def take_longest_road
     game.longest_road.update_attributes! :player => self
+  end
+  
+  def get_soldier
+    soldier = game.soldiers.not_taken.first
+    raise Soldier::NoMore unless soldier
+    soldiers << soldier
   end
   
 end

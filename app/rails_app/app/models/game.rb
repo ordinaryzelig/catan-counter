@@ -22,6 +22,9 @@ class Game < ActiveRecord::Base
     def with_longest_road
       detect(&:longest_road)
     end
+    def with_largest_army
+      detect(&:largest_army)
+    end
     # override method_missing and send so that we can do either of the following:
     # game.players.blue
     # game.players.send('blue')
@@ -44,7 +47,12 @@ class Game < ActiveRecord::Base
   has_and_belongs_to_many :expansions, :after_add => :expansion_added
   has_many :knights, :through => :players
   has_one :longest_road
-  has_many :soldiers
+  has_one :largest_army
+  has_many :soldiers do
+    def not_taken
+      reject(&:player_id)
+    end
+  end
   
   # assign default victory points.
   before_validation do |game|
@@ -59,6 +67,7 @@ class Game < ActiveRecord::Base
     game.players.save! if game.players_attributes_changed
   end
   after_save :create_longest_road
+  after_save :create_largest_army
   # create soldiers.
   after_create do |game|
     Soldier.limit_per_game.times { game.soldiers.create! }
