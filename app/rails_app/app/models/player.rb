@@ -24,6 +24,8 @@ class Player < ActiveRecord::Base
   has_one :longest_road
   has_many :soldiers
   has_one :largest_army
+  # why isn't this using the inflection?
+  has_many :defenders_of_catan, :class_name => 'DefenderOfCatan'
   
   delegate :expansions, :to => :game
   
@@ -85,7 +87,7 @@ class Player < ActiveRecord::Base
   end
   
   def declare_defender_of_catan
-    
+    defenders_of_catan << game.defenders_of_catan.first
   end
   
 end

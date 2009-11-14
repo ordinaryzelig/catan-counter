@@ -2,6 +2,7 @@ class BarbarianAttackOutcome
   
   attr_reader :outcome
   attr_reader :players_with_strongest_army
+  attr_reader :players_with_weakest_army
   
   def initialize(outcome, barbarians)
     @outcome = outcome
@@ -9,7 +10,8 @@ class BarbarianAttackOutcome
     @game = barbarians.game
     case @outcome
     when :barbarians_win
-      @game.players.with_weakest_army.each do |player|
+      @players_with_weakest_army = @game.players.with_weakest_army
+      @players_with_weakest_army.each do |player|
         player.cities.first.destroy
       end
     when :settlers_successfully_defend

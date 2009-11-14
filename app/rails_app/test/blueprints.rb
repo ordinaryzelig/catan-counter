@@ -24,6 +24,10 @@ Soldier.blueprint do
   game { Game.make }
 end
 
+DefenderOfCatan.blueprint do
+  game { Game.make }
+end
+
 Expansion.blueprint do
 end
 Expansion.blueprint(:cities_and_knights) do

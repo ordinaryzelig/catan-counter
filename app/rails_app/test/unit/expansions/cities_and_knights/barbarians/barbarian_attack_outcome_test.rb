@@ -17,7 +17,7 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
   def test_attack_and_settlers_successfully_defend_with_defender_of_catan
     player = @game.players.first
     2.times { player.knights.make.activate }
-    assert_difference('player.victory_points') do
+    assert_difference('player.reload.victory_points') do
       outcome = @game.barbarians.attack
       assert outcome.settlers_successfully_defend?
       assert_equal player, outcome.defender_of_catan

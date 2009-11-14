@@ -30,6 +30,11 @@ module CitiesAndKnights
       cities.create!
     end
     
+    def victory_points
+      super +
+      defenders_of_catan.size
+    end
+    
   end
   
 end

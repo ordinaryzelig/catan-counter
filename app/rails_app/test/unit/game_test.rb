@@ -57,7 +57,7 @@ class GameTest < ActiveSupport::TestCase
   end
   
   def test_create_soldiers
-    assert_equal 14, Game.make.soldiers.size
+    assert_equal Soldier.limit_per_game, Game.make.soldiers.size
   end
   
   def test_soldiers_not_taken
@@ -89,6 +89,10 @@ class GameTest < ActiveSupport::TestCase
     defender = players.first
     defender.knights.first.promote
     assert_equal (players - [defender]), game.reload.players.with_weakest_army
+  end
+  
+  def test_create_defenders_of_catan
+    assert_equal DefenderOfCatan.limit_per_game, Game.make.defenders_of_catan.size
   end
   
 end

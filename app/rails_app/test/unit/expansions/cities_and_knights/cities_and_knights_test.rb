@@ -27,6 +27,14 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     assert_equal 13, game.victory_points_to_win
   end
   
+  def test_player_victory_points
+    default_game_with_expansion
+    player = @game.players.make
+    2.times { player.knights.make.activate }
+    @game.barbarians.attack
+    assert_equal 4, player.victory_points
+  end
+  
   # ===================================================
   # helpers.
   
