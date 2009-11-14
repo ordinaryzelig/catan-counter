@@ -1,7 +1,5 @@
 class Barbarians
   
-  OUTCOMES = {1 => :barbarians_win, -1 => :settlers_successfully_defend, 0 => :settlers_successfully_defend}
-  
   attr_reader :game
   
   def initialize(game)
@@ -9,7 +7,7 @@ class Barbarians
   end
   
   def attack
-    outcome = BarbarianAttackOutcome.new(OUTCOMES[strength <=> defended_against], self)
+    outcome = BarbarianAttackOutcome.new(self)
     @game.knights.activated.each(&:deactivate)
     outcome
   end
@@ -18,7 +16,7 @@ class Barbarians
     @game.cities.size
   end
   
-  def defended_against
+  def strength_defended_against
     @game.knights.activated.map(&:strength).sum
   end
   

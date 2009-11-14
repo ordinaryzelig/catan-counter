@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :games do |game|
     game.resources :expansions
+    game.barbarians_attack 'barbarians/attack', :controller => 'barbarians', :action => 'attack', :conditions => {:method => :put}
   end
   
   map.resources :players, :member => {:take_longest_road => :put, :play_soldier => :put} do |player|
