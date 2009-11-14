@@ -10,8 +10,10 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
   
   def test_attack_and_barbarians_win
     assert @game.cities.size > @game.knights.activated.size
-    assert @game.barbarians.attack.barbarians_win?
-    assert @game.players.all? { |player| player.cities.empty? }
+    outcome = @game.barbarians.attack
+    assert outcome.barbarians_are_victorious?
+    assert_equal 2, outcome.strength_of_victorious_party
+    assert_equal 0, outcome.strength_of_defeated_party
   end
   
   def test_attack_and_settlers_successfully_defend_with_defender_of_catan
@@ -19,7 +21,9 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
     2.times { player.knights.make.activate }
     assert_difference('player.reload.victory_points') do
       outcome = @game.barbarians.attack
-      assert outcome.settlers_successfully_defend?
+      assert outcome.catan_is_saved?
+      assert_equal 2, outcome.strength_of_victorious_party
+      assert_equal 2, outcome.strength_of_defeated_party
       assert_equal player, outcome.defender_of_catan
     end
   end
@@ -27,7 +31,9 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
   def test_attack_and_settlers_successfully_defend_with_multiple_players_defending
     @game.players.each { |player| player.knights.make.activate }
     outcome = @game.barbarians.attack
-    assert outcome.settlers_successfully_defend?
+    assert outcome.catan_is_saved?
+    assert_equal 2, outcome.strength_of_victorious_party
+    assert_equal 2, outcome.strength_of_defeated_party
     assert_equal @game.players, outcome.players_with_strongest_army
   end
   

@@ -4,6 +4,8 @@
     - @game.expansions.each do |expansion|
       = expansion.display_name
   = link_to 'edit/add players or customize', edit_game_url(@game)
+  - if @game.uses?(CitiesAndKnights)
+    = link_to 'barbarians attack', game_barbarians_attack_url(@game), :method => :put
 
 %table#winners.centered
   - @winners.each do |player|

@@ -39,6 +39,7 @@ class Game < ActiveRecord::Base
       end
     end
     def with_weakest_army
+      # start with greatest possible strength of activated knights and work down.
       weakest_army = 18
       reject { |player| player.cities.empty? }.inject([]) do |victims, player|
         case player.knights.strength <=> weakest_army

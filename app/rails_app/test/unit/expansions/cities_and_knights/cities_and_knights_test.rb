@@ -40,7 +40,8 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
   
   def default_game_with_expansion
     @expansion = Expansion.make(:cities_and_knights)
-    @game = Game.make(:expansions => [@expansion])
+    @game = Game.make
+    @game.expansions << @expansion
   end
   
 end
