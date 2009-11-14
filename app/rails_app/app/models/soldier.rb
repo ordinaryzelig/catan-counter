@@ -3,6 +3,8 @@ class Soldier < ActiveRecord::Base
   belongs_to :player
   belongs_to :game
   
+  validates_presence_of :game_id
+  
   # check limit.
   before_create do |soldier|
     raise LimitExceeded if soldier.game.soldiers.size >= Soldier.limit_per_game
