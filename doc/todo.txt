@@ -1,0 +1,5 @@
+blueprints file per model
+game creation order
+  create
+  add expansions
+  create players (create_starter_buildings depends on expansions)
