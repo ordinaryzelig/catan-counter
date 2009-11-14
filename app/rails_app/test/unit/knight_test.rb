@@ -31,4 +31,11 @@ class KnightTest < ActiveSupport::TestCase
     assert knight.activated
   end
   
+  def test_strength
+    knight = Knight.make
+    assert_equal 0, knight.strength
+    assert_equal 1, knight.activate.strength
+    assert_equal 2, knight.promote.strength
+  end
+  
 end

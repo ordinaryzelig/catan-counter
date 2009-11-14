@@ -102,4 +102,14 @@ class PlayerTest < ActiveSupport::TestCase
     assert_raise(Soldier::NoMore) { player.play_soldier }
   end
   
+  def test_knights_strength
+    knight = Knight.make
+    assert_equal 0, knight.player.knights.strength
+    assert_equal 1, knight.activate.reload.player.knights.strength
+    assert_equal 2, knight.promote.reload.player.knights.strength
+    knight = Knight.make(:player => knight.player)
+    assert_equal 2, knight.player.knights.strength
+    assert_equal 3, knight.activate.reload.player.knights.strength
+  end
+  
 end

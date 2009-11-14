@@ -25,6 +25,32 @@ class Game < ActiveRecord::Base
     def with_largest_army
       detect(&:largest_army)
     end
+    def with_strongest_army
+      strongest_army = 1
+      inject([]) do |defenders, player|
+        case player.knights.strength <=> strongest_army
+        when 0
+          defenders << player
+        when 1
+          strongest_army = player.knights.strength
+          defenders = [player]
+        end
+        defenders
+      end
+    end
+    def with_weakest_army
+      weakest_army = 18
+      reject { |player| player.cities.empty? }.inject([]) do |victims, player|
+        case player.knights.strength <=> weakest_army
+        when 0
+          victims << player
+        when -1
+          weakest_army = player.knights.strength
+          victims = [player]
+        end
+        victims
+      end
+    end
     # override method_missing and send so that we can do either of the following:
     # game.players.blue
     # game.players.send('blue')
@@ -53,6 +79,8 @@ class Game < ActiveRecord::Base
       reject(&:player_id)
     end
   end
+  has_many :cities, :through => :players
+  has_many :knights, :through => :players
   
   # assign default victory points.
   before_validation do |game|
@@ -107,6 +135,10 @@ class Game < ActiveRecord::Base
   
   def player_with_longest_road
     longest_road.player
+  end
+  
+  def barbarians
+    @barbarians ||= Barbarians.new(self)
   end
   
 end

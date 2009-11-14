@@ -16,6 +16,9 @@ class Player < ActiveRecord::Base
     def deactivate
       each(&:deactivate)
     end
+    def strength
+      map(&:strength).sum
+    end
   end
   belongs_to :game
   has_one :longest_road
@@ -79,6 +82,10 @@ class Player < ActiveRecord::Base
     soldier = game.soldiers.not_taken.first
     raise Soldier::NoMore unless soldier
     soldiers << soldier
+  end
+  
+  def declare_defender_of_catan
+    
   end
   
 end

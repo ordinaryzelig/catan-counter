@@ -67,4 +67,28 @@ class GameTest < ActiveSupport::TestCase
     end
   end
   
+  def test_players_with_strongest_army
+    game = Game.make(:expansions => [Expansion.make(:cities_and_knights)])
+    players = 2.times.map { game.players.make }
+    players.each do |player|
+      2.times.map { player.knights.make }.flatten.each(&:activate)
+    end
+    assert_equal players, game.players.with_strongest_army
+    defender = players.first
+    defender.knights.first.promote
+    assert_equal [defender], game.reload.players.with_strongest_army
+  end
+  
+  def test_players_with_weakest_army
+    game = Game.make(:expansions => [Expansion.make(:cities_and_knights)])
+    players = 2.times.map { game.players.make }
+    players.each do |player|
+      2.times.map { player.knights.make }.flatten.each(&:activate)
+    end
+    assert_equal players, game.players.with_weakest_army
+    defender = players.first
+    defender.knights.first.promote
+    assert_equal (players - [defender]), game.reload.players.with_weakest_army
+  end
+  
 end
