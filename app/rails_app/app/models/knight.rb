@@ -21,18 +21,25 @@ class Knight < ActiveRecord::Base
   
   def promote
     update_attributes! :level => level + 1
+    self
   end
   
   def activate
     update_attributes! :activated => true
+    self
   end
   
   def deactivate
     update_attributes! :activated => false
+    self
   end
   
   def toggle_activation
     activated ? deactivate : activate
+  end
+  
+  def strength
+    activated ? level : 0
   end
   
 end
