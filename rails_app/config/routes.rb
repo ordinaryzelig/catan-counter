@@ -17,5 +17,6 @@ ActionController::Routing::Routes.draw do |map|
   map.downgrade_to_settlement_city 'cities/:id/downgrade_to_settlement', :controller => 'cities', :action => 'downgrade_to_settlement', :conditions => {:method => :post}
   
   map.resources :knights, :member => {:promote => :post, :toggle_activation => :put}
+  map.resources :settlements
   
 end

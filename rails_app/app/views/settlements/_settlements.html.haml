@@ -5,3 +5,5 @@
   = link_to_if can_build, action_partial('build', image_tag('add.png'), !can_build), player_settlements_url(player), :method => :post
   - can_build = player.can_build_city?
   = link_to_if can_build, action_partial('upgrade', image_tag('up.png'), !can_build), upgrade_to_city_settlement_url(player.settlements.first), :method => :post
+  -can_destroy = player.settlements.size > 2
+  = link_to_if can_destroy, action_partial('destroy', image_tag('delete.png'), !can_destroy), settlement_url(player.settlements.first), :method => :delete
