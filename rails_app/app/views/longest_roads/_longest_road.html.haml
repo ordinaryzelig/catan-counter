@@ -1,6 +1,6 @@
 - player_has_longest_road = player.longest_road
 .longest_road
   - if player_has_longest_road
-    %span.owned= 'longest road'
+    longest road (2 victory points)
   - else
     = link_to 'take longest road', take_longest_road_player_url(player), :method => :put
