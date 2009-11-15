@@ -1,6 +1,6 @@
 class KnightsController < ApplicationController
   
-  before_filter :load_player, :except => [:promote, :toggle_activiation, :destroy]
+  before_filter :load_player, :except => [:promote, :toggle_activation, :destroy]
   
   def create
     @player.knights.create!(:level => 1)

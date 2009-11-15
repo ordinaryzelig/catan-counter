@@ -1,5 +1,7 @@
-%span.image=knight_image(knight)
--if knight.level <= 2
-  -can_promote = knight.player.can_promote_knight?(knight.level)
-  =link_to_if can_promote, action_partial('promote', image_tag('up.png'), !can_promote), can_promote ? promote_knight_url(knight) : nil, :method => :post
-=link_to action_partial('desert', image_tag('delete.png'), false), knight_url(knight), :method => :delete
+.knight
+  -knight_image_name = "knights/#{knight.player.color}_#{knight.level}#{knight.activated ? '_activated' : nil}.png"
+  =link_to action_partial(knight.activated ? 'deactivate' : 'activate', image_tag(knight_image_name), false), toggle_activation_knight_url(knight), :method => :put
+  -if knight.level <= 2
+    -can_promote = knight.player.can_promote_knight?(knight.level)
+    =link_to_if can_promote, action_partial('promote', image_tag('up.png'), !can_promote), can_promote ? promote_knight_url(knight) : nil, :method => :post
+  =link_to action_partial('desert', image_tag('delete.png'), false), knight_url(knight), :method => :delete
