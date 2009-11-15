@@ -1,13 +1,5 @@
 .knights
+  -can_build = player.can_build_knight?(1)
+  =link_to_if can_build, action_partial('build', image_tag('add.png'), !can_build), player_knights_url(player), :method => :post
   - Knight::LEVELS.reverse.each do |level|
-    %div{:class => "knightLevel"}
-      - knights = player.knights.level(level)
-      %span.image= image_tag("knight_level_#{level}.png") + ' x '
-      %span.number= knights.size
-      - if level == 1
-        - can_build = player.can_build_knight?(level)
-        = link_to_if can_build, action_partial('build', image_tag('add.png'), !can_build), player_knights_url(player), :method => :post
-      - if level <= 2
-        - can_promote = player.can_promote_knight?(level)
-        = link_to_if can_promote, action_partial('promote', image_tag('up.png'), !can_promote), knights.any? ? promote_knight_url(knights.first) : nil, :method => :post
-      = link_to_if knights.any?, action_partial('fire', image_tag('delete.png'), knights.empty?), knights.any? ? knight_url(knights.first) : nil, :method => :delete
+    =render player.knights.level(level)

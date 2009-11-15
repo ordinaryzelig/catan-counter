@@ -8,4 +8,8 @@ module ApplicationHelper
                        :image => image}
   end
   
+  def knight_image(knight)
+    image_tag("knights/#{knight.player.color}_#{knight.level}#{knight.activated ? '_activated' : nil}.png", :width => '15%')
+  end
+  
 end

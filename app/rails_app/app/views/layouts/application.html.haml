@@ -4,9 +4,9 @@
 %html{html_attrs}
   %head
     = stylesheet_link_tag 'screen', :cache => true
-    
+
   %body
-    -if flash.any?
+    - if flash.any?
       #flash
         - flash.each do |type, message|
           %div{:class => type}
