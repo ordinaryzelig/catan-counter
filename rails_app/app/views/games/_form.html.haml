@@ -1,24 +1,28 @@
-- form_for @game, :html => {:class => 'game_form'} do |game_form|
+-form_for @game, :html => {:class => 'game_form'} do |game_form|
   
-  = game_form.error_messages
+  =game_form.error_messages
   
+  -if @game.new_record?
+    select any expansions you will use
+    %table.expansions
+      -Expansion.all.each do |expansion|
+        %tr
+          %td= check_box_tag "game[expansion_ids][]", expansion.id, @game.expansion_ids.include?(expansion.id), :id => dom_id(expansion)
+          %td= label_for_expansion(expansion)
+
   .players
-    players
-    - if @game.new_record?
-      (leave color blank if not playing)
-    - @game.colors.each do |color|
-      - player = @game.players.send(color) || @game.players.new(:color => color)
-      - game_form.fields_for :players, player do |player_form|
-        .player{:style => "background-color: #{color}"}
-          %span.color= color
-          %span.name= player_form.text_field :name
-          = player_form.hidden_field :color
-  
-  - if @game.new_record?        
-    = check_box_tag :add_expansions
-    = label_tag :add_expansions, 'add expansions'
-    %br/
-  - else
-    = game_form.label :victory_points_to_win
-    = game_form.text_field :victory_points_to_win, {:size => 2}
-  = game_form.submit 'save'
+    who's playing?
+    %table
+      -@game.colors.each do |color|
+        %tr{:style => "background-color: #{color}"}
+          -player = @game.players.send(color) || @game.players.new(:color => color)
+          -game_form.fields_for :players, player do |player_form|
+            %td
+              %span.color= color
+            %td.name= player_form.text_field :name
+            =player_form.hidden_field :color
+
+  -unless @game.new_record?
+    =game_form.label :victory_points_to_win
+    =game_form.text_field :victory_points_to_win, {:size => 2}
+  =game_form.submit 'save'
