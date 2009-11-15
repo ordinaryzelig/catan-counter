@@ -1,0 +1,5 @@
+%span.image=knight_image(knight)
+-if knight.level <= 2
+  -can_promote = knight.player.can_promote_knight?(knight.level)
+  =link_to_if can_promote, action_partial('promote', image_tag('up.png'), !can_promote), can_promote ? promote_knight_url(knight) : nil, :method => :post
+=link_to action_partial('desert', image_tag('delete.png'), false), knight_url(knight), :method => :delete
