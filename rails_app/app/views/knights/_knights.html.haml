@@ -1,5 +1,5 @@
 .knights
   -can_build = player.can_build_knight?(1)
-  =link_to_if can_build, action_partial('build', image_tag('add.png'), !can_build), player_knights_url(player), :method => :post
   - Knight::LEVELS.reverse.each do |level|
     =render player.knights.level(level)
+  =link_to_if can_build, action_partial('build knight', image_tag('add.png'), !can_build), player_knights_url(player), :method => :post

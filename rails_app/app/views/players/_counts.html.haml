@@ -1,5 +1,7 @@
 .player_counts
   .victory_points= pluralize(player.victory_points, 'victory point')
-  - if @game.uses?(CitiesAndKnights)
+  -if @game.uses?(CitiesAndKnights)
+    .cities
+      =pluralize(player.cities.size, 'city')
     .knights
-      = pluralize(player.knights.activated.size, 'activated knight')
+      =pluralize(player.knights.activated.strength, 'activated knights')
