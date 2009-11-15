@@ -3,9 +3,18 @@
   #expansions
     - @game.expansions.each do |expansion|
       = expansion.display_name
-  = link_to 'edit/add players or customize', edit_game_url(@game)
-  - if @game.uses?(CitiesAndKnights)
-    = link_to 'barbarians attack', game_barbarians_attack_url(@game), :method => :put
+  = link_to 'customize game or edit/add players', edit_game_url(@game)
+
+- if @game.uses?(CitiesAndKnights)
+  %table#game_counts.centered
+    %tr
+      %th cities
+      %td= @game.barbarians.strength
+    %tr
+      %th activated knights
+      %td= @game.barbarians.strength_defended_against
+    %tr.barbarians_attack
+      %td{:colspan => 2}= link_to 'barbarians attack', game_barbarians_attack_url(@game), :method => :put
 
 %table#winners.centered
   - @winners.each do |player|
