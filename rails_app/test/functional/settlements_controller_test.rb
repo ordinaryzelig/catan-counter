@@ -18,4 +18,10 @@ class SettlementsControllerTest < ActionController::TestCase
     end
   end
   
+  def test_destroy
+    settlement = Settlement.make
+    delete :destroy, :id => settlement
+    assert_nil Settlement.find_by_id(settlement)
+  end
+  
 end

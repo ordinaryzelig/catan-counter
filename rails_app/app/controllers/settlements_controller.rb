@@ -1,6 +1,6 @@
 class SettlementsController < ApplicationController
   
-  before_filter :load_player, :except => [:upgrade_to_city]
+  before_filter :load_player, :except => [:upgrade_to_city, :destroy]
   
   def create
     @player.settlements.create!
@@ -11,6 +11,12 @@ class SettlementsController < ApplicationController
     @settlement = Settlement.find(params[:id])
     @settlement.upgrade_to_city
     redirect_to game_url(@settlement.player.game)
+  end
+  
+  def destroy
+    settlement = Settlement.find(params[:id])
+    settlement.destroy
+    redirect_to game_url(settlement.player.game)
   end
   
   protected
