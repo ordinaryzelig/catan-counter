@@ -91,4 +91,12 @@ class Player < ActiveRecord::Base
     defenders_of_catan << game.defenders_of_catan.first
   end
   
+  def can_build_metropolis?
+    game.metropolises.not_built.any? && cities.without_metropolis.any?
+  end
+  
+  def build_metropolis
+    
+  end
+  
 end

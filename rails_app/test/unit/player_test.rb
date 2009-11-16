@@ -61,7 +61,7 @@ class PlayerTest < ActiveSupport::TestCase
     assert !player.can_promote_knight?(1)
   end
   
-  def test_longest_road_points
+  def test_victory_points_with_longest_road
     player = Player.make
     player.game.create_components
     assert_difference('player.victory_points', 2) do
@@ -91,7 +91,7 @@ class PlayerTest < ActiveSupport::TestCase
     end
   end
   
-  def test_largest_army_victory_points
+  def test_victory_points_with_largest_army
     player = Player.make
     player.game.create_components
     assert_difference('player.victory_points', 2) do
@@ -113,6 +113,21 @@ class PlayerTest < ActiveSupport::TestCase
     knight = Knight.make(:player => knight.player)
     assert_equal 2, knight.player.knights.strength
     assert_equal 3, knight.activate.reload.player.knights.strength
+  end
+  
+  def test_can_build_metropolis?
+    game = Game.make(:cities_and_knights).create_components
+    player = game.players.make
+    assert player.can_build_metropolis?
+    game.metropolises.first.update_attributes! :city => player.cities.first
+    assert !player.can_build_metropolis?
+  end
+  
+  def test_metropolis_victory_points
+    game = Game.make(:cities_and_knights).create_components
+    player = game.players.make
+    game.metropolises.first.update_attributes! :city => player.cities.first
+    assert_equal 5, player.victory_points
   end
   
 end
