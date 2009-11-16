@@ -82,7 +82,11 @@ class Game < ActiveRecord::Base
       reject(&:player_id)
     end
   end
-  has_many :metropolises, :class_name => 'Metropolis'
+  has_many :metropolises, :class_name => 'Metropolis' do
+    def not_built
+      self - built
+    end
+  end
   
   # assign default victory points.
   before_validation do |game|

@@ -26,6 +26,7 @@ module CitiesAndKnights
       create_longest_road
       create_metropolises
       create_defenders_of_catan
+      self
     end
     
   end

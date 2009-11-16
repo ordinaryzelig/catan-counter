@@ -25,8 +25,7 @@ class GamesControllerTest < ActionController::TestCase
   end
   
   def test_cities_and_knights_shows_components
-    game = Player.make.game
-    game.create_components
+    game = Player.make.game.create_components
     get :show, :id => game
     assert_no_tag :div, :attributes => {:class => 'knights'}
     game.expansions << Expansion.make(:cities_and_knights)
@@ -41,16 +40,14 @@ class GamesControllerTest < ActionController::TestCase
   end
   
   def test_update
-    game = Game.make
-    game.create_components
+    game = Game.make.create_components
     expansion = Expansion.make(:cities_and_knights)
     put :update, :id => game, :game => {:expansion_ids => [expansion.id]}
     assert game.uses?(expansion)
   end
   
   def test_winners
-    game = Game.make
-    game.create_components
+    game = Game.make.create_components
     game.players.make.win
     get :show, :id => game
     winners = assigns(:winners)

@@ -3,16 +3,15 @@
   .name{:style => "background-color: #{player.color}"}
     %span= player.name
   
-  .victory_points= pluralize(player.victory_points, 'victory point')
+  .victory_points= "victory points: #{player.victory_points}"
   =render :partial => 'longest_roads/longest_road', :locals => {:player => player}
-  -if @game.largest_army.player_id
+  -if @game.largest_army.try(:player_id)
     =render :partial => 'largest_armies/largest_army', :locals => {:player => player}
   -if @game.uses?(CitiesAndKnights)
     .defenders_of_catan
       ="defenders of catan: #{player.defenders_of_catan.size}"
-  -if @game.uses?(CitiesAndKnights)
-    =pluralize(player.knights.activated.strength, 'activated knights')
-  
+    ="activated knights: #{player.knights.activated.strength}"
+    
   .buildings
     =render :partial => 'cities/cities', :locals => {:player => player}
     =render :partial => 'settlements/settlements', :locals => {:player => player}

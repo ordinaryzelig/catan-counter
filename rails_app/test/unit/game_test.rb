@@ -44,26 +44,22 @@ class GameTest < ActiveSupport::TestCase
   end
   
   def test_create_longest_road
-    game = Game.make
-    game.create_components
+    game = Game.make.create_components
     assert game.longest_road.id
   end
   
   def test_create_largest_army
-    game = Game.make
-    game.create_components
+    game = Game.make.create_components
     assert game.largest_army.id
   end
   
   def test_players_with_longest_road
-    game = Game.make
-    game.create_components
+    game = Game.make.create_components
     assert_equal game.longest_road.player, game.player_with_longest_road
   end
   
   def test_create_soldiers
-    game = Game.make
-    game.create_components
+    game = Game.make.create_components
     assert_equal Soldier.limit_per_game, game.soldiers.size
   end
   
@@ -97,6 +93,14 @@ class GameTest < ActiveSupport::TestCase
     defender = players.first
     defender.knights.first.promote
     assert_equal (players - [defender]), game.reload.players.with_weakest_army
+  end
+  
+  def test_metropolises_not_built
+    game = Game.make(:cities_and_knights).create_components
+    assert_equal game.metropolises, game.metropolises.not_built
+    metropolis = game.metropolises.first
+    metropolis.update_attributes!(:city => game.players.make.cities.first)
+    assert !game.metropolises.not_built.include?(metropolis)
   end
   
 end

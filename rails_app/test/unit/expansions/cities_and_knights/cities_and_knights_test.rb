@@ -3,8 +3,7 @@ require 'test_helper'
 class CitiesAndKnightTest < ActiveSupport::TestCase
   
   def setup
-    @game = Game.make(:cities_and_knights)
-    @game.create_components
+    @game = Game.make(:cities_and_knights).create_components
   end
   
   def test_uses?

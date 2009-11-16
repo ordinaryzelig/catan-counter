@@ -4,8 +4,7 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
   
   def setup
     super
-    @game = Game.make(:cities_and_knights)
-    @game.create_components
+    @game = Game.make(:cities_and_knights).create_components
     2.times.map { @game.players.make }
   end
   
