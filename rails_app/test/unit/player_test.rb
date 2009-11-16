@@ -63,6 +63,7 @@ class PlayerTest < ActiveSupport::TestCase
   
   def test_longest_road_points
     player = Player.make
+    player.game.create_components
     assert_difference('player.victory_points', 2) do
       player.take_longest_road
     end
@@ -84,6 +85,7 @@ class PlayerTest < ActiveSupport::TestCase
   
   def test_play_soldier
     player = Player.make
+    player.game.create_components
     assert_difference('player.soldiers.size') do
       player.play_soldier
     end
@@ -91,6 +93,7 @@ class PlayerTest < ActiveSupport::TestCase
   
   def test_largest_army_victory_points
     player = Player.make
+    player.game.create_components
     assert_difference('player.victory_points', 2) do
       3.times { player.play_soldier }
     end

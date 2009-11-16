@@ -26,6 +26,7 @@ class Player < ActiveRecord::Base
   has_one :largest_army
   # why isn't this using the inflection?
   has_many :defenders_of_catan, :class_name => 'DefenderOfCatan'
+  has_many :metropolises, :through => :cities
   
   delegate :expansions, :to => :game
   

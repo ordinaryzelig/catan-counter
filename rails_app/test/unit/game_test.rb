@@ -44,31 +44,39 @@ class GameTest < ActiveSupport::TestCase
   end
   
   def test_create_longest_road
-    assert Game.make.longest_road.id
+    game = Game.make
+    game.create_components
+    assert game.longest_road.id
   end
   
   def test_create_largest_army
-    assert Game.make.largest_army.id
+    game = Game.make
+    game.create_components
+    assert game.largest_army.id
   end
   
   def test_players_with_longest_road
     game = Game.make
+    game.create_components
     assert_equal game.longest_road.player, game.player_with_longest_road
   end
   
   def test_create_soldiers
-    assert_equal Soldier.limit_per_game, Game.make.soldiers.size
+    game = Game.make
+    game.create_components
+    assert_equal Soldier.limit_per_game, game.soldiers.size
   end
   
   def test_soldiers_not_taken
     player = Player.make
+    player.game.create_components
     assert_difference('player.game.soldiers.not_taken.size', -1) do
       player.play_soldier
     end
   end
   
   def test_players_with_strongest_army
-    game = Game.make(:expansions => [Expansion.make(:cities_and_knights)])
+    game = Game.make(:cities_and_knights)
     players = 2.times.map { game.players.make }
     players.each do |player|
       2.times.map { player.knights.make }.flatten.each(&:activate)
@@ -80,7 +88,7 @@ class GameTest < ActiveSupport::TestCase
   end
   
   def test_players_with_weakest_army
-    game = Game.make(:expansions => [Expansion.make(:cities_and_knights)])
+    game = Game.make(:cities_and_knights)
     players = 2.times.map { game.players.make }
     players.each do |player|
       2.times.map { player.knights.make }.flatten.each(&:activate)
@@ -89,10 +97,6 @@ class GameTest < ActiveSupport::TestCase
     defender = players.first
     defender.knights.first.promote
     assert_equal (players - [defender]), game.reload.players.with_weakest_army
-  end
-  
-  def test_create_defenders_of_catan
-    assert_equal DefenderOfCatan.limit_per_game, Game.make.defenders_of_catan.size
   end
   
 end

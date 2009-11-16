@@ -18,6 +18,7 @@ class GamesController < ApplicationController
     players_attributes = params[:game].delete(:players_attributes)
     game = Game.new(params[:game])
     game.save!
+    game.create_components
     if players_attributes
       game.players_attributes = players_attributes
       game.save!
