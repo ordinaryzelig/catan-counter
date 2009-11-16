@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091114054521) do
+ActiveRecord::Schema.define(:version => 20091115232702) do
 
   create_table "cities", :force => true do |t|
     t.integer  "player_id",  :null => false
@@ -66,6 +66,12 @@ ActiveRecord::Schema.define(:version => 20091114054521) do
   end
 
   add_index "longest_roads", ["game_id"], :name => "index_longest_roads_on_game_id", :unique => true
+
+  create_table "metropolises", :force => true do |t|
+    t.integer "game_id",          :null => false
+    t.integer "city_id"
+    t.string  "development_area", :null => false
+  end
 
   create_table "players", :force => true do |t|
     t.integer  "game_id",    :null => false

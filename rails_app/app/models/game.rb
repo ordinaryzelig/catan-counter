@@ -76,13 +76,13 @@ class Game < ActiveRecord::Base
   has_many :cities, :through => :players
   has_one :longest_road
   has_one :largest_army
-  # why isn't this using the inflection?
   has_many :defenders_of_catan, :class_name => 'DefenderOfCatan'
   has_many :soldiers do
     def not_taken
       reject(&:player_id)
     end
   end
+  has_many :metropolises, :class_name => 'Metropolis'
   
   # assign default victory points.
   before_validation do |game|
@@ -96,10 +96,6 @@ class Game < ActiveRecord::Base
   after_save do |game|
     game.players.save! if game.players_attributes_changed
   end
-  after_save :create_longest_road
-  after_save :create_largest_army
-  after_create :create_soldiers
-  after_create :create_defenders_of_catan
   
   attr_reader :players_attributes_changed
   
@@ -141,6 +137,13 @@ class Game < ActiveRecord::Base
     @barbarians ||= Barbarians.new(self)
   end
   
+  def create_components
+    create_longest_road
+    create_largest_army
+    create_soldiers
+    self
+  end
+  
   private
   
   def create_soldiers
@@ -149,6 +152,12 @@ class Game < ActiveRecord::Base
   
   def create_defenders_of_catan
     DefenderOfCatan.limit_per_game.times { defenders_of_catan.create! }
+  end
+  
+  def create_metropolises
+    Metropolis::DEVELOPMENT_AREAS.each do |development_area|
+      metropolises.create! :development_area => development_area
+    end
   end
   
 end

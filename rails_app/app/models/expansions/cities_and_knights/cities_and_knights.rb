@@ -21,6 +21,13 @@ module CitiesAndKnights
       update_attributes! :victory_points_to_win => default_victory_points_to_win
     end
     
+    # overwrite.
+    def create_components
+      create_longest_road
+      create_metropolises
+      create_defenders_of_catan
+    end
+    
   end
   
   module PlayerMethods
@@ -32,7 +39,8 @@ module CitiesAndKnights
     
     def victory_points
       super +
-      defenders_of_catan.size
+      defenders_of_catan.size +
+      (metropolises.size * 2)
     end
     
   end
