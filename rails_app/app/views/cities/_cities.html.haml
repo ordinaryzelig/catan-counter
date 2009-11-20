@@ -2,3 +2,4 @@
   %span.image= "#{image_tag('city.png')} x "
   %span.number= player.cities.size
   = link_to_if player.cities.any?, action_partial('downgrade', image_tag('down.png'), player.cities.empty?), downgrade_to_settlement_city_url(player.cities.first), :method => :post
+  = link_to_if player.can_build_metropolis?, action_partial('metropolis', image_tag('up.png'), !player.can_build_metropolis?), build_metropolis_player_url(player), :method => :put

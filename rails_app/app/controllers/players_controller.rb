@@ -7,9 +7,15 @@ class PlayersController < ApplicationController
   end
   
   def play_soldier
-    @player = Player.find(params[:id])
-    @player.play_soldier
-    redirect_to @player.game
+    player = Player.find(params[:id])
+    player.play_soldier
+    redirect_to player.game
+  end
+  
+  def build_metropolis
+    player = Player.find(params[:id])
+    player.build_metropolis
+    redirect_to player.game
   end
   
   protected
