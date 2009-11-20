@@ -1,0 +1,1 @@
+= link_to_if player.can_build_metropolis?, action_partial('build metropolis', image_tag('metropolis.png'), !player.can_build_metropolis?), build_metropolis_player_url(player), :method => :put
