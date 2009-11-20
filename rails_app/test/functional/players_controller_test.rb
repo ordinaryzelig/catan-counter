@@ -22,12 +22,21 @@ class PlayersControllerTest < ActionController::TestCase
     end
   end
   
-  def test_player_soldier_when_none_left_to_take
+  def test_play_soldier_when_none_left_to_take
     player = Player.make
     player.game.create_components
     player.game.soldiers.each { player.play_soldier }
     assert_raise(Soldier::NoMore) do
       put :play_soldier, :id => player
+    end
+  end
+  
+  def test_build_metropolis
+    game = Game.make(:cities_and_knights)
+    game.create_components
+    player = game.players.make
+    assert_difference('player.cities.without_metropolises.size', -1) do
+      put :build_metropolis, :id => player
     end
   end
   

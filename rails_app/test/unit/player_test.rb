@@ -130,4 +130,12 @@ class PlayerTest < ActiveSupport::TestCase
     assert_equal 5, player.victory_points
   end
   
+  def test_build_metropolis
+    game = Game.make(:cities_and_knights).create_components
+    player = game.players.make
+    assert_difference('player.victory_points', 2) do
+      player.build_metropolis
+    end
+  end
+  
 end

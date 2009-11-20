@@ -17,13 +17,13 @@ class CityTest < ActiveSupport::TestCase
     end
   end
   
-  def test_without_metropolis_named_scope
+  def test_without_metropolises_named_scope
     game = Game.make(:cities_and_knights).create_components
     player = game.players.make
     city = player.cities.first
-    assert player.cities.without_metropolis.include?(city)
+    assert player.cities.without_metropolises.include?(city)
     game.metropolises.first.update_attributes!(:city => city)
-    assert player.cities.without_metropolis.empty?
+    assert player.cities.without_metropolises.empty?
   end
   
 end

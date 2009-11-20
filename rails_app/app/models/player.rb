@@ -92,11 +92,19 @@ class Player < ActiveRecord::Base
   end
   
   def can_build_metropolis?
-    game.metropolises.not_built.any? && cities.without_metropolis.any?
+    game.metropolises.not_built.any? && cities.without_metropolises.any?
   end
   
   def build_metropolis
-    
+    if (city = cities.without_metropolises.first) && (metropolis = game.metropolises.not_built.first)
+      city.metropolis = metropolis
+    else
+      raise NoCitiesToBuildMetropolis unless city
+      raise Metropolis::NoMore unless metropolis
+      raise 'what just happened here ?'
+    end
   end
+  
+  class NoCitiesToBuildMetropolis < StandardError; end
   
 end

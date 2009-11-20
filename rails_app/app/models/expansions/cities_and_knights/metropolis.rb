@@ -21,5 +21,6 @@ class Metropolis < ActiveRecord::Base
   end
   
   class LimitExceeded < StandardError; end
+  class NoMore < StandardError; end
   
 end
