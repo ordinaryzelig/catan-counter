@@ -106,6 +106,10 @@ class Player < ActiveRecord::Base
     end
   end
   
+  def immune_to_barbarians?
+    cities.without_metropolises.empty?
+  end
+  
   class NoCitiesToBuildMetropolis < StandardError; end
   
 end

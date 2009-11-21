@@ -43,4 +43,14 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
     assert @game.reload.players.all? { |player| player.knights.none?(&:activated) }
   end
   
+  def test_attack_and_barbarians_win_but_lowest_contributor_has_only_metropolis
+    assert @game.cities.size > @game.knights.activated.size
+    player_with_metropolis = @game.players.first
+    player_with_metropolis.build_metropolis('politics')
+    outcome = @game.barbarians.attack
+    assert outcome.barbarians_are_victorious?
+    assert !outcome.players_with_weakest_army.include?(player_with_metropolis)
+    assert player_with_metropolis.metropolises.any?
+  end
+  
 end
