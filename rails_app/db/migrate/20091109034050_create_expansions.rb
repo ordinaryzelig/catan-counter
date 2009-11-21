@@ -7,6 +7,7 @@ class CreateExpansions < ActiveRecord::Migration
       t.string :description, {:null => false}
       t.timestamps
     end
+    add_index :expansions, :name, {:unique => true}
   end
   
   def self.down

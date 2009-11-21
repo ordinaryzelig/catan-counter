@@ -118,9 +118,16 @@ class PlayerTest < ActiveSupport::TestCase
   def test_can_build_metropolis?
     game = Game.make(:cities_and_knights).create_components
     player = game.players.make
+    # got cities?
     assert player.can_build_metropolis?
+    # git cities without metropolises?
     game.metropolises.first.update_attributes! :city => player.cities.first
     assert !player.can_build_metropolis?
+    # got cities again?
+    player.cities.make
+    assert player.can_build_metropolis?
+    # already got metropolis?
+    assert !player.can_build_metropolis?(player.metropolises.first.development_area)
   end
   
   def test_metropolis_victory_points
@@ -134,7 +141,7 @@ class PlayerTest < ActiveSupport::TestCase
     game = Game.make(:cities_and_knights).create_components
     player = game.players.make
     assert_difference('player.victory_points', 2) do
-      player.build_metropolis
+      assert_equal 'politics', player.build_metropolis('politics').development_area
     end
   end
   

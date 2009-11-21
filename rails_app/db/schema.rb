@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20091115232702) do
     t.datetime "updated_at"
   end
 
+  add_index "expansions", ["name"], :name => "index_expansions_on_name", :unique => true
+
   create_table "expansions_games", :id => false, :force => true do |t|
     t.integer  "game_id",      :null => false
     t.integer  "expansion_id", :null => false

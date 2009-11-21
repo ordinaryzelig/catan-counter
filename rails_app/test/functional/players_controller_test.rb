@@ -36,7 +36,7 @@ class PlayersControllerTest < ActionController::TestCase
     game.create_components
     player = game.players.make
     assert_difference('player.cities.without_metropolises.size', -1) do
-      put :build_metropolis, :id => player
+      put :build_metropolis, :id => player, :development_area => 'politics'
     end
   end
   

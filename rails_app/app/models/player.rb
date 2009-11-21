@@ -91,16 +91,17 @@ class Player < ActiveRecord::Base
     defenders_of_catan << game.defenders_of_catan.first
   end
   
-  def can_build_metropolis?
-    game.metropolises.not_built.any? && cities.without_metropolises.any?
+  # can build if has cities without metropolises and doesn't already have that metropolis.
+  def can_build_metropolis?(development_area = nil)
+    cities.without_metropolises.any? &&
+    !(development_area && metropolises.map(&:development_area).include?(development_area))
   end
   
-  def build_metropolis
-    if (city = cities.without_metropolises.first) && (metropolis = game.metropolises.not_built.first)
+  def build_metropolis(development_area)
+    if (city = cities.without_metropolises.first) && (metropolis = game.metropolises.development_area(development_area))
       city.metropolis = metropolis
     else
       raise NoCitiesToBuildMetropolis unless city
-      raise Metropolis::NoMore unless metropolis
       raise 'what just happened here ?'
     end
   end
