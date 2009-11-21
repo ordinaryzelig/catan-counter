@@ -8,7 +8,7 @@ class Game
     return super unless args.first == :cities_and_knights
     expansion = args.shift
     game = super(*args)
-    game.expansions = [Expansion.make(expansion)]
+    game.expansions = [Expansion.find_by_name('CitiesAndKnights') || Expansion.make(expansion)]
     game
   end
 end
