@@ -5,7 +5,6 @@
   
   .victory_points= "victory points: #{player.victory_points}"
   =render :partial => 'longest_roads/longest_road', :locals => {:player => player}
-  =render :partial => @game.metropolises, :locals => {:player => player}
   -if @game.largest_army.try(:player_id)
     =render :partial => 'largest_armies/largest_army', :locals => {:player => player}
   -if @game.uses?(CitiesAndKnights)
@@ -14,6 +13,7 @@
     ="activated knights: #{player.knights.activated.strength}"
     
   .buildings
+    =render :partial => @game.metropolises, :locals => {:player => player}
     =render :partial => 'cities/cities', :locals => {:player => player}
     =render :partial => 'settlements/settlements', :locals => {:player => player}
     -if @game.uses?(CitiesAndKnights)
