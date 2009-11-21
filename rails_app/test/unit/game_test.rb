@@ -95,12 +95,12 @@ class GameTest < ActiveSupport::TestCase
     assert_equal (players - [defender]), game.reload.players.with_weakest_army
   end
   
-  def test_metropolises_not_built
+  def test_metropolises_development_area
     game = Game.make(:cities_and_knights).create_components
-    assert_equal game.metropolises, game.metropolises.not_built
-    metropolis = game.metropolises.first
-    metropolis.update_attributes!(:city => game.players.make.cities.first)
-    assert !game.metropolises.not_built.include?(metropolis)
+    area = 'politics'
+    metropolis = Metropolis.development_area(area).first
+    assert_not_nil metropolis
+    assert_equal metropolis, game.metropolises.development_area(area)
   end
   
 end

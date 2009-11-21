@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
   
   def build_metropolis
     player = Player.find(params[:id])
-    player.build_metropolis
+    player.build_metropolis(params[:development_area])
     redirect_to player.game
   end
   

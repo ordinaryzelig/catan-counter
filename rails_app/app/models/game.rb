@@ -83,8 +83,9 @@ class Game < ActiveRecord::Base
     end
   end
   has_many :metropolises, :class_name => 'Metropolis' do
-    def not_built
-      self - built
+    # looks like named_scope but just returns first.
+    def development_area(area)
+      super.first
     end
   end
   
