@@ -27,6 +27,7 @@ class Player < ActiveRecord::Base
   # why isn't this using the inflection?
   has_many :defenders_of_catan, :class_name => 'DefenderOfCatan'
   has_many :metropolises, :through => :cities
+  has_one :boot
   
   delegate :expansions, :to => :game
   
@@ -108,6 +109,18 @@ class Player < ActiveRecord::Base
   
   def immune_to_barbarians?
     cities.without_metropolises.empty?
+  end
+  
+  def victory_points_needed_to_win
+    game.victory_points_to_win
+  end
+  
+  def has_enough_victory_points_to_win?
+    victory_points >= victory_points_needed_to_win
+  end
+  
+  def take_boot
+    (self.boot = game.boot).save!
   end
   
   class NoCitiesToBuildMetropolis < StandardError; end

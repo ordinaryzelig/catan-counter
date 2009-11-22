@@ -145,4 +145,11 @@ class PlayerTest < ActiveSupport::TestCase
     end
   end
   
+  def test_take_boot
+    game = Game.make(:fishermen_of_catan).create_components
+    player = game.players.make
+    player.take_boot
+    assert_equal player, player.boot.player
+  end
+  
 end

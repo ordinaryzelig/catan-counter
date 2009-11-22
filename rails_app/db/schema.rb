@@ -9,7 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091115232702) do
+ActiveRecord::Schema.define(:version => 20091121230116) do
+
+  create_table "boots", :force => true do |t|
+    t.integer "game_id",   :null => false
+    t.integer "player_id"
+  end
 
   create_table "cities", :force => true do |t|
     t.integer  "player_id",  :null => false

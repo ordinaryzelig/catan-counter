@@ -16,8 +16,8 @@ class Game < ActiveRecord::Base
     def save!
       each(&:save!)
     end
-    def reached_victory_points_to_win
-      self.select { |player| player.victory_points >= proxy_owner.victory_points_to_win }
+    def with_enough_victory_points_to_win
+      self.select { |player| player.has_enough_victory_points_to_win? }
     end
     def with_longest_road
       detect(&:longest_road)
@@ -71,7 +71,7 @@ class Game < ActiveRecord::Base
       proxy_target.detect { |player| player.color == color.to_s }
     end
   end
-  has_and_belongs_to_many :expansions, :after_add => :expansion_added
+  has_and_belongs_to_many :expansions, :after_add => [:extend_expansion, :expansion_added]
   has_many :knights, :through => :players
   has_many :cities, :through => :players
   has_one :longest_road
@@ -88,6 +88,7 @@ class Game < ActiveRecord::Base
       super.first
     end
   end
+  has_one :boot
   
   # assign default victory points.
   before_validation do |game|
@@ -150,6 +151,10 @@ class Game < ActiveRecord::Base
   end
   
   private
+  
+  # expansion module can override this.
+  def expansion_added(expansion)
+  end
   
   def create_soldiers
     Soldier.limit_per_game.times { soldiers.create! }
