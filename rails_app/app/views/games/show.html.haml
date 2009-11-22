@@ -8,13 +8,17 @@
 - if @game.uses?(CitiesAndKnights)
   %table#game_counts.centered
     %tr
+      %th.icon
       %th cities
       %td= @game.barbarians.strength
     %tr
+      %th.icon
       %th activated knights
       %td= @game.barbarians.strength_defended_against
     %tr.barbarians_attack
+      %th.icon= link_to image_tag('barbarians.png'), game_barbarians_attack_url(@game), :method => :put
       %th{:colspan => 2}= link_to 'barbarians attack', game_barbarians_attack_url(@game), :method => :put
+      %td
 
 %table#winners.centered
   - @winners.each do |player|
