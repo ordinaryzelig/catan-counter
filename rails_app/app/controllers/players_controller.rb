@@ -24,6 +24,12 @@ class PlayersController < ApplicationController
     redirect_to player.game
   end
   
+  def take_merchant
+    player = Player.find(params[:id])
+    player.take_merchant
+    redirect_to player.game
+  end
+  
   protected
   
 end
