@@ -1,4 +1,4 @@
-class Boot < ActiveRecord::Base
+class Merchant < ActiveRecord::Base
   
   belongs_to :game
   belongs_to :player

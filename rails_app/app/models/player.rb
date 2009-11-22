@@ -28,6 +28,7 @@ class Player < ActiveRecord::Base
   has_many :defenders_of_catan, :class_name => 'DefenderOfCatan'
   has_many :metropolises, :through => :cities
   has_one :boot
+  has_one :merchant
   
   delegate :expansions, :to => :game
   
@@ -121,6 +122,10 @@ class Player < ActiveRecord::Base
   
   def take_boot
     (self.boot = game.boot).save!
+  end
+  
+  def take_merchant
+    (self.merchant = game.merchant).save!
   end
   
   class NoCitiesToBuildMetropolis < StandardError; end

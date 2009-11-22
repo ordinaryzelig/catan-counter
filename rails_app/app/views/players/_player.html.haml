@@ -4,6 +4,8 @@
   =render :partial => 'players/victory_points', :locals => {:player => player}
   -if @game.uses?(FishermenOfCatan)
     =render :partial => 'boots/boot', :locals => {:player => player}
+  -if @game.uses?(CitiesAndKnights)
+    =render :partial => 'merchants/merchant', :locals => {:player => player}
   =render :partial => 'longest_roads/longest_road', :locals => {:player => player}
   -if @game.largest_army.try(:player_id)
     =render :partial => 'largest_armies/largest_army', :locals => {:player => player}

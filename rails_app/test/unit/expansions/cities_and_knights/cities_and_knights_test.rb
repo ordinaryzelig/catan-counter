@@ -30,6 +30,10 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     2.times { player.knights.make.activate }
     @game.barbarians.attack
     assert_equal 4, player.victory_points
+    player.build_metropolis('politics')
+    assert_equal 6, player.victory_points
+    player.take_merchant
+    assert_equal 7, player.victory_points
   end
   
   def test_create_defenders_of_catan

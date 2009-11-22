@@ -26,6 +26,7 @@ module CitiesAndKnights
       create_longest_road
       create_metropolises
       create_defenders_of_catan
+      create_merchant
       self
     end
     
@@ -41,7 +42,8 @@ module CitiesAndKnights
     def victory_points
       super +
       defenders_of_catan.size +
-      (metropolises.size * 2)
+      (metropolises.size * 2) +
+      (merchant ? 1 : 0)
     end
     
   end
