@@ -6,6 +6,7 @@ module ExpandedModelMethods
     end
   end
   
+  # is this model expanded by given expansion?
   def uses?(expansion_object_or_module)
     case expansion_object_or_module
     when Expansion
@@ -15,24 +16,20 @@ module ExpandedModelMethods
     end
   end
   
+  # every fetched object should extend expansions.
   def after_find
     extend_expansions
   end
   
   # tried overwriting extend, but that didn't work.
   def extend_expansion(expansion)
-    extend expansion.name.constantize
+    extend expansion.module
   end
   
   def extend_expansions
     expansions.each do |expansion|
       extend_expansion expansion
     end
-  end
-  
-  def expansion_added(expansion)
-    extend_expansion expansion
-    expansion_added(expansion) # this should call newly defined method in expansion module.
   end
   
 end

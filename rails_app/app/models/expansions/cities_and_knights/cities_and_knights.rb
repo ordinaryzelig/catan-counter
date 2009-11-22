@@ -2,9 +2,9 @@ module CitiesAndKnights
   
   def self.extended(object)
     case object
-    when ::Game
+    when Game
       object.extend GameMethods
-    when ::Player
+    when Player
       object.extend PlayerMethods
     else
       raise "don't know how to extend #{object.class} with expansion"

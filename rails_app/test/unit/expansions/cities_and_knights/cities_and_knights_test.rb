@@ -22,10 +22,7 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
   end
   
   def test_victory_points_to_win
-    game = Game.make
-    assert_equal 10, game.victory_points_to_win
-    game.expansions << Expansion.find_by_name('CitiesAndKnights')
-    assert_equal 13, game.victory_points_to_win
+    assert_equal 13, @game.victory_points_to_win
   end
   
   def test_player_victory_points
