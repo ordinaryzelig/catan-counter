@@ -18,6 +18,12 @@ class PlayersController < ApplicationController
     redirect_to player.game
   end
   
+  def take_boot
+    player = Player.find(params[:id])
+    player.take_boot
+    redirect_to player.game
+  end
+  
   protected
   
 end

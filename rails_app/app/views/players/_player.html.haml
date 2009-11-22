@@ -1,17 +1,14 @@
 .player{:style => "border: 5px solid #{player.color == 'white' ? 'black' : player.color}"}
-  
   .name{:style => "background-color: #{player.color}"}
     %span= player.name
-  
-  .victory_points= "victory points: #{player.victory_points}"
+  =render :partial => 'players/victory_points', :locals => {:player => player}
+  -if @game.uses?(FishermenOfCatan)
+    =render :partial => 'boots/boot', :locals => {:player => player}
   =render :partial => 'longest_roads/longest_road', :locals => {:player => player}
   -if @game.largest_army.try(:player_id)
     =render :partial => 'largest_armies/largest_army', :locals => {:player => player}
   -if @game.uses?(CitiesAndKnights)
-    .defenders_of_catan
-      ="defenders of catan: #{player.defenders_of_catan.size}"
-    ="activated knights: #{player.knights.activated.strength}"
-    
+    =render :partial => 'players/defenders_of_catan', :locals => {:player => player}
   .buildings
     =render :partial => @game.metropolises, :locals => {:player => player}
     =render :partial => 'cities/cities', :locals => {:player => player}
