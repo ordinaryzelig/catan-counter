@@ -16,6 +16,7 @@ Rails::Initializer.run do |config|
     "#{RAILS_ROOT}/app/models/expansions",
     "#{RAILS_ROOT}/app/models/expansions/cities_and_knights",
     "#{RAILS_ROOT}/app/models/expansions/cities_and_knights/barbarians",
+    "#{RAILS_ROOT}/app/models/expansions/fishermen_of_catan",
   ]
 
   # Specify gems that this application depends on and have them installed with rake gems:install

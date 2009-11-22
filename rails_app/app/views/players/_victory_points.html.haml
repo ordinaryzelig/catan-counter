@@ -1,0 +1,4 @@
+.victory_points
+  victory points: #{player.victory_points}
+  -if @game.uses?(FishermenOfCatan) && player.boot
+    =image_tag('boot.png')

@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
     game.barbarians_attack 'barbarians/attack', :controller => 'barbarians', :action => 'attack', :conditions => {:method => :put}
   end
   
-  map.resources :players, :member => {:take_longest_road => :put, :play_soldier => :put, :build_metropolis => :put} do |player|
+  map.resources :players, :member => {:take_longest_road => :put, :play_soldier => :put, :build_metropolis => :put, :take_boot => :put} do |player|
     player.resources :settlements
     player.resources :cities
     player.resources :knights

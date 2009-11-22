@@ -40,4 +40,11 @@ class PlayersControllerTest < ActionController::TestCase
     end
   end
   
+  def test_take_boot
+    game = Game.make(:fishermen_of_catan).create_components
+    player = game.players.make
+    put :take_boot, :id => player
+    assert player.boot
+  end
+  
 end
