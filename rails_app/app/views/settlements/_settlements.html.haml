@@ -1,5 +1,5 @@
 .settlements
-  %span.image= "#{image_tag('settlement.png')} x "
+  %span.image= image_tag("settlement_#{player.color}.png") + 'x'
   %span.number= player.settlements.size
   - can_build = player.can_build_settlement?
   = link_to_if can_build, action_partial('build', image_tag('add.png'), !can_build), player_settlements_url(player), :method => :post
