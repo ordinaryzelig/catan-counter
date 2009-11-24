@@ -4,7 +4,7 @@ end
 Expansion.blueprint(:cities_and_knights) do
   name { 'CitiesAndKnights' }
   display_name { 'cities and knights' }
-  description { 'adds knights, metropolises, and barbarians.' }
+  description { 'adds knights, metropolises, barbarians, and merchant.' }
 end
 
 Expansion.blueprint(:fishermen_of_catan) do
