@@ -27,8 +27,5 @@
         %span.name{:style => "color: #{player.color}"}= player.name
         %span.message= 'has enough victory points to win'
 
-%table.players
-  %tr
-    - @game.players.each do |player|
-      %td{:width => "#{100 / @game.players.size}%"}
-        = render player
+- @game.players.each do |player|
+  = render player
