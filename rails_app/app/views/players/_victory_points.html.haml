@@ -1,6 +1,9 @@
 .victory_points
   victory points: #{player.victory_points}
-  -if @game.uses?(FishermenOfCatan) && player.boot
-    =image_tag('boot.png', :width => '5%', :title => 'boot')
-  -if @game.uses?(CitiesAndKnights) && player.merchant
-    =image_tag('merchant.png', :width => '3%', :title => 'merchant')
+  - if @game.uses?(FishermenOfCatan) && player.boot
+    = image_tag('boot.png', :width => '5%', :title => 'boot')
+  - if @game.uses?(CitiesAndKnights)
+    - if player.merchant
+      = image_tag('merchant.png', :width => '3%', :title => 'merchant')
+    - player.metropolises.each do |metropolis|
+      = image_tag("metropolis_#{metropolis.development_area}.png", :width => '7%')
