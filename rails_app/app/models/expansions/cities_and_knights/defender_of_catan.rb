@@ -11,7 +11,7 @@ class DefenderOfCatan < ActiveRecord::Base
   end
   
   def self.limit_per_game
-    6
+    8
   end
   
   class LimitExceeded < StandardError; end
