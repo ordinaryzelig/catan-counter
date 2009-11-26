@@ -30,6 +30,12 @@ class PlayersController < ApplicationController
     redirect_to player.game
   end
   
+  def take_progress_card_victory_point
+    player = Player.find(params[:id])
+    player.take_progress_card_victory_point
+    redirect_to player.game
+  end
+  
   protected
   
 end

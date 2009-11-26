@@ -29,6 +29,7 @@ class Player < ActiveRecord::Base
   has_many :metropolises, :through => :cities
   has_one :boot
   has_one :merchant
+  has_many :progress_card_victory_points
   
   delegate :expansions, :to => :game
   
@@ -126,6 +127,10 @@ class Player < ActiveRecord::Base
   
   def take_merchant
     (self.merchant = game.merchant).save!
+  end
+  
+  def take_progress_card_victory_point
+    self.progress_card_victory_points << game.progress_card_victory_points.not_taken.first
   end
   
   class NoCitiesToBuildMetropolis < StandardError; end

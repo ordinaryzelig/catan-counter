@@ -152,4 +152,12 @@ class PlayerTest < ActiveSupport::TestCase
     assert_equal player, player.boot.player
   end
   
+  def test_take_progress_card_victory_point
+    game = Game.make(:cities_and_knights).create_components
+    player = game.players.make
+    assert_difference('game.reload.progress_card_victory_points.not_taken.size', -1) do
+      player.take_progress_card_victory_point
+    end
+  end
+  
 end
