@@ -20,7 +20,8 @@ the original intent was to keep score for the cities and knights expansion, but 
 == boot
 
  ruby script/server -e production
- point browser to http://localhost:3000/
+
+then point your browser to http://localhost:3000/
 
 p.s. catan counter doesn't look too shabby on the iphone.  just find your server's ip address and point safari to
 
