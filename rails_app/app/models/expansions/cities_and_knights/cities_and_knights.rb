@@ -27,6 +27,7 @@ module CitiesAndKnights
       create_metropolises
       create_defenders_of_catan
       create_merchant
+      create_progress_card_victory_points
       self
     end
     
@@ -43,7 +44,8 @@ module CitiesAndKnights
       super +
       defenders_of_catan.size +
       (metropolises.size * 2) +
-      (merchant ? 1 : 0)
+      (merchant ? 1 : 0) +
+      progress_card_victory_points.size
     end
     
   end

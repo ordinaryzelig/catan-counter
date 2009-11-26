@@ -34,6 +34,8 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     assert_equal 6, player.victory_points
     player.take_merchant
     assert_equal 7, player.victory_points
+    player.take_progress_card_victory_point
+    assert_equal 8, player.victory_points
   end
   
   def test_create_defenders_of_catan
@@ -46,6 +48,10 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
   
   def test_do_not_create_soldiers
     assert @game.soldiers.empty?
+  end
+  
+  def test_create_metropolises
+    assert_equal ProgressCardVictoryPoint.limit_per_game, @game.progress_card_victory_points.size
   end
   
 end

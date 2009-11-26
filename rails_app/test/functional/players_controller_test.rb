@@ -47,4 +47,12 @@ class PlayersControllerTest < ActionController::TestCase
     assert player.boot
   end
   
+  def test_take_progress_card_victory_point
+    game = Game.make(:cities_and_knights).create_components
+    player = game.players.make
+    assert_difference('player.reload.progress_card_victory_points.size') do
+      put :take_progress_card_victory_point, :id => player
+    end
+  end
+  
 end
