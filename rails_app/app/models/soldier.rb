@@ -23,7 +23,7 @@ class Soldier < ActiveRecord::Base
   end
   
   def self.limit_per_game
-    14
+    20
   end
   
   class LimitExceeded < StandardError; end
