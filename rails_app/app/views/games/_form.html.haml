@@ -11,7 +11,7 @@
           %td= label_for_expansion(expansion)
 
   .players
-    who's playing?
+    who's playing? (blanks will not be used)
     %table
       -@game.colors.each do |color|
         %tr{:style => "background-color: #{color}"}
