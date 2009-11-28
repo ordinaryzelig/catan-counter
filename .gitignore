@@ -1,7 +1,7 @@
 .DS_Store
 *.tmproj
-rails_app/log/*
+log/*
 *.sqlite3
 tmp/
-rails_app/config/database.yml
-rails_app/public/stylesheets/*
+config/database.yml
+public/stylesheets/*
