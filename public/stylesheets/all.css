@@ -1,0 +1,99 @@
+a {
+  text-decoration: none;
+  outline-width: 0; }
+  a:hover {
+    text-decoration: underline;
+    background-color: beige; }
+  a:visited {
+    color: blue; }
+
+table {
+  border-collapse: collapse; }
+
+table.centered {
+  margin-left: auto;
+  margin-right: auto; }
+
+#flash {
+  padding: 2mm;
+  border-size: 2px;
+  border-style: solid; }
+  #flash .notice {
+    background-color: yellow; }
+  #flash .success {
+    background-color: green; }
+  #flash .error {
+    background-color: red; }
+
+.game_form table.expansions {
+  margin-bottom: 5mm; }
+  .game_form table.expansions td {
+    padding: 2mm; }
+.game_form .players {
+  margin-bottom: 5mm; }
+  .game_form .players table td {
+    padding: 2mm; }
+    .game_form .players table td span.color {
+      padding: 1mm;
+      background-color: white; }
+.game_form .player {
+  padding: 2mm; }
+  .game_form .player .color {
+    padding: 1mm;
+    background-color: white; }
+
+#game_title {
+  text-align: center;
+  margin-bottom: 5mm; }
+  #game_title #number {
+    font-size: 200%;
+    font-weight: bold; }
+  #game_title #expansions {
+    font-size: 120%;
+    color: gray; }
+
+table#game_counts th {
+  text-align: left; }
+table#game_counts th, table#game_counts td {
+  padding-left: 1mm;
+  padding-right: 1mm; }
+table#game_counts td {
+  text-align: center; }
+
+.player {
+  display: inline-block;
+  text-align: center;
+  margin: 4px;
+  padding: 2mm;
+  vertical-align: top; }
+  .player .name {
+    font-size: 125%;
+    font-weight: bold;
+    border: 2px solid #999;
+    padding: 2mm;
+    margin-bottom: 2mm; }
+    .player .name span {
+      padding: 1mm;
+      background-color: white; }
+  .player .action {
+    display: inline-block; }
+  .player .disabled {
+    color: gray; }
+  .player #largest_army {
+    background-color: red; }
+  .player .buildings {
+    border-top: 2px solid #999; }
+
+table#winners {
+  text-align: center;
+  margin-bottom: 5mm; }
+  table#winners .player {
+    background-color: yellow; }
+    table#winners .player td {
+      padding: 2mm; }
+    table#winners .player span.name {
+      font-size: 120%;
+      font-weight: bold; }
+
+form.edit_game table tr td label .display_name {
+  font-size: 150%; }
