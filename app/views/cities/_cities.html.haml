@@ -1,0 +1,6 @@
+.cities
+  %span.image= image_tag("city_#{player.color}.png")
+  %span.x= 'x'
+  %span.number= player.cities.size
+  - can_downgrade = player.cities.without_metropolises.any?
+  = link_to_if can_downgrade, action_partial('downgrade', image_tag('down.png'), !can_downgrade), downgrade_to_settlement_city_url(player.cities.first), :method => :post

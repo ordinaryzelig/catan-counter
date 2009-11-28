@@ -1,0 +1,2 @@
+-can_build = player.can_build_metropolis?(metropolis.development_area)
+= link_to_if can_build, action_partial('build', image_tag("metropolis_#{metropolis.development_area}.png"), !can_build), build_metropolis_player_url(player, :development_area => metropolis.development_area), :method => :put

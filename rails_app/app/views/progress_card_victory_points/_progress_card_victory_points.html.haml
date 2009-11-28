@@ -1,5 +1,0 @@
-.progress_card_victory_points
-  -if @game.progress_card_victory_points.not_taken.any?
-    =link_to 'take progress card victory point', take_progress_card_victory_point_player_url(player), :method => :put
-  -else
-    %span.disabled='no more progress card victory points'
