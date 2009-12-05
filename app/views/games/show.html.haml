@@ -27,5 +27,6 @@
         %span.name{:style => "color: #{player.color}"}= player.name
         %span.message= 'has enough victory points to win'
 
-- @game.players.each do |player|
-  = render player
+#players
+  - @game.players.each do |player|
+    = render player
