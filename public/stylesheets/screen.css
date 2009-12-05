@@ -15,9 +15,12 @@ table.centered {
   margin-right: auto; }
 
 #flash {
-  padding: 2mm;
   border-size: 2px;
-  border-style: solid; }
+  border-style: solid;
+  text-align: center;
+  margin-bottom: 5mm; }
+  #flash div {
+    padding: 2px; }
   #flash .notice {
     background-color: yellow; }
   #flash .success {
