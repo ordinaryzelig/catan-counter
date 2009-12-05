@@ -91,7 +91,7 @@ class Player < ActiveRecord::Base
   end
   
   def declare_defender_of_catan
-    defenders_of_catan << game.defenders_of_catan.first
+    defenders_of_catan << game.defenders_of_catan.not_taken.first
   end
   
   # can build if has cities without metropolises and doesn't already have that metropolis.

@@ -77,11 +77,7 @@ class Game < ActiveRecord::Base
   has_one :longest_road
   has_one :largest_army
   has_many :defenders_of_catan, :class_name => 'DefenderOfCatan'
-  has_many :soldiers do
-    def not_taken
-      reject(&:player_id)
-    end
-  end
+  has_many :soldiers
   has_many :metropolises, :class_name => 'Metropolis' do
     # looks like named_scope but just returns first.
     def development_area(area)
@@ -90,11 +86,7 @@ class Game < ActiveRecord::Base
   end
   has_one :boot
   has_one :merchant
-  has_many :progress_card_victory_points do
-    def not_taken
-      reject(&:player_id)
-    end
-  end
+  has_many :progress_card_victory_points
   
   # assign default victory points.
   before_validation do |game|
