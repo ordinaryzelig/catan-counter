@@ -3,14 +3,18 @@ require 'test_helper'
 class FishermenOfCatanTest < ActiveSupport::TestCase
   
   def setup
+    super
     @game = Game.make(:fishermen_of_catan).create_components
   end
   
-  def test_create_boot
+  def test_game_create_components
+    assert @game.soldiers.any?
+    assert_not_nil @game.largest_army
+    assert_not_nil @game.longest_road
     assert @game.boot
   end
   
-  def test_victory_points_to_win
+  def test_player_victory_points_to_win
     player = @game.players.make
     assert_equal @game.victory_points_to_win, player.victory_points_needed_to_win
     assert_difference('player.victory_points_needed_to_win') do
@@ -47,6 +51,12 @@ class FishermenOfCatanTest < ActiveSupport::TestCase
     # give player the boot and player should not be winning any more.
     player.take_boot
     assert @game.reload.players.with_enough_victory_points_to_win.empty?
+  end
+  
+  def test_player_take_boot
+    player = @game.players.make
+    player.take_boot
+    assert_equal player, player.boot.player
   end
   
 end

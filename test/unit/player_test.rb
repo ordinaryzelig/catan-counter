@@ -4,11 +4,11 @@ class PlayerTest < ActiveSupport::TestCase
   
   def test_victory_points
     player = Player.make
-    player.settlements.destroy_all
-    player.cities.destroy_all
+    assert_equal 2, player.victory_points
     2.times { player.settlements.make }
-    2.times { player.cities.make }
-    assert_equal 6, player.victory_points
+    assert_equal 4, player.victory_points
+    player.settlements.each(&:upgrade_to_city)
+    assert_equal 8, player.reload.victory_points
   end
   
   def test_create_starter_buildings
@@ -41,24 +41,6 @@ class PlayerTest < ActiveSupport::TestCase
     color = 'blue'
     player = Player.make(:color => color, :name => nil)
     assert_equal color, player.name
-  end
-  
-  def test_deactivate_knights
-    player = Player.make
-    2.times { player.knights.make(:activated => true) }
-    assert !player.knights.deactivate.any?(&:activated)
-  end
-  
-  def test_can_promote_knight?
-    player = Player.make
-    # no knights to promote.
-    assert !player.can_promote_knight?(1)
-    # one knight to promote with no other knights.
-    player.knights.make(:level => 1)
-    assert player.can_promote_knight?(1)
-    # already has 2 level 2 knights.
-    2.times { player.knights.make(:level => 2) }
-    assert !player.can_promote_knight?(1)
   end
   
   def test_victory_points_with_longest_road
@@ -113,51 +95,6 @@ class PlayerTest < ActiveSupport::TestCase
     knight = Knight.make(:player => knight.player)
     assert_equal 2, knight.player.knights.strength
     assert_equal 3, knight.activate.reload.player.knights.strength
-  end
-  
-  def test_can_build_metropolis?
-    game = Game.make(:cities_and_knights).create_components
-    player = game.players.make
-    # got cities?
-    assert player.can_build_metropolis?
-    # git cities without metropolises?
-    game.metropolises.first.update_attributes! :city => player.cities.first
-    assert !player.can_build_metropolis?
-    # got cities again?
-    player.cities.make
-    assert player.can_build_metropolis?
-    # already got metropolis?
-    assert !player.can_build_metropolis?(player.metropolises.first.development_area)
-  end
-  
-  def test_metropolis_victory_points
-    game = Game.make(:cities_and_knights).create_components
-    player = game.players.make
-    game.metropolises.first.update_attributes! :city => player.cities.first
-    assert_equal 5, player.victory_points
-  end
-  
-  def test_build_metropolis
-    game = Game.make(:cities_and_knights).create_components
-    player = game.players.make
-    assert_difference('player.victory_points', 2) do
-      assert_equal 'politics', player.build_metropolis('politics').development_area
-    end
-  end
-  
-  def test_take_boot
-    game = Game.make(:fishermen_of_catan).create_components
-    player = game.players.make
-    player.take_boot
-    assert_equal player, player.boot.player
-  end
-  
-  def test_take_progress_card_victory_point
-    game = Game.make(:cities_and_knights).create_components
-    player = game.players.make
-    assert_difference('game.reload.progress_card_victory_points.not_taken.size', -1) do
-      player.take_progress_card_victory_point
-    end
   end
   
 end

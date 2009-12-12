@@ -14,7 +14,7 @@ class Metropolis < ActiveRecord::Base
   
   # check limit.
   before_create do |metropolis|
-    raise LimitExceeded if metropolis.game.metropolises.size >= Metropolis.limit_per_game
+    raise LimitExceeded if metropolis.game.metropolises.size >= limit_per_game
   end
   
   def self.limit_per_game

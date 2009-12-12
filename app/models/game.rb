@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   
-  include ExpandedModelMethods
+  include ExpandedModel
   
   has_many :players do
     def colors
@@ -87,6 +87,7 @@ class Game < ActiveRecord::Base
   has_one :boot
   has_one :merchant
   has_many :progress_card_victory_points
+  has_many :gold_point_victory_points
   
   # assign default victory points.
   before_validation do |game|
@@ -137,10 +138,6 @@ class Game < ActiveRecord::Base
     longest_road.player
   end
   
-  def barbarians
-    @barbarians ||= Barbarians.new(self)
-  end
-  
   def create_components
     create_longest_road
     create_largest_army
@@ -156,20 +153,6 @@ class Game < ActiveRecord::Base
   
   def create_soldiers
     Soldier.limit_per_game.times { soldiers.create! }
-  end
-  
-  def create_defenders_of_catan
-    DefenderOfCatan.limit_per_game.times { defenders_of_catan.create! }
-  end
-  
-  def create_metropolises
-    Metropolis::DEVELOPMENT_AREAS.each do |development_area|
-      metropolises.create! :development_area => development_area
-    end
-  end
-  
-  def create_progress_card_victory_points
-    ProgressCardVictoryPoint.limit_per_game.times { progress_card_victory_points.create! }
   end
   
 end

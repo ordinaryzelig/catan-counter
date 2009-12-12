@@ -9,7 +9,7 @@ class ProgressCardVictoryPoint < ActiveRecord::Base
   
   # check limit.
   before_create do |pcvp|
-    raise LimitExceeded if pcvp.game.progress_card_victory_points.size >= ProgressCardVictoryPoint.limit_per_game
+    raise LimitExceeded if pcvp.game.progress_card_victory_points.size >= limit_per_game
   end
   
   def self.limit_per_game

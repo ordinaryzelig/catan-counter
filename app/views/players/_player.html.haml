@@ -12,6 +12,8 @@
     =render :partial => 'largest_armies/largest_army', :locals => {:player => player}
   -if @game.uses?(CitiesAndKnights)
     =render :partial => 'players/defenders_of_catan', :locals => {:player => player}
+  -if @game.uses?(GreatRiver)
+    =render :partial => 'gold_point_victory_points/gold_point_victory_point', :locals => {:player => player}
   .buildings
     =render :partial => @game.metropolises, :locals => {:player => player}
     =render :partial => 'cities/cities', :locals => {:player => player}

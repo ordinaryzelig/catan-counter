@@ -1,7 +1,12 @@
-module ExpandedModelMethods
+=begin
+  a model that can be expanded should include this module.
+  this expands the model with each expansion module, giving it the expansions characteristics.
+=end
+
+module ExpandedModel
   
-  def self.included(base)
-    base.class_eval do
+  def self.included(receiver)
+    receiver.class_eval do
       after_create :extend_expansions
     end
   end

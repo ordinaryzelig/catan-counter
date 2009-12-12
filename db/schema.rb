@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091126213206) do
+ActiveRecord::Schema.define(:version => 20091212063223) do
 
   create_table "boots", :force => true do |t|
     t.integer "game_id",   :null => false
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(:version => 20091126213206) do
 
   create_table "games", :force => true do |t|
     t.integer  "victory_points_to_win", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "gold_point_victory_points", :force => true do |t|
+    t.integer  "game_id",    :null => false
+    t.integer  "player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -96,8 +103,10 @@ ActiveRecord::Schema.define(:version => 20091126213206) do
   add_index "players", ["game_id", "color"], :name => "index_players_on_game_id_and_color", :unique => true
 
   create_table "progress_card_victory_points", :force => true do |t|
-    t.integer "game_id",   :null => false
-    t.integer "player_id"
+    t.integer  "game_id",    :null => false
+    t.integer  "player_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "settlements", :force => true do |t|

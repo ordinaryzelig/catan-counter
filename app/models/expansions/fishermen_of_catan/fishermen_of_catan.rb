@@ -1,5 +1,7 @@
 module FishermenOfCatan
   
+  # TODO: all expansions share this code.
+  # need to figure out how to DRY it up.
   def self.extended(object)
     case object
     when Game
@@ -14,9 +16,8 @@ module FishermenOfCatan
   module GameMethods
     
     def create_components
-      super
       create_boot
-      self
+      super
     end
     
   end
@@ -26,6 +27,10 @@ module FishermenOfCatan
     def victory_points_needed_to_win
       super +
       (self.boot ? 1 : 0)
+    end
+    
+    def take_boot
+      (self.boot = game.boot).save!
     end
     
   end
