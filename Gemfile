@@ -9,3 +9,7 @@ group :test do
   source 'http://gems.github.com/'
   gem 'notahat-machinist'
 end
+
+group :development do
+  gem 'rails-footnotes'
+end
