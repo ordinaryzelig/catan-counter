@@ -4,3 +4,4 @@ log/*
 *.sqlite3
 tmp/
 config/database.yml
+.rvmrc
