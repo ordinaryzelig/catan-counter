@@ -13,6 +13,6 @@ class Game
     expansion = Expansion.find_by_name(expansion_arg.to_s.camelize) || Expansion.make(expansion_arg)
     game = super(*args)
     game.expansions << expansion
-    game
+    game.reload
   end
 end

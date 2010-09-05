@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
-  
+
   include ExpandedModel
-  
+
   has_many :players do
     def colors
       map(&:color)
@@ -79,7 +79,7 @@ class Game < ActiveRecord::Base
   has_many :defenders_of_catan, :class_name => 'DefenderOfCatan'
   has_many :soldiers
   has_many :metropolises, :class_name => 'Metropolis' do
-    # looks like named_scope but just returns first.
+    # looks like scope but just returns first.
     def development_area(area)
       super.first
     end
@@ -88,22 +88,22 @@ class Game < ActiveRecord::Base
   has_one :merchant
   has_many :progress_card_victory_points
   has_many :gold_point_victory_points
-  
+
   # assign default victory points.
   before_validation do |game|
     game.extend_expansions
     game.victory_points_to_win ||= game.default_victory_points_to_win
   end
-  
+
   validates_numericality_of :victory_points_to_win
-  
+
   # save players from players_attributes.
   after_save do |game|
     game.players.save! if game.players_attributes_changed
   end
-  
+
   attr_reader :players_attributes_changed
-  
+
   # custom accepts_nested_attributes_for.
   # this is because we have to find the player by their color.
   # also, accepts_nested_attributes_for doesn't work for editing.
@@ -121,38 +121,38 @@ class Game < ActiveRecord::Base
       end
     end
   end
-  
+
   def default_victory_points_to_win
     10
   end
-  
+
   def self.colors
     ['blue', 'red', 'white', 'orange', 'green', 'brown'].freeze
   end
-  
+
   def colors
     self.class.colors
   end
-  
+
   def player_with_longest_road
     longest_road.player
   end
-  
+
   def create_components
     create_longest_road
     create_largest_army
     create_soldiers
     self
   end
-  
+
   private
-  
+
   # expansion module can override this.
   def expansion_added(expansion)
   end
-  
+
   def create_soldiers
     Soldier.limit_per_game.times { soldiers.create! }
   end
-  
+
 end

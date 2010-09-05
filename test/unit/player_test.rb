@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PlayerTest < ActiveSupport::TestCase
-  
+
   def test_victory_points
     player = Player.make
     assert_equal 2, player.victory_points
@@ -10,12 +10,12 @@ class PlayerTest < ActiveSupport::TestCase
     player.settlements.each(&:upgrade_to_city)
     assert_equal 8, player.reload.victory_points
   end
-  
+
   def test_create_starter_buildings
     player = Player.make
     assert_equal 2, player.settlements.size
   end
-  
+
   def test_can_build_settlement?
     player = Player.make
     player.settlements.left.times { player.settlements.make  }
@@ -23,7 +23,7 @@ class PlayerTest < ActiveSupport::TestCase
     player.settlements.last.destroy
     assert player.can_build_settlement?
   end
-  
+
   def test_can_build_city?
     player = Player.make
     assert player.can_build_city?
@@ -36,13 +36,13 @@ class PlayerTest < ActiveSupport::TestCase
     player.cities.left.times { player.cities.make }
     assert !player.can_build_city?
   end
-  
+
   def test_default_name_to_color
     color = 'blue'
     player = Player.make(:color => color, :name => nil)
     assert_equal color, player.name
   end
-  
+
   def test_victory_points_with_longest_road
     player = Player.make
     player.game.create_components
@@ -50,7 +50,7 @@ class PlayerTest < ActiveSupport::TestCase
       player.take_longest_road
     end
   end
-  
+
   def test_take_longest_road_from_another_player
     game = Game.make
     longest_road = game.create_longest_road
@@ -64,7 +64,7 @@ class PlayerTest < ActiveSupport::TestCase
       end
     end
   end
-  
+
   def test_play_soldier
     player = Player.make
     player.game.create_components
@@ -72,21 +72,15 @@ class PlayerTest < ActiveSupport::TestCase
       player.play_soldier
     end
   end
-  
+
   def test_victory_points_with_largest_army
     player = Player.make
     player.game.create_components
     assert_difference('player.victory_points', 2) do
-      3.times { player.play_soldier }
+      3.times { player.reload.play_soldier }
     end
   end
-  
-  def test_no_more_soldiers_to_get
-    player = Player.make
-    player.game.soldiers.not_taken.each { player.play_soldier }
-    assert_raise(Soldier::NoMore) { player.play_soldier }
-  end
-  
+
   def test_knights_strength
     knight = Knight.make
     assert_equal 0, knight.player.knights.strength
@@ -96,5 +90,5 @@ class PlayerTest < ActiveSupport::TestCase
     assert_equal 2, knight.player.knights.strength
     assert_equal 3, knight.activate.reload.player.knights.strength
   end
-  
+
 end

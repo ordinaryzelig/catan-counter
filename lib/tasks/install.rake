@@ -1,6 +1,6 @@
 desc 'install locally'
 task :install do
-  ENV['RAILS_ENV'] = 'production'
+  Rails.env = 'production'
   sh 'rake db:migrate'
   sh 'rake db:seed'
 end

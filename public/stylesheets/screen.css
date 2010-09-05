@@ -42,6 +42,9 @@ table.centered {
   .game_form .player .color {
     padding: 1mm;
     background-color: white; }
+.game_form .field_with_errors {
+  color: red;
+  font-size: 125%; }
 
 #game_title {
   text-align: center;
@@ -72,7 +75,7 @@ table#game_counts td {
     #players .player .name {
       font-size: 125%;
       font-weight: bold;
-      border: 2px solid #999;
+      border: 2px solid #999999;
       padding: 2mm;
       margin-bottom: 2mm; }
       #players .player .name span {
@@ -85,7 +88,7 @@ table#game_counts td {
     #players .player #largest_army {
       background-color: red; }
     #players .player .buildings {
-      border-top: 2px solid #999; }
+      border-top: 2px solid #999999; }
 
 table#winners {
   text-align: center;

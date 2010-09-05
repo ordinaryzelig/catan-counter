@@ -1,35 +1,35 @@
-class Barbarians::BarbarianAttackOutcome
-  
+class BarbarianAttackOutcome
+
   OUTCOMES = {1 => :barbarians_are_victorious, -1 => :catan_is_saved, 0 => :catan_is_saved}
-  
+
   attr_reader :players_with_strongest_army
   attr_reader :players_with_weakest_army
   attr_reader :strength_of_victorious_party
   attr_reader :strength_of_defeated_party
-  
+
   def initialize(barbarians)
     @barbarians = barbarians
     determine_outcome
   end
-  
+
   def barbarians_are_victorious?
     @outcome == :barbarians_are_victorious
   end
-  
+
   def catan_is_saved?
     @outcome == :catan_is_saved
   end
-  
+
   def defender_of_catan
     players_with_strongest_army.size == 1 ? players_with_strongest_army.first : nil
   end
-  
+
   def to_s
     @outcome.to_s.humanize + '!'
   end
-  
+
   private
-  
+
   def determine_outcome
     @outcome = OUTCOMES[@barbarians.strength <=> @barbarians.strength_defended_against]
     game = @barbarians.game
@@ -51,5 +51,5 @@ class Barbarians::BarbarianAttackOutcome
     end
     game.knights.activated.each(&:deactivate)
   end
-  
+
 end

@@ -1,7 +1,7 @@
 class BarbariansController < ApplicationController
-  
+
   before_filter :load_game
-  
+
   def attack
     barbarians = @game.barbarians
     outcome = barbarians.attack
@@ -25,11 +25,11 @@ class BarbariansController < ApplicationController
     end
     redirect_to @game
   end
-  
+
   protected
-  
+
   def load_game
     @game = Game.find(params[:game_id])
   end
-  
+
 end

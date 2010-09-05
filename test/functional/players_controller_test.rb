@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PlayersControllerTest < ActionController::TestCase
-  
+
   def test_take_longest_road
     player1 = Player.make
     player1.game.create_components
@@ -13,7 +13,7 @@ class PlayersControllerTest < ActionController::TestCase
       end
     end
   end
-  
+
   def test_play_soldier
     player = Player.make
     player.game.create_components
@@ -21,16 +21,7 @@ class PlayersControllerTest < ActionController::TestCase
       put :play_soldier, :id => player
     end
   end
-  
-  def test_play_soldier_when_none_left_to_take
-    player = Player.make
-    player.game.create_components
-    player.game.soldiers.each { player.play_soldier }
-    assert_raise(Soldier::NoMore) do
-      put :play_soldier, :id => player
-    end
-  end
-  
+
   def test_build_metropolis
     game = Game.make(:cities_and_knights)
     game.create_components
@@ -39,14 +30,14 @@ class PlayersControllerTest < ActionController::TestCase
       put :build_metropolis, :id => player, :development_area => 'politics'
     end
   end
-  
+
   def test_take_boot
     game = Game.make(:fishermen_of_catan).create_components
     player = game.players.make
     put :take_boot, :id => player
     assert player.boot
   end
-  
+
   def test_take_progress_card_victory_point
     game = Game.make(:cities_and_knights).create_components
     player = game.players.make
@@ -54,5 +45,5 @@ class PlayersControllerTest < ActionController::TestCase
       put :take_progress_card_victory_point, :id => player
     end
   end
-  
+
 end

@@ -1,3 +1,3 @@
 .defenders_of_catan
   ="defenders of catan: #{player.defenders_of_catan.size}"
-="activated knights: #{player.knights.activated.strength}"
+="activated knight strength: #{player.knights.activated.map(&:strength).sum}"
