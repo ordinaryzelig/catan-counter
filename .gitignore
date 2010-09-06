@@ -1,7 +1,8 @@
+.DS_Store
+.*.sw*
 .bundle
 db/*.sqlite3
 log/*.log
 tmp/**/*
-.DS_Store
 config/database.yml
 .rvmrc

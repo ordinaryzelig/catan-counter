@@ -1,4 +1,4 @@
-CatanCounter::Application.routes.draw do |map|
+CatanCounter::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -50,23 +50,42 @@ CatanCounter::Application.routes.draw do |map|
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
 
-  map.root :controller => 'games', :action => 'new'
+  root :to => 'games#new'
 
-  map.resources :games do |game|
-    game.resources :expansions
-    game.barbarians_attack 'barbarians/attack', :controller => 'barbarians', :action => 'attack', :conditions => {:method => :put}
+  resources 'games' do
+    resources 'barbarians', :only => [] do
+      collection do
+        put 'attack'
+      end
+    end
   end
 
-  map.resources :players, :member => {:take_longest_road => :put, :play_soldier => :put, :build_metropolis => :put, :take_boot => :put, :take_merchant => :put, :take_progress_card_victory_point => :put, :take_gold_point_victory_point => :put} do |player|
-    player.resources :settlements
-    player.resources :cities
-    player.resources :knights
+  resources 'players' do
+    member do
+      put 'take_longest_road'
+      put 'play_soldier'
+      put 'build_metropolis'
+      put 'take_boot'
+      put 'take_merchant'
+      put 'take_progress_card_victory_point'
+      put 'take_gold_point_victory_point'
+    end
+    resources 'settlements' do
+      member do
+        post 'upgrade_to_city'
+      end
+    end
+    resources 'cities' do
+      member do
+        post 'downgrade_to_settlement'
+      end
+    end
+    resources 'knights' do
+      member do
+        put 'promote'
+        put 'toggle_activation'
+      end
+    end
   end
-
-  map.upgrade_to_city_settlement 'settlements/:id/upgrade_to_city', :controller => 'settlements', :action => 'upgrade_to_city', :conditions => {:method => :post}
-  map.downgrade_to_settlement_city 'cities/:id/downgrade_to_settlement', :controller => 'cities', :action => 'downgrade_to_settlement', :conditions => {:method => :post}
-
-  map.resources :knights, :member => {:promote => :post, :toggle_activation => :put}
-  map.resources :settlements
 
 end

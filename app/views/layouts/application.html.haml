@@ -1,9 +1,12 @@
-!!! XML
-!!!
+!!! 5
 
-%html{html_attrs}
+%html
   %head
+    %title
+      Catan Counter
     = stylesheet_link_tag 'screen', :cache => true
+    = javascript_include_tag 'prototype', 'rails', 'application'
+    = csrf_meta_tag
 
   %body
     - if flash.any?

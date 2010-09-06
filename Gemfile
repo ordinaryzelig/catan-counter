@@ -6,6 +6,7 @@ gem 'haml', '>3'
 
 group :test do
   gem 'machinist'
+  gem 'webrat'
 end
 
 # To use debugger
