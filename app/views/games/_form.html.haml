@@ -16,7 +16,7 @@
           - player = @game.players.send(color) || @game.players.new(:color => color)
           = game_form.fields_for :players, player do |player_form|
             %td
-              %span.color= color
+              %span.color= player_form.label :name, color
             %td.name= player_form.text_field :name
             = player_form.hidden_field :color
 

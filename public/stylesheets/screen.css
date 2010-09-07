@@ -68,6 +68,8 @@ table#game_counts td {
   text-align: center; }
   #players .player {
     display: inline-block;
+    border-width: 5px;
+    border-style: solid;
     text-align: center;
     margin: 4px;
     padding: 2mm;

@@ -6,7 +6,7 @@ gem 'haml', '>3'
 
 group :test do
   gem 'machinist'
-  gem 'webrat'
+  gem 'webrat', '>=0.7.2.beta.1'
 end
 
 # To use debugger
