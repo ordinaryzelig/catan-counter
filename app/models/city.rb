@@ -3,7 +3,7 @@ class City < ActiveRecord::Base
   belongs_to :player
   has_one :metropolis
 
-  scope :without_metropolises, :conditions => "#{Metropolis.table_name}.city_id is null", :include => :metropolis
+  scope :without_metropolises, where("#{Metropolis.table_name}.city_id is null").includes(:metropolis)
 
   validate :limit_to_4
 
