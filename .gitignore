@@ -6,3 +6,4 @@ log/*.log
 tmp/**/*
 config/database.yml
 .rvmrc
+webrat.log
