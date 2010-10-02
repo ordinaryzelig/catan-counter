@@ -61,19 +61,43 @@ class CitiesAndKnightsTest < ActionDispatch::IntegrationTest
   end
 
   test 'barbarians attack and player loses city' do
-    flunk
+    visit game_url(@game)
+    barbarians_attack
+    @player.reload
+    assert_equal 0, @player.cities.count
   end
 
   test 'barbarians attack and player is defender of catan' do
-    flunk
+    @player.knights.create!(:activated => true, :level => 1)
+    visit game_url(@game)
+    barbarians_attack
+    @player.reload
+    assert_equal 1, @player.defenders_of_catan.count
   end
 
   test 'barbarians attack and 2 players tie for most activated knights' do
-    flunk
+    player_2 = @game.players.make
+    [@player, player_2].each do |player|
+      player.knights.create!(:activated => true, :level => 1)
+    end
+    visit game_url(@game)
+    barbarians_attack
+    @player.reload
+    assert_equal 0, @player.defenders_of_catan.count
   end
 
   test 'build metropolis' do
-    flunk
+    visit game_url(@game)
+    click_link 'build trade metro.', :method => 'put'
+    @player.reload
+    assert @player.metropolises.present?
+  end
+
+  # ==================================================
+  # helpers.
+
+  def barbarians_attack
+    click_link 'barbarians attack', :method => 'put'
   end
 
 end
