@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def show
-    @game = Game.find(params[:id], :include => [:largest_army, :longest_road, {:players => [:settlements, :cities, :knights, :soldiers]}])
+    @game = Game.includes({:players => [:settlements, :cities, :knights, :soldiers]}).find(params[:id])
     @winners = @game.players.with_enough_victory_points_to_win
   end
 
