@@ -1,5 +1,0 @@
-.gold_point_victory_points
-  -if @game.gold_point_victory_points.not_taken.any?
-    =link_to 'take gold point victory point', take_gold_point_victory_point_player_url(player), :method => :put
-  -else
-    %span.disabled='no more gold point victory points'

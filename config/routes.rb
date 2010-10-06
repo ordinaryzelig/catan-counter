@@ -68,7 +68,6 @@ CatanCounter::Application.routes.draw do
       put 'take_boot'
       put 'take_merchant'
       put 'take_progress_card_victory_point'
-      put 'take_gold_point_victory_point'
     end
     resources 'settlements' do
       member do
