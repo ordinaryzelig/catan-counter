@@ -42,4 +42,10 @@ class Knight < ActiveRecord::Base
     activated ? level : 0
   end
 
+  def can_be_promoted?
+    return false if level == 3
+    return false if player.knights.level(level + 1).size == 2
+    return true
+  end
+
 end

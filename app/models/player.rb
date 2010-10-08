@@ -70,6 +70,14 @@ class Player < ActiveRecord::Base
     settlements.any? && cities.left > 0
   end
 
+  def can_destroy_settlement?
+    settlements.any?
+  end
+
+  def can_downgrade_city?
+    cities.without_metropolises.any?
+  end
+
   def take_longest_road
     game.longest_road.update_attributes! :player => self
   end

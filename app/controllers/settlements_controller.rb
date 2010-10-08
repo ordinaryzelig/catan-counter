@@ -2,6 +2,8 @@ class SettlementsController < ApplicationController
 
   before_filter :load_player
 
+  #respond_to :js, :only => :upgrade_to_city
+
   def create
     @player.settlements.create!
     redirect_to game_url(@player.game)
@@ -10,7 +12,7 @@ class SettlementsController < ApplicationController
   def upgrade_to_city
     @settlement = @player.settlements.find(params[:id])
     @settlement.upgrade_to_city
-    redirect_to game_url(@settlement.player.game)
+    #redirect_to game_url(@settlement.player.game)
   end
 
   def destroy

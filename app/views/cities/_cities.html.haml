@@ -2,10 +2,4 @@
   %span.image= image_tag("city_#{player.color}.png")
   %span.x= 'x'
   %span.number= player.cities.size
-  - can_downgrade = player.cities.without_metropolises.any?
-  - partial = action_partial('downgrade', image_tag('down.png'), !can_downgrade)
-  - # can't use link_to_if because the downgrade_to_settlement_player_city_url will raise an error.
-  - if can_downgrade
-    = link_to partial, downgrade_to_settlement_player_city_url(player, player.cities.first), :method => :post
-  - else
-    = partial
+  = link_to_downgrade_city(player)
