@@ -1,0 +1,14 @@
+                 attack_game_barbarians PUT    update flash, deactivate activated, downgrade cities, decrement victory points, increment victory points, increment defender of catan
+               take_longest_road_player PUT    destroy existing, decrement victory points, appear longest road, increment victory points
+                    play_soldier_player PUT    increment soldier, destroy largest army, decrement victory points, appear largest army, increment largest army
+                build_metropolis_player PUT    enable existing, decrement victory points, disable for player, increment victory points
+                       take_boot_player PUT    destroy existing, enable link, appear for player, disable link
+                   take_merchant_player PUT    destroy existing, enable link, decrement victory points, appear for player, disable link, increment victory points
+take_progress_card_victory_point_player PUT    increment counter, increment victory points
+      upgrade_to_city_player_settlement POST   decrement settlement, increment city, increment victory points
+                      player_settlement DELETE decrement settlement, decrement victory points
+    downgrade_to_settlement_player_city POST   decrement city, decrement victory points, increment settlement
+                  promote_player_knight PUT    destroy knight, appear stronger knight, update activated knight count
+        toggle_activation_player_knight PUT    destroy existing, appear activated, increment activated knight count
+                         player_knights POST   appear knight
+                          player_knight DELETE destroy knight, decrement activated knight count
