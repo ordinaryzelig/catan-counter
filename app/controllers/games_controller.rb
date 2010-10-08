@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
 
+  caches_page :new
+
   def show
     @game = Game.includes({:players => [:settlements, :cities, :knights, :soldiers]}).find(params[:id])
     @winners = @game.players.with_enough_victory_points_to_win
