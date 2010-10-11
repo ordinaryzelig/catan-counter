@@ -1,6 +1,8 @@
 class Metropolis < ActiveRecord::Base
 
-  DEVELOPMENT_AREAS = ['trade', 'politics', 'science']
+  def self.development_areas
+    @development_areas ||= ['trade', 'politics', 'science'].freeze
+  end
 
   belongs_to :game
   belongs_to :player
@@ -10,10 +12,6 @@ class Metropolis < ActiveRecord::Base
   scope :development_area, proc { |area| where(:development_area => area) }
 
   validates_presence_of :game_id
-  validates_inclusion_of :development_area, :in => DEVELOPMENT_AREAS
-
-  def self.limit_per_game
-    DEVELOPMENT_AREAS.size
-  end
+  validates_inclusion_of :development_area, :in => development_areas
 
 end

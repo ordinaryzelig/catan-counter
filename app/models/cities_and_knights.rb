@@ -51,7 +51,7 @@ module CitiesAndKnights
     end
 
     def create_metropolises
-      Metropolis::DEVELOPMENT_AREAS.each do |development_area|
+      Metropolis.development_areas.each do |development_area|
         metropolises.create! :development_area => development_area
       end
     end

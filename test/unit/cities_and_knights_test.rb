@@ -31,7 +31,7 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     assert @game.soldiers.empty?
     assert_nil @game.largest_army
     assert_not_nil @game.longest_road
-    assert_equal Metropolis::DEVELOPMENT_AREAS.size, @game.metropolises.size
+    assert_equal Metropolis.development_areas.size, @game.metropolises.size
     assert_equal DefenderOfCatan.limit_per_game, @game.defenders_of_catan.size
     assert_not_nil @game.merchant
     assert_equal ProgressCardVictoryPoint.limit_per_game, @game.progress_card_victory_points.size

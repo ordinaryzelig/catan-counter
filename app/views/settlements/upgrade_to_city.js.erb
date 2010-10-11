@@ -8,9 +8,9 @@ player.updateSettlementsCount('<%= @player.settlements.count %>')
 <% end %>
 player.updateVictoryPoints('<%= @player.victory_points %>')
 player.updateCitiesCount('<%= @player.cities.count %>')
-<% if @player.cities.count == @player.metropolises.count + 1 %>
+<% if @player.cities.without_metropolises.any? %>
   player.enableDowngradeCityLink()
-  <% Metropolis::DEVELOPMENT_AREAS.each do |development_area| %>
+  <% Metropolis.development_areas.each do |development_area| %>
     <% if @player.can_build_metropolis?(development_area) %>
       player.enableMetropolisLink('<%= development_area %>')
     <% end %>
