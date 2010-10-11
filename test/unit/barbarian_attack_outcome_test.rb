@@ -53,4 +53,12 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
     assert player_with_metropolis.metropolises.any?
   end
 
+  test 'barbarians attack, player loses city but has no more settlements, player loses entire city' do
+    player = @game.players.first
+    4.times { player.settlements.make }
+    assert_equal 5, player.settlements.size
+    @game.barbarians.attack
+    assert_equal 5, player.settlements.size
+    assert_equal 0, player.cities.size
+  end
 end

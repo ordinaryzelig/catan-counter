@@ -29,7 +29,7 @@ function getPlayer(playerId) {
   }
   player.metropolises = function() {
     var metropolises_div = this.find('.metropolises:first')
-    metropolises_div.link = function(development_area) { return this.find('a.' + development_area + ':first') }
+    metropolises_div.buildLink = function(development_area) { return this.find('a.' + development_area + ':first') }
     return metropolises_div
   }
   player.cities = function() {
@@ -48,15 +48,46 @@ function getPlayer(playerId) {
   }
 
   // AJAX actions.
+
+  // victory points AJAX.
+  player.updateVictoryPoints = function(victoryPoints) {
+    this.victoryPoints().number().html(victoryPoints)
+  }
+
+  // metropolis AJAX.
+  player.disableBuildMetropolisLink = function(development_area) {
+    disableLink(this.metropolises().buildLink(development_area))
+  }
+  player.enableBuildMetropolisLink = function(development_area) {
+    enableLink(this.metropolises().buildLink(development_area))
+  }
+  player.disableBuildMetropolisesLinks = function() {
+    this.metropolises().find('a').each(function() {
+      disableLink($(this))
+    })
+  }
+
+  // settlement AJAX.
   player.updateSettlementsCount = function(count) {
     this.settlements().number().html(count)
+  }
+  player.disableBuildSettlementLink = function() {
+    disableLink(this.settlements().buildLink())
+  }
+  player.enableBuildSettlementLink = function() {
+    enableLink(this.settlements().buildLink())
+  }
+  player.enableUpgradeSettlementLink = function() {
+    enableLink(this.settlements().upgradeLink())
   }
   player.disableDestroySettlementLink = function() {
     disableLink(this.settlements().destroyLink())
   }
-  player.disableUpgradeSettlementLink = function() {
-    disableLink(this.settlements().upgradeLink())
+  player.enableDestroySettlementLink = function() {
+    enableLink(this.settlements().destroyLink())
   }
+
+  // cities AJAX.
   player.updateCitiesCount = function(count) {
     this.cities().number().html(count)
   }
@@ -66,15 +97,7 @@ function getPlayer(playerId) {
   player.disableDowngradeCityLink = function() {
     disableLink(this.cities().downgradeLink())
   }
-  player.updateVictoryPoints = function(victoryPoints) {
-    this.victoryPoints().number().html(victoryPoints)
-  }
-  player.disableMetropolisLink = function(development_area) {
-    disableLink(this.metropolises().link(development_area))
-  }
-  player.enableMetropolisLink = function(development_area) {
-    enableLink(this.metropolises().link(development_area))
-  }
+
   return player
 }
 

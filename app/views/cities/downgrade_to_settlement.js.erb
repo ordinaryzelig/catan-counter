@@ -1,7 +1,16 @@
-var player_div = $('#player_<%= @player.id %>')
-// decrement cities count
-// decrement player victory points
-// decrement player cities count
-// disable downgrade city link if no more cities
-// disable build metropolis links
-// increment player settlements count
+var player = getPlayer('<%= @player.id %>')
+player.updateCitiesCount('<%= @player.cities.count %>')
+updateTotalCitiesCount('<%= @player.game.cities.count %>')
+<% if @player.cities.without_metropolises.empty? %>
+  player.disableDowngradeCityLink()
+  player.disableBuildMetropolisesLinks()
+<% end %>
+player.updateSettlementsCount('<%= @player.settlements.count %>')
+<% if @player.settlements.count == 1 %>
+  player.enableUpgradeSettlementLink()
+  player.enableDestroySettlementLink()
+<% end %>
+<% if @player.settlements.count == 5 %>
+  player.disableBuildSettlementLink()
+<% end %>
+player.updateVictoryPoints('<%= @player.victory_points %>')
