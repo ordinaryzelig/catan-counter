@@ -7,3 +7,4 @@ tmp/**/*
 config/database.yml
 .rvmrc
 webrat.log
+public/page_cache/*

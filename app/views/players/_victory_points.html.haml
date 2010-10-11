@@ -1,5 +1,6 @@
-.victory_points
-  victory points: #{player.victory_points}
+.victoryPoints
+  victory points: 
+  %span.number= player.victory_points
 .bonuses
   - if player.longest_road
     = image_tag('longest_road.png')

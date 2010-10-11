@@ -36,6 +36,4 @@ class PlayersController < ApplicationController
     redirect_to player.game
   end
 
-  protected
-
 end

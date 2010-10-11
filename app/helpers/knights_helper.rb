@@ -1,23 +1,35 @@
 module KnightsHelper
 
   def link_to_build_knight(player)
-    link_to_action_partial_if(player.can_build_knight?(1), 'build knight', image_tag('add.png'), :method => :post) do
-      player_knights_url(player)
-    end
+    action_label = 'build knight'
+    image_file_name = 'add.png'
+    url = player_knights_url(player)
+    options = {:method => :post}
+    link_to_action_partial_if(player.can_build_knight?(1), action_label, image_file_name, url, options)
   end
 
   def link_to_toggle_knight_activation(knight)
-    knight_image_name = "knights/#{knight.player.color}_#{knight.level}#{knight.activated ? '_activated' : nil}.png"
-    link_text = knight.activated ? 'deactivate' : 'activate'
-    link_to(action_partial(link_text, image_tag(knight_image_name)), toggle_activation_player_knight_url(knight.player, knight), :method => :put)
+    action_label = knight.activated ? 'deactivate' : 'activate'
+    image_file_name = "knights/#{knight.player.color}_#{knight.level}#{knight.activated ? '_activated' : nil}.png"
+    url = toggle_activation_player_knight_url(knight.player, knight)
+    options = {:method => :put}
+    link_to_action_partial_if(true, action_label, image_file_name, url, options)
   end
 
   def link_to_promote_knight(knight)
-    link_to_action_partial_if(knight.can_be_promoted?, 'promote', image_tag('up.png'), :method => :put) { promote_player_knight_url(knight.player, knight) }
+    action_label = 'promote'
+    image_file_name = 'up.png'
+    url = promote_player_knight_url(knight.player, knight)
+    options = {:method => :put}
+    link_to_action_partial_if(knight.can_be_promoted?, action_label, image_file_name, url, options)
   end
 
   def link_to_destroy_knight(knight)
-    link_to(action_partial('destroy', image_tag('delete.png')), player_knight_url(knight.player, knight), :method => :delete)
+    action_label = 'destroy'
+    image_file_name = 'delete.png'
+    url = player_knight_url(knight.player, knight)
+    options = {:method => :delete}
+    link_to_action_partial_if(true, action_label, image_file_name, url, options)
   end
 
 end

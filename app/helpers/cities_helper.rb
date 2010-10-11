@@ -1,9 +1,11 @@
 module CitiesHelper
 
   def link_to_downgrade_city(player)
-    link_to_action_partial_if(player.can_downgrade_city?, 'downgrade', image_tag('down.png'), :method => :post) do
-      downgrade_to_settlement_player_city_url(player, player.cities.without_metropolises.first)
-    end
+    action_label = 'downgrade'
+    image_file_name = 'down.png'
+    url = player_cities_downgrade_to_settlement_url(player)
+    options = {:method => :post, :class => 'downgrade'}
+    link_to_action_partial_if(player.can_downgrade_city?, action_label, image_file_name, url, options)
   end
 
 end

@@ -1,31 +1,31 @@
 require 'test_helper'
 
 class CitiesAndKnightTest < ActiveSupport::TestCase
-  
+
   def setup
     super
     @game = Game.make(:cities_and_knights).create_components
   end
-  
+
   def test_game_uses?
     assert @game.uses?(@game.expansions.first)
     assert @game.uses?(CitiesAndKnights)
   end
-  
+
   def test_game_default_victory_points_to_win
     assert_equal 13, @game.reload.default_victory_points_to_win
   end
-  
+
   def test_player_create_starter_buildings
     player = Player.make(:game => @game)
     assert_equal 1, player.settlements.size
     assert_equal 1, player.cities.size
   end
-  
+
   def test_game_victory_points_to_win
     assert_equal 13, @game.victory_points_to_win
   end
-  
+
   def test_game_create_components
     # no soldiers or largest army.
     assert @game.soldiers.empty?
@@ -36,7 +36,7 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     assert_not_nil @game.merchant
     assert_equal ProgressCardVictoryPoint.limit_per_game, @game.progress_card_victory_points.size
   end
-  
+
   def test_player_victory_points
     player = @game.players.make
     2.times { player.knights.make.activate }
@@ -49,17 +49,17 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     player.take_progress_card_victory_point
     assert_equal 8, player.victory_points
   end
-  
+
   def test_game_do_not_create_soldiers
     assert @game.soldiers.empty?
   end
-  
+
   def test_player_deactivate_knights
     player = @game.players.make
     2.times { player.knights.make(:activated => true) }
     assert !player.knights.deactivate.any?(&:activated)
   end
-  
+
   def test_player_can_promote_knight?
     player = @game.players.make
     # no knights to promote.
@@ -71,14 +71,14 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     2.times { player.knights.make(:level => 2) }
     assert !player.can_promote_knight?(1)
   end
-  
+
   def test_player_take_progress_card_victory_point
     player = @game.players.make
     assert_difference('@game.reload.progress_card_victory_points.not_taken.size', -1) do
       player.take_progress_card_victory_point
     end
   end
-  
+
   def test_player_can_build_metropolis?
     player = @game.players.make
     # got cities?
@@ -92,18 +92,18 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
     # already got metropolis?
     assert !player.can_build_metropolis?(player.metropolises.first.development_area)
   end
-  
+
   def test_player_metropolis_victory_points
     player = @game.players.make
     @game.metropolises.first.update_attributes! :city => player.cities.first
     assert_equal 5, player.victory_points
   end
-  
+
   def test_player_build_metropolis
     player = @game.players.make
     assert_difference('player.victory_points', 2) do
       assert_equal 'politics', player.build_metropolis('politics').development_area
     end
   end
-  
+
 end

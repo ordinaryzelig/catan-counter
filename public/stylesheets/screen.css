@@ -3,7 +3,7 @@ a {
   outline-width: 0; }
   a:hover {
     text-decoration: underline;
-    background-color: beige; }
+    background-color: yellow; }
   a:visited {
     color: blue; }
 
@@ -56,12 +56,12 @@ table.centered {
     font-size: 120%;
     color: gray; }
 
-table#game_counts th {
+table#gameCounts th {
   text-align: left; }
-table#game_counts th, table#game_counts td {
+table#gameCounts th, table#gameCounts td {
   padding-left: 1mm;
   padding-right: 1mm; }
-table#game_counts td {
+table#gameCounts td {
   text-align: center; }
 
 #players {

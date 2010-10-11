@@ -1,0 +1,19 @@
+var player = getPlayer('<%= @player.id %>')
+player.updateSettlementsCount('<%= @player.settlements.count %>')
+<% if !@player.can_build_city? %>
+  player.disableUpgradeSettlementLink()
+<% end %>
+<% if @player.settlements.empty? %>
+  player.disableDestroySettlementLink()
+<% end %>
+player.updateVictoryPoints('<%= @player.victory_points %>')
+player.updateCitiesCount('<%= @player.cities.count %>')
+<% if @player.cities.count == @player.metropolises.count + 1 %>
+  player.enableDowngradeCityLink()
+  <% Metropolis::DEVELOPMENT_AREAS.each do |development_area| %>
+    <% if @player.can_build_metropolis?(development_area) %>
+      player.enableMetropolisLink('<%= development_area %>')
+    <% end %>
+  <% end %>
+<% end %>
+updateTotalCitiesCount('<%= @player.game.cities.count %>')
