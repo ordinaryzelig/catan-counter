@@ -6,7 +6,9 @@ class SettlementsController < ApplicationController
 
   def create
     @player.settlements.create!
-    redirect_to game_url(@player.game)
+    respond_with do |format|
+      format.html { redirect_to game_url(@player.game) }
+    end
   end
 
   def upgrade_to_city
@@ -20,7 +22,9 @@ class SettlementsController < ApplicationController
   def destroy
     settlement = @player.settlements.first
     settlement.destroy
-    redirect_to game_url(settlement.player.game)
+    respond_with do |format|
+      format.html { redirect_to game_url(settlement.player.game) }
+    end
   end
 
   protected

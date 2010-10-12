@@ -1,5 +1,7 @@
 class PlayersController < ApplicationController
 
+  respond_to :js
+
   def take_longest_road
     player = Player.find(params[:id])
     player.take_longest_road
@@ -7,9 +9,12 @@ class PlayersController < ApplicationController
   end
 
   def play_soldier
-    player = Player.find(params[:id])
-    player.play_soldier
-    redirect_to player.game
+    @player = Player.find(params[:id])
+    @player.play_soldier
+    @former_player_with_largest_army = @player.just_acquired_largest_army_from
+    respond_with do |format|
+      format.html { redirect_to @player.game }
+    end
   end
 
   def build_metropolis

@@ -4,7 +4,7 @@ module SettlementsHelper
     action_label = 'build'
     image_file_name = 'add.png'
     url = player_settlements_url(player)
-    options = {:method => :post, :class => 'build'}
+    options = {:method => :post, :class => 'build', :remote => true}
     link_to_action_partial_if(player.can_build_settlement?, action_label, image_file_name, url, options)
   end
 
@@ -20,7 +20,7 @@ module SettlementsHelper
     action_label = 'destroy'
     image_file_name = 'delete.png'
     url = player_settlements_url(player)
-    options = {:method => :delete, :class => 'destroy'}
+    options = {:method => :delete, :class => 'destroy', :remote => true}
     link_to_action_partial_if(player.can_destroy_settlement?, action_label, image_file_name, url, options)
   end
 

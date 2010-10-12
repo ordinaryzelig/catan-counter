@@ -41,7 +41,9 @@ class BasicGamePlayTest < ActionDispatch::IntegrationTest
 
   test 'play knight/soldier card' do
     visit game_path(@game)
-    click_link 'play', :method => 'put'
+    within('.soldiers') do
+      click_link 'use', :method => 'put'
+    end
     assert_equal 1, @player.soldiers.size
   end
 

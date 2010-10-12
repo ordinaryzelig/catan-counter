@@ -1,0 +1,12 @@
+var player = getPlayer('<%= @player.id %>')
+player.updateSettlementsCount('<%= @player.settlements.count %>')
+<% if @player.settlements.count == 5 %>
+  player.disableBuildSettlementLink()
+<% end %>
+<% if @player.settlements.count == 1 %>
+  player.enableDestroySettlementLink()
+  <% if @player.can_build_city? %>
+    player.enableUpgradeSettlementLink()
+  <% end %>
+<% end %>
+player.updateVictoryPoints('<%= @player.victory_points %>')

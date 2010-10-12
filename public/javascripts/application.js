@@ -27,6 +27,9 @@ function getPlayer(playerId) {
     vPoints_div.number = function() { return this.find('.number:first') }
     return vPoints_div
   }
+  player.largestArmy = function() {
+    return this.find('.largestArmy:first')
+  }
   player.metropolises = function() {
     var metropolises_div = this.find('.metropolises:first')
     metropolises_div.buildLink = function(development_area) { return this.find('a.' + development_area + ':first') }
@@ -45,6 +48,12 @@ function getPlayer(playerId) {
     settlements_div.upgradeLink = function() { return this.find('a.upgrade:first') }
     settlements_div.destroyLink = function() { return this.find('a.destroy:first') }
     return settlements_div
+  }
+  player.soldiers = function() {
+    var soldiers_div = this.find('.soldiers:first')
+    soldiers_div.count = function() { return this.find('.count:first') }
+    soldiers_div.useLink = function() { return this.find('a.use:first') }
+    return soldiers_div
   }
 
   // AJAX actions.
@@ -67,6 +76,17 @@ function getPlayer(playerId) {
     })
   }
 
+  // cities AJAX.
+  player.updateCitiesCount = function(count) {
+    this.cities().number().html(count)
+  }
+  player.enableDowngradeCityLink = function() {
+    enableLink(this.cities().downgradeLink())
+  }
+  player.disableDowngradeCityLink = function() {
+    disableLink(this.cities().downgradeLink())
+  }
+
   // settlement AJAX.
   player.updateSettlementsCount = function(count) {
     this.settlements().number().html(count)
@@ -76,6 +96,9 @@ function getPlayer(playerId) {
   }
   player.enableBuildSettlementLink = function() {
     enableLink(this.settlements().buildLink())
+  }
+  player.disableUpgradeSettlementLink = function() {
+    disableLink(this.settlements().upgradeLink())
   }
   player.enableUpgradeSettlementLink = function() {
     enableLink(this.settlements().upgradeLink())
@@ -87,15 +110,21 @@ function getPlayer(playerId) {
     enableLink(this.settlements().destroyLink())
   }
 
-  // cities AJAX.
-  player.updateCitiesCount = function(count) {
-    this.cities().number().html(count)
+  // soldier AJAX.
+  player.updateSoldiersCount = function(count) {
+    this.soldiers().count().html(count)
   }
-  player.enableDowngradeCityLink = function() {
-    enableLink(this.cities().downgradeLink())
+  player.disableUseLink = function() {
+    disableLink(this.soldiers().useLink())
   }
-  player.disableDowngradeCityLink = function() {
-    disableLink(this.cities().downgradeLink())
+  player.enableUseLink = function() {
+    enableLink(this.soldiers().useLink())
+  }
+  player.hideLargestArmy = function() {
+    this.largestArmy().hide()
+  }
+  player.showLargestArmy = function() {
+    this.largestArmy().show()
   }
 
   return player

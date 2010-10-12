@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
-  
+
   def test_players_colors_left
     game = Game.make
     game.colors[0...-1].each do |color|
@@ -9,14 +9,14 @@ class GameTest < ActiveSupport::TestCase
     end
     assert_equal [game.colors.last], game.players.colors_left
   end
-  
+
   def test_player_by_color
     player = [:blue, :red].map { |color| Player.make(color) }.first
     game = player.game
     assert_equal player, game.players.send('blue')
     assert_equal player, game.players.blue
   end
-  
+
   def test_create_players_through_attributes
     player = Player.make_unsaved(:name => 'asdf')
     game = Game.make
@@ -27,14 +27,14 @@ class GameTest < ActiveSupport::TestCase
     assert_equal 1, players.size
     assert_equal player.name, players.first.name
   end
-  
+
   def test_edit_players_through_attributes
     game = Player.make(:name => 'asdf', :color => 'blue').game
     new_name = 'fdsa'
     game.update_attributes!(:players_attributes => {0 => {:color => 'blue', :name => new_name}})
     assert_equal new_name, game.reload.players.blue.name
   end
-  
+
   def test_players_with_enough_victory_points_to_win
     game = Game.make.create_components
     2.times { game.players.make }
@@ -42,27 +42,27 @@ class GameTest < ActiveSupport::TestCase
     player.win
     assert_equal [player], game.players.with_enough_victory_points_to_win
   end
-  
+
   def test_create_longest_road
     game = Game.make.create_components
     assert game.longest_road.id
   end
-  
+
   def test_create_largest_army
     game = Game.make.create_components
     assert game.largest_army.id
   end
-  
+
   def test_players_with_longest_road
     game = Game.make.create_components
     assert_equal game.longest_road.player, game.player_with_longest_road
   end
-  
+
   def test_create_soldiers
     game = Game.make.create_components
     assert_equal Soldier.limit_per_game, game.soldiers.size
   end
-  
+
   def test_soldiers_not_taken
     player = Player.make
     player.game.create_components
@@ -70,7 +70,7 @@ class GameTest < ActiveSupport::TestCase
       player.play_soldier
     end
   end
-  
+
   def test_players_with_strongest_army
     game = Game.make(:cities_and_knights)
     players = 2.times.map { game.players.make }
@@ -82,7 +82,7 @@ class GameTest < ActiveSupport::TestCase
     defender.knights.first.promote
     assert_equal [defender], game.reload.players.with_strongest_army
   end
-  
+
   def test_players_with_weakest_army
     game = Game.make(:cities_and_knights)
     players = 2.times.map { game.players.make }
@@ -94,7 +94,7 @@ class GameTest < ActiveSupport::TestCase
     defender.knights.first.promote
     assert_equal (players - [defender]), game.reload.players.with_weakest_army
   end
-  
+
   def test_metropolises_development_area
     game = Game.make(:cities_and_knights).create_components
     area = 'politics'
@@ -102,5 +102,5 @@ class GameTest < ActiveSupport::TestCase
     assert_not_nil metropolis
     assert_equal metropolis, game.metropolises.development_area(area)
   end
-  
+
 end

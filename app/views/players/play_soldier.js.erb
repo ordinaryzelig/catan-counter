@@ -1,0 +1,11 @@
+var player = getPlayer('<%= @player.id %>')
+player.updateSoldiersCount('<%= @player.soldiers.count %>')
+<% if @player.just_acquired_largest_army %>
+  <% if @former_player_with_largest_army %>
+    var formerPlayerWithLargestArmy = getPlayer('<%= @former_player_with_largest_army.id %>')
+    formerPlayerWithLargestArmy.hideLargestArmy()
+    formerPlayerWithLargestArmy.updateVictoryPoints('<%= @former_player_with_largest_army.victory_points %>')
+  <% end %>
+  player.showLargestArmy()
+  player.updateVictoryPoints('<%= @player.victory_points %>')
+<% end %>

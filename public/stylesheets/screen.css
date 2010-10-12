@@ -87,8 +87,10 @@ table#gameCounts td {
       display: inline-block; }
     #players .player .disabled {
       color: gray; }
-    #players .player #largest_army {
+    #players .player .largestArmy {
       background-color: red; }
+    #players .player .largestArmy.hidden {
+      display: none; }
     #players .player .buildings {
       border-top: 2px solid #999999; }
 

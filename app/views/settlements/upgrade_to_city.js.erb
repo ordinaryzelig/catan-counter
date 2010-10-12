@@ -10,13 +10,19 @@ player.updateSettlementsCount('<%= @player.settlements.count %>')
   player.enableBuildSettlementLink()
 <% end %>
 player.updateCitiesCount('<%= @player.cities.count %>')
-updateTotalCitiesCount('<%= @player.game.cities.count %>')
 player.updateVictoryPoints('<%= @player.victory_points %>')
-<% if @player.cities.without_metropolises.any? %>
-  player.enableDowngradeCityLink()
-  <% Metropolis.development_areas.each do |development_area| %>
-    <% if @player.can_build_metropolis?(development_area) %>
-      player.enableBuildMetropolisLink('<%= development_area %>')
+<% if @player.game.uses?(CitiesAndKnights) %>
+  <% if @player.cities.without_metropolises.count == 1 %>
+    player.enableDowngradeCityLink()
+    <% Metropolis.development_areas.each do |development_area| %>
+      <% if @player.can_build_metropolis?(development_area) %>
+        player.enableBuildMetropolisLink('<%= development_area %>')
+      <% end %>
     <% end %>
+  <% end %>
+  updateTotalCitiesCount('<%= @player.game.cities.count %>')
+<% else %>
+  <% if @player.cities.count == 1 %>
+    player.enableBuildMetropolisLink()
   <% end %>
 <% end %>

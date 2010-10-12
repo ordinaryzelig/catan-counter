@@ -73,6 +73,16 @@ class PlayerTest < ActiveSupport::TestCase
     end
   end
 
+  test 'just acquired largest army' do
+    player = Player.make
+    player.game.create_components
+    3.times { player.reload.play_soldier }
+    assert player.just_acquired_largest_army
+    player_2 = player.game.players.make
+    4.times { player_2.reload.play_soldier }
+    assert_equal player, player_2.just_acquired_largest_army_from
+  end
+
   def test_victory_points_with_largest_army
     player = Player.make
     player.game.create_components

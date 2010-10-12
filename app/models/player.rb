@@ -31,6 +31,8 @@ class Player < ActiveRecord::Base
   has_one :merchant
   has_many :progress_card_victory_points
   has_many :gold_point_victory_points
+  attr_reader :just_acquired_largest_army
+  attr_reader :just_acquired_largest_army_from
 
   delegate :expansions, :to => :game
 
@@ -83,8 +85,14 @@ class Player < ActiveRecord::Base
   end
 
   def play_soldier
+    former_player_with_largest_army = game.largest_army.player
     soldier = game.soldiers.not_taken.first
     soldiers << soldier
+    if soldier.acquired_largest_army
+      @just_acquired_largest_army = true
+      @just_acquired_largest_army_from = former_player_with_largest_army unless former_player_with_largest_army == self
+    end
+    soldier
   end
 
   def victory_points_needed_to_win

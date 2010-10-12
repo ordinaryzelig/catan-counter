@@ -16,7 +16,14 @@ class SoldierTest < ActiveSupport::TestCase
     assert first_player_to_play_3_soldiers.reload.largest_army
     another_player = game.players.make
     3.times { another_player.reload.play_soldier }
-    assert_equal first_player_to_play_3_soldiers, game.reload.players.with_largest_army
+    assert_equal first_player_to_play_3_soldiers, game.reload.player_with_largest_army
+  end
+
+  test 'player gets largest army, soldier.acquired_largest_army is true' do
+    player = Player.make
+    player.game.create_components
+    soldier = 3.times.inject(nil) { |a, i| player.reload.play_soldier }
+    assert soldier.acquired_largest_army
   end
 
 end

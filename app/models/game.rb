@@ -22,9 +22,6 @@ class Game < ActiveRecord::Base
     def with_longest_road
       detect(&:longest_road)
     end
-    def with_largest_army
-      detect(&:largest_army)
-    end
     def with_strongest_army
       strongest_army = 1
       inject([]) do |defenders, player|
@@ -143,6 +140,14 @@ class Game < ActiveRecord::Base
     create_largest_army
     create_soldiers
     self
+  end
+
+  def player_with_largest_army
+    largest_army.try(:player)
+  end
+
+  def plays_with_largest_army?
+    !uses?(CitiesAndKnights)
   end
 
   private

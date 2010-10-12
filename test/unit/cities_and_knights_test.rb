@@ -9,6 +9,7 @@ class CitiesAndKnightTest < ActiveSupport::TestCase
 
   def test_game_uses?
     assert @game.uses?(@game.expansions.first)
+    assert !@game.uses?(Expansion.make(:fishermen_of_catan))
     assert @game.uses?(CitiesAndKnights)
   end
 

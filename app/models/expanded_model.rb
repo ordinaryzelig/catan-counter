@@ -16,7 +16,7 @@ module ExpandedModel
   def uses?(expansion_object_or_module)
     case expansion_object_or_module
     when Expansion
-      expansion_object_or_module.name.constantize
+      expansions.include?(expansion_object_or_module)
     when Module
       is_a? expansion_object_or_module
     end

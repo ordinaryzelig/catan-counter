@@ -1,4 +1,2 @@
-- if @game.largest_army.player_id == player.id
-  %span#largest_army= 'largest army'
-- else
-  &nbsp;
+%span.largestArmy{:class => show ? nil : 'hidden'}
+  largest army
