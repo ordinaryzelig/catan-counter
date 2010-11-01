@@ -18,4 +18,13 @@ module ApplicationHelper
     link_to action_partial(action_label, image_file_name), url, options
   end
 
+  # Javascript builder to update flash through AJAX.
+  # If flash type doesn't exist, replace with empty string so previous message will go away.
+  def update_flash
+    ['notice', 'error'].each do |type|
+      concat "updateFlash('#{type}', '#{flash[type]}')\n"
+      flash.discard
+    end
+  end
+
 end

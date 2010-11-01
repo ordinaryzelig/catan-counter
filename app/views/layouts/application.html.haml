@@ -10,12 +10,8 @@
     = csrf_meta_tag
 
   %body
-    - if flash.any?
-      #flash
-        - flash.each do |type, messages|
-          %div{:class => type}
-            - (messages.is_a?(Array) ? messages : [messages]).each do |message|
-              %div= message
+    - ['notice', 'error'].each do |type|
+      %div{:id => "flash_#{type}"}= flash[type]
 
     #main
       = yield

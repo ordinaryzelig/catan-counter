@@ -1,3 +1,7 @@
+function updateFlash(type, content) {
+  $('#flash_' + type).html(content)
+}
+
 // Add class 'disabled' to element.
 // Add special click event to link that will determine whether it sends request or not.
 function disableLink(link) {
