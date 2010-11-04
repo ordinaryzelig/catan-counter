@@ -8,4 +8,5 @@ player.updateSoldiersCount('<%= @player.soldiers.count %>')
   <% end %>
   player.showLargestArmy()
   player.updateVictoryPoints('<%= @player.victory_points %>')
+  <% handle_winner_status(@player) %>
 <% end %>

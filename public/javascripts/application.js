@@ -66,6 +66,12 @@ function getPlayer(playerId) {
   player.updateVictoryPoints = function(victoryPoints) {
     this.victoryPoints().number().html(victoryPoints)
   }
+  player.hasEnoughVictoryPointsToWin = function() {
+    this.addClass('hasEnoughVictoryPointsToWin')
+  }
+  player.noLongerHasEnoughVictoryPointsToWin = function() {
+    this.removeClass('hasEnoughVictoryPointsToWin')
+  }
 
   // metropolis AJAX.
   player.disableBuildMetropolisLink = function(development_area) {

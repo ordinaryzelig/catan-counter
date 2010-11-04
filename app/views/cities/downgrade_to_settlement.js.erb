@@ -7,7 +7,7 @@ updateTotalCitiesCount('<%= @player.game.cities.count %>')
   player.disableBuildMetropolisesLinks()
 <% end %>
 player.updateSettlementsCount('<%= @player.settlements.count %>')
-<% if @player.settlements.count == 1 %>
+<% if @player.settlements.any? %>
   player.enableUpgradeSettlementLink()
   player.enableDestroySettlementLink()
 <% end %>
@@ -15,3 +15,4 @@ player.updateSettlementsCount('<%= @player.settlements.count %>')
   player.disableBuildSettlementLink()
 <% end %>
 player.updateVictoryPoints('<%= @player.victory_points %>')
+<% handle_winner_status(@player) %>

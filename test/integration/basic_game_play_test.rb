@@ -53,10 +53,10 @@ class BasicGamePlayTest < ActionDispatch::IntegrationTest
     assert_equal 4, @player.victory_points
   end
 
-  test 'message shows player has enough victory points to win' do
+  test 'player with enough victory points to win is highlighted' do
     @game.update_attributes!(:victory_points_to_win => 2)
     visit game_path(@game)
-    assert_contain 'has enough victory points to win'
+    assert_have_selector "div#player_#{@player.id}.hasEnoughVictoryPointsToWin"
   end
 
 end

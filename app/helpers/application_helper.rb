@@ -27,4 +27,14 @@ module ApplicationHelper
     end
   end
 
+  # return javascript string for whether player has won or has been stripped of winner status.
+  def handle_winner_status(player)
+    if @player.has_enough_victory_points_to_win?
+      concat 'player.hasEnoughVictoryPointsToWin()' + "\n"
+      concat "alert('#{player.name} has enough victory points to win.')"
+    else
+      concat 'player.noLongerHasEnoughVictoryPointsToWin()'
+    end
+  end
+
 end

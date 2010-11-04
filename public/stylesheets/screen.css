@@ -93,17 +93,8 @@ table#gameCounts td {
       display: none; }
     #players .player .buildings {
       border-top: 2px solid #999999; }
-
-table#winners {
-  text-align: center;
-  margin-bottom: 5mm; }
-  table#winners .player {
+  #players .player.hasEnoughVictoryPointsToWin {
     background-color: yellow; }
-    table#winners .player td {
-      padding: 2mm; }
-    table#winners .player span.name {
-      font-size: 120%;
-      font-weight: bold; }
 
 form.edit_game table tr td label .display_name {
   font-size: 150%; }

@@ -10,3 +10,4 @@ player.updateSettlementsCount('<%= @player.settlements.count %>')
   <% end %>
 <% end %>
 player.updateVictoryPoints('<%= @player.victory_points %>')
+<% handle_winner_status(@player) %>

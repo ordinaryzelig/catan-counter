@@ -1,4 +1,4 @@
-= div_for(player, :style => "border-color: #{player.color == 'white' ? 'black' : player.color}") do
+= div_for(player, :style => "border-color: #{player.color == 'white' ? 'black' : player.color}", :class => player.has_enough_victory_points_to_win? ? 'hasEnoughVictoryPointsToWin' : nil) do
   .name{:style => "background-color: #{player.color}"}
     %span= player.name
   = render :partial => 'players/victory_points', :locals => {:player => player}

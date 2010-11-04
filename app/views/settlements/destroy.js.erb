@@ -8,3 +8,4 @@ player.updateSettlementsCount('<%= @player.settlements.count %>')
   player.disableUpgradeSettlementLink()
 <% end %>
 player.updateVictoryPoints('<%= @player.victory_points %>')
+<% handle_winner_status(@player) %>

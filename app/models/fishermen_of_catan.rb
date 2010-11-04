@@ -25,8 +25,7 @@ module FishermenOfCatan
   module PlayerMethods
 
     def victory_points_needed_to_win
-      super +
-      (self.boot ? 1 : 0)
+      self.boot ? super + 1 : super
     end
 
     def take_boot
