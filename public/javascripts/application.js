@@ -34,6 +34,12 @@ function getPlayer(playerId) {
   player.largestArmy = function() {
     return this.find('.largestArmy:first')
   }
+  player.longestRoadImage = function() {
+    return this.find('img.longestRoad:first')
+  }
+  player.longestRoadLink = function() {
+    return this.find('a.longestRoad:first')
+  }
   player.metropolises = function() {
     var metropolises_div = this.find('.metropolises:first')
     metropolises_div.buildLink = function(development_area) { return this.find('a.' + development_area + ':first') }
@@ -135,6 +141,16 @@ function getPlayer(playerId) {
   }
   player.showLargestArmy = function() {
     this.largestArmy().show()
+  }
+
+  // longest road AJAX.
+  player.takeLongestRoad = function() {
+    this.longestRoadImage().show()
+    this.longestRoadLink().hide()
+  }
+  player.loseLongestRoad = function() {
+    this.longestRoadImage().hide()
+    this.longestRoadLink().show()
   }
 
   return player

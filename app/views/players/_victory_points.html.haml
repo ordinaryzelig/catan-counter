@@ -1,13 +1,3 @@
 .victoryPoints
   victory points: 
   %span.number= player.victory_points
-.bonuses
-  - if player.longest_road
-    = image_tag('longest_road.png')
-  - if @game.uses?(FishermenOfCatan) && player.boot
-    = image_tag('boot.png', :title => 'boot')
-  - if @game.uses?(CitiesAndKnights)
-    - if player.merchant
-      = image_tag('merchant.png', :title => 'merchant')
-    - player.metropolises.each do |metropolis|
-      = image_tag("metropolis_#{metropolis.development_area}.png", :width => '10%')

@@ -2,15 +2,19 @@ a
   text-decoration: none
   outline-width: 0
   &:hover
-    text-decoration: underline
     background-color: yellow
   &:visited
     color: blue
+a.disabled
+  background-color: transparent
+  cursor: default
 table
   border-collapse: collapse
 table.centered
   margin-left: auto
   margin-right: auto
+.hidden
+  display: none
 
 .flash
   border-size: 2px
@@ -90,12 +94,10 @@ table#gameCounts
       color: gray
     .largestArmy
       background-color: red
-    .largestArmy.hidden
-      display: none
     .buildings
       border-top: 2px solid #999
   .player.hasEnoughVictoryPointsToWin
-    background-color: yellow
+    background-color: #FFFFBB
 
 form.edit_game
   table

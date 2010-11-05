@@ -2,7 +2,7 @@
   .name{:style => "background-color: #{player.color}"}
     %span= player.name
   = render :partial => 'players/victory_points', :locals => {:player => player}
-  = render :partial => 'longest_roads/longest_road', :locals => {:player => player}
+  = render :partial => 'players/bonuses', :locals => {:player => player}
   - if @game.uses?(CitiesAndKnights)
     = render :partial => 'merchants/merchant', :locals => {:player => player}
     = render :partial => 'progress_card_victory_points/progress_card_victory_points', :locals => {:player => player}
@@ -20,3 +20,4 @@
       = render :partial => 'knights/knights', :locals => {:player => player}
     - else
       = render :partial => 'soldiers/soldiers', :locals => {:player => player}
+  = render :partial => 'longest_roads/longest_road', :locals => {:player => player}

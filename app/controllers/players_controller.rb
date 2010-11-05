@@ -5,8 +5,11 @@ class PlayersController < ApplicationController
   respond_to :js
 
   def take_longest_road
+    @former_player_with_longest_road = @player.game.players.with_longest_road
     @player.take_longest_road
-    redirect_to @player.game
+    respond_with do |format|
+      format.html { redirect_to @player.game }
+    end
   end
 
   def play_soldier

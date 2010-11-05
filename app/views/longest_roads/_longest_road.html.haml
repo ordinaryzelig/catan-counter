@@ -1,6 +1,2 @@
-- player_has_longest_road = player.longest_road
-.longest_road
-  - if player_has_longest_road
-    %span.disabled= 'take longest road'
-  - else
-    = link_to 'take longest road', take_longest_road_player_url(player), :method => :put
+%div
+  = link_to_take_longest_road(player)

@@ -1,0 +1,10 @@
+<% if @former_player_with_longest_road %>
+  var former_player = getPlayer('<%= @former_player_with_longest_road.id %>')
+  former_player.loseLongestRoad()
+  former_player.updateVictoryPoints('<%= @former_player_with_longest_road.victory_points %>')
+  <% handle_winner_status(@former_player_with_longest_road)%>
+<% end %>
+var player = getPlayer('<%= @player.id %>')
+player.takeLongestRoad()
+player.updateVictoryPoints('<%= @player.victory_points %>')
+<% handle_winner_status(@player)%>

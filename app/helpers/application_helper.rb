@@ -22,19 +22,24 @@ module ApplicationHelper
   # If flash type doesn't exist, replace with empty string so previous message will go away.
   def update_flash
     ['notice', 'error'].each do |type|
-      concat "updateFlash('#{type}', '#{flash[type]}')\n"
+      concat_js "updateFlash('#{type}', '#{flash[type]}')"
       flash.discard
     end
   end
 
   # return javascript string for whether player has won or has been stripped of winner status.
   def handle_winner_status(player)
-    if @player.has_enough_victory_points_to_win?
-      concat 'player.hasEnoughVictoryPointsToWin()' + "\n"
-      concat "alert('#{player.name} has enough victory points to win.')"
+    player_js = "getPlayer('#{player.id}')"
+    if player.has_enough_victory_points_to_win?
+      concat_js "#{player_js}.hasEnoughVictoryPointsToWin()"
+      concat_js "alert('#{player.name} has enough victory points to win.')"
     else
-      concat 'player.noLongerHasEnoughVictoryPointsToWin()'
+      concat_js "#{player_js}.noLongerHasEnoughVictoryPointsToWin()"
     end
+  end
+
+  def concat_js(javascript)
+    concat javascript + "\n"
   end
 
 end
