@@ -35,6 +35,9 @@ table.centered {
 body {
   background-color: #9999ff; }
 
+#overlay {
+  display: none; }
+
 .game_form table.expansions {
   margin-bottom: 5mm; }
   .game_form table.expansions td {

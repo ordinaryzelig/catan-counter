@@ -166,6 +166,15 @@ function disableDisabledLinks() {
   })
 }
 
+function injectOverlayForAjaxLinks() {
+  $('a[data-remote="true"]').each(function() {
+    $(this).click(function(event) {
+      $('#overlay').bPopup({opacity: 0.4, escClose: false, fadeSpeed: 0, modalClose: false})
+    })
+  })
+}
+
 $(document).ready(function() {
   disableDisabledLinks()
+  injectOverlayForAjaxLinks()
 })
