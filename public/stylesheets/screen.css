@@ -32,6 +32,9 @@ table.centered {
   .flash .error {
     background-color: red; }
 
+body {
+  background-color: #9999ff; }
+
 .game_form table.expansions {
   margin-bottom: 5mm; }
   .game_form table.expansions td {
@@ -73,6 +76,7 @@ table#gameCounts td {
 #players {
   text-align: center; }
   #players .player {
+    background-color: white;
     display: inline-block;
     border-width: 5px;
     border-style: solid;
