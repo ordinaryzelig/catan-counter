@@ -22,7 +22,9 @@ class KnightsController < ApplicationController
   def promote
     @knight = @player.knights.find(params[:id])
     @knight.promote
-    redirect_to game_url(@knight.player.game)
+    respond_with do |format|
+      format.html { redirect_to game_url(@knight.player.game) }
+    end
   end
 
   def toggle_activation

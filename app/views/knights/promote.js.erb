@@ -1,0 +1,6 @@
+<%= remove_knight(@knight) %>
+var player = <%= get_player(@player) %>
+player.<%= add_knight(@knight) %>
+<% if @knight.activated %>
+  adjustTotalActivatedKnights(1)
+<% end %>

@@ -20,7 +20,7 @@ module KnightsHelper
     action_label = 'promote'
     image_file_name = 'up.png'
     url = promote_player_knight_url(knight.player, knight)
-    options = {:method => :put}
+    options = {:method => :put, :remote => true}
     link_to_action_partial_if(knight.can_be_promoted?, action_label, image_file_name, url, options)
   end
 
@@ -30,6 +30,16 @@ module KnightsHelper
     url = player_knight_url(knight.player, knight)
     options = {:method => :delete, :remote => true}
     link_to_action_partial_if(true, action_label, image_file_name, url, options)
+  end
+
+  # AJAX to remove knight by id.
+  def remove_knight(knight)
+    "$('#knight_' + #{knight.id}).remove()"
+  end
+
+  # AJAX to add knight to player depending on level.
+  def add_knight(knight)
+    "addKnight(#{knight.level}, '#{escape_javascript(render(@knight))}')".html_safe
   end
 
 end

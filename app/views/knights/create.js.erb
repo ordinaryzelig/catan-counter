@@ -1,6 +1,5 @@
 var player = <%= get_player(@player) %>
-// insert knight partial.
-player.addKnight(1, '<%= escape_javascript(render(@knight)).html_safe %>')
+player.<%= add_knight(@knight) %>
 <% if @player.knights.level(1).count == 2 %>
   player.disableBuildKnightLink()
 <% end %>
