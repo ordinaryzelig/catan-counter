@@ -1,4 +1,4 @@
-<%= remove_knight(@knight) %>
+<%= get_knight(@knight) %>.remove()
 <% if @knight.activated %>
   adjustTotalActivatedKnights(<%= -@knight.level %>)
 <% end %>

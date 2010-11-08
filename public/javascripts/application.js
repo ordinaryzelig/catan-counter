@@ -177,6 +177,11 @@ function getPlayer(playerId) {
   return player
 }
 
+function getKnight(id) {
+  var knight = $('#knight_' + id)
+  return knight
+}
+
 function updateTotalCitiesCount(count) {
   $('#gameCounts').find('.cities:first').find('.count:first').html(count)
 }

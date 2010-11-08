@@ -12,7 +12,7 @@ module KnightsHelper
     action_label = knight.activated ? 'deactivate' : 'activate'
     image_file_name = "knights/#{knight.player.color}_#{knight.level}#{knight.activated ? '_activated' : nil}.png"
     url = toggle_activation_player_knight_url(knight.player, knight)
-    options = {:method => :put}
+    options = {:method => :put, :remote => true}
     link_to_action_partial_if(true, action_label, image_file_name, url, options)
   end
 
@@ -32,14 +32,20 @@ module KnightsHelper
     link_to_action_partial_if(true, action_label, image_file_name, url, options)
   end
 
-  # AJAX to remove knight by id.
-  def remove_knight(knight)
-    "$('#knight_' + #{knight.id}).remove()"
+  def get_knight(knight)
+    "getKnight(#{knight.id})"
   end
 
   # AJAX to add knight to player depending on level.
   def add_knight(knight)
     "addKnight(#{knight.level}, '#{escape_javascript(render(@knight))}')".html_safe
+  end
+
+  # Update total activated knights count based on knight's current state assuming it has changed.
+  def update_total_activated_knights_count(knight)
+    offset = knight.level
+    offset *= -1 if !knight.activated
+    "adjustTotalActivatedKnights(#{offset})"
   end
 
 end

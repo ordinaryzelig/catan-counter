@@ -30,7 +30,9 @@ class KnightsController < ApplicationController
   def toggle_activation
     @knight = @player.knights.find(params[:id])
     @knight.toggle_activation
-    redirect_to game_url(@knight.player.game)
+    respond_with do |format|
+      format.html { redirect_to game_url(@knight.player.game) }
+    end
   end
 
   protected
