@@ -4,7 +4,7 @@ module KnightsHelper
     action_label = 'build knight'
     image_file_name = 'add.png'
     url = player_knights_url(player)
-    options = {:method => :post}
+    options = {:class => 'buildKnight', :remote => true, :method => :post}
     link_to_action_partial_if(player.can_build_knight?(1), action_label, image_file_name, url, options)
   end
 
@@ -25,10 +25,10 @@ module KnightsHelper
   end
 
   def link_to_destroy_knight(knight)
-    action_label = 'destroy'
+    action_label = 'remove'
     image_file_name = 'delete.png'
     url = player_knight_url(knight.player, knight)
-    options = {:method => :delete}
+    options = {:method => :delete, :remote => true}
     link_to_action_partial_if(true, action_label, image_file_name, url, options)
   end
 

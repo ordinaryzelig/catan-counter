@@ -2,15 +2,21 @@ class KnightsController < ApplicationController
 
   before_filter :load_player
 
+  respond_to :js
+
   def create
-    @player.knights.create!(:level => 1)
-    redirect_to game_url(@player.game)
+    @knight = @player.knights.create!(:level => 1)
+    respond_with do |format|
+      format.html { redirect_to game_url(@player.game) }
+    end
   end
 
   def destroy
     @knight = @player.knights.find(params[:id])
     @knight.destroy
-    redirect_to game_url(@knight.player.game)
+    respond_with do |format|
+      format.html { redirect_to game_url(@knight.player.game) }
+    end
   end
 
   def promote

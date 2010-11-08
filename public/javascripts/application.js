@@ -65,6 +65,16 @@ function getPlayer(playerId) {
     soldiers_div.useLink = function() { return this.find('a.use:first') }
     return soldiers_div
   }
+  player.knights = function() {
+    var knight_div = this.find('.knights:first')
+    knight_div.level = function(level) {
+      return this.find('.level' + level + ':first')
+    }
+    return knight_div
+  }
+  player.buildKnightLink = function() {
+    return this.find('a.buildKnight:first')
+  }
 
   // AJAX actions.
 
@@ -153,11 +163,38 @@ function getPlayer(playerId) {
     this.longestRoadLink().show()
   }
 
+  // knights AJAX.
+  player.enableBuildKnightLink = function() {
+    enableLink(this.buildKnightLink())
+  }
+  player.disableBuildKnightLink = function() {
+    disableLink(this.buildKnightLink())
+  }
+  player.addKnight = function(level, html) {
+    player.knights().level(level).append(html)
+  }
+
   return player
 }
 
 function updateTotalCitiesCount(count) {
   $('#gameCounts').find('.cities:first').find('.count:first').html(count)
+}
+
+function totalActivatedKnights() {
+  var activatedKnightsDiv = $('#totalActivatedKnights')
+  activatedKnightsDiv.count = function() {
+    var count = this.find('.count:first')
+    count.toInt = function() { return parseInt(this.html()) }
+    count.update = function(num) { this.html(num) }
+    return count
+  }
+  return activatedKnightsDiv
+}
+
+function adjustTotalActivatedKnights(offset) {
+  var count = totalActivatedKnights().count()
+  count.html(count.toInt() + offset)
 }
 
 function disableDisabledLinks() {

@@ -1,4 +1,5 @@
 .knights
   - Knight::LEVELS.reverse.each do |level|
-    = render player.knights.level(level)
+    %div{:class => "level#{level}"}
+      = render player.knights.level(level)
   = link_to_build_knight(player)

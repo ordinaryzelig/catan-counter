@@ -32,9 +32,9 @@ class BasicGamePlayTest < ActionDispatch::IntegrationTest
     assert_equal 3, @player.settlements.size
   end
 
-  test 'destroy settlement' do
+  test 'remove settlement' do
     visit game_path(@game)
-    click_link 'destroy', :method => 'delete'
+    click_link 'remove', :method => 'delete'
     @player.reload
     assert_equal 1, @player.settlements.size
   end

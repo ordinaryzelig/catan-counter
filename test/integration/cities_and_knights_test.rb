@@ -23,11 +23,11 @@ class CitiesAndKnightsTest < ActionDispatch::IntegrationTest
     assert_equal 2, knight.level
   end
 
-  test 'destroy' do
+  test 'remove' do
     @player.knights.make
     visit game_url(@game)
     within('.knights') do
-      click_link 'destroy', :method => 'delete'
+      click_link 'remove', :method => 'delete'
     end
     assert_equal 0, @player.reload.knights.size
   end

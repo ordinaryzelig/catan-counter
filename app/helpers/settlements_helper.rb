@@ -17,7 +17,7 @@ module SettlementsHelper
   end
 
   def link_to_destroy_settlement(player)
-    action_label = 'destroy'
+    action_label = 'remove'
     image_file_name = 'delete.png'
     url = player_settlements_url(player)
     options = {:method => :delete, :class => 'destroy', :remote => true}

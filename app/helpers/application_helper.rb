@@ -27,6 +27,10 @@ module ApplicationHelper
     end
   end
 
+  def get_player(player)
+    "getPlayer('#{player.id}')"
+  end
+
   # return javascript string for whether player has won or has been stripped of winner status.
   def handle_winner_status(player)
     player_js = "getPlayer('#{player.id}')"

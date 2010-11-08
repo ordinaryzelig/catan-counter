@@ -1,0 +1,4 @@
+$('#knight_' + <%= @knight.id %>).remove()
+<% if @knight.activated %>
+  adjustTotalActivatedKnights(<%= -@knight.level %>)
+<% end %>
