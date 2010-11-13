@@ -90,9 +90,9 @@ class CitiesAndKnightsTest < ActionDispatch::IntegrationTest
 
   test 'build metropolis' do
     visit game_url(@game)
-    click_link 'build trade metro.', :method => 'put'
+    click_link 'trade', :method => 'put'
     @player.reload
-    assert @player.metropolises.present?
+    assert @player.metropolises.first
   end
 
   # ==================================================

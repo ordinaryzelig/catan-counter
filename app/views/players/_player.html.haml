@@ -13,7 +13,6 @@
   - if @game.uses?(CitiesAndKnights)
     = render :partial => 'players/defenders_of_catan', :locals => {:player => player}
   .buildings
-    = render 'metropolises/metropolises', :metropolises => @game.metropolises, :player => player
     = render :partial => 'cities/cities', :locals => {:player => player}
     = render :partial => 'settlements/settlements', :locals => {:player => player}
     - if @game.uses?(CitiesAndKnights)
@@ -21,3 +20,4 @@
     - else
       = render :partial => 'soldiers/soldiers', :locals => {:player => player}
   = render :partial => 'longest_roads/longest_road', :locals => {:player => player}
+  = render 'metropolises/metropolises', :metropolises => @game.metropolises, :player => player

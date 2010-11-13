@@ -6,4 +6,4 @@
     - if player.merchant
       = image_tag('merchant.png', :title => 'merchant')
     - player.metropolises.each do |metropolis|
-      = image_tag("metropolis_#{metropolis.development_area}.png", :width => '10%')
+      = metropolis_image_tag(metropolis.development_area)

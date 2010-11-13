@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def jquery_include_tag
+    if Rails.env == 'production'
+      javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
+    else
+      javascript_include_tag 'jquery-1.4.2.min.js'
+    end
+  end
+
   # a partial that includes an image and a label for the action.
   # if disabled, the css class 'disabled' will be added.
   def action_partial(action_label, image_file_name)
@@ -44,6 +52,10 @@ module ApplicationHelper
 
   def concat_js(javascript)
     concat javascript + "\n"
+  end
+
+  def metropolis_image_tag(development_area)
+    image_tag("metropolis_#{development_area}.png", :id => "metropolis_#{development_area}", :width => '10%')
   end
 
 end

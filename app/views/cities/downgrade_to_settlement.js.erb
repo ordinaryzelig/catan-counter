@@ -4,7 +4,7 @@ player.updateCitiesCount('<%= @player.cities.count %>')
 updateTotalCitiesCount('<%= @player.game.cities.count %>')
 <% if @player.cities.without_metropolises.empty? %>
   player.disableDowngradeCityLink()
-  player.disableBuildMetropolisesLinks()
+  player.disableBuildMetropolisLinks()
 <% end %>
 player.updateSettlementsCount('<%= @player.settlements.count %>')
 <% if @player.settlements.any? %>

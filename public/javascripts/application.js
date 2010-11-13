@@ -27,9 +27,13 @@ function getPlayer(playerId) {
 
   // Children selectors with selectors of their own.
   player.victoryPoints = function() {
-    var vPoints_div = this.find('.victoryPoints:first')
-    vPoints_div.number = function() { return this.find('.number:first') }
-    return vPoints_div
+    var vPoints = this.find('.victoryPoints:first')
+    vPoints.number = function() { return this.find('.number:first') }
+    vPoints.toInt = function() { return parseInt(this.number().html()) }
+    return vPoints
+  }
+  player.bonuses = function() {
+    return this.find('.bonuses:first')
   }
   player.largestArmy = function() {
     return this.find('.largestArmy:first')
@@ -43,6 +47,7 @@ function getPlayer(playerId) {
   player.metropolises = function() {
     var metropolises_div = this.find('.metropolises:first')
     metropolises_div.buildLink = function(development_area) { return this.find('a.' + development_area + ':first') }
+    metropolises_div.buildLinks = function() { return this.find('a') }
     return metropolises_div
   }
   player.cities = function() {
@@ -82,24 +87,14 @@ function getPlayer(playerId) {
   player.updateVictoryPoints = function(victoryPoints) {
     this.victoryPoints().number().html(victoryPoints)
   }
+  player.adjustVictoryPoints = function(offset) {
+    this.victoryPoints().number().html(this.victoryPoints().toInt() + offset)
+  }
   player.hasEnoughVictoryPointsToWin = function() {
     this.addClass('hasEnoughVictoryPointsToWin')
   }
   player.noLongerHasEnoughVictoryPointsToWin = function() {
     this.removeClass('hasEnoughVictoryPointsToWin')
-  }
-
-  // metropolis AJAX.
-  player.disableBuildMetropolisLink = function(development_area) {
-    disableLink(this.metropolises().buildLink(development_area))
-  }
-  player.enableBuildMetropolisLink = function(development_area) {
-    enableLink(this.metropolises().buildLink(development_area))
-  }
-  player.disableBuildMetropolisesLinks = function() {
-    this.metropolises().find('a').each(function() {
-      disableLink($(this))
-    })
   }
 
   // cities AJAX.
@@ -153,6 +148,24 @@ function getPlayer(playerId) {
     this.largestArmy().show()
   }
 
+  // metropolis AJAX.
+  player.disableBuildMetropolisLink = function(development_area) {
+    disableLink(this.metropolises().buildLink(development_area))
+  }
+  player.enableBuildMetropolisLink = function(development_area) {
+    enableLink(this.metropolises().buildLink(development_area))
+  }
+  player.enableBuildMetropolisLinks = function() {
+    this.metropolises().buildLinks().each(function() {
+      enableLink($(this))
+    })
+  }
+  player.disableBuildMetropolisLinks = function() {
+    this.metropolises().buildLinks().each(function() {
+      disableLink($(this))
+    })
+  }
+
   // longest road AJAX.
   player.takeLongestRoad = function() {
     this.longestRoadImage().show()
@@ -180,6 +193,10 @@ function getPlayer(playerId) {
 function getKnight(id) {
   var knight = $('#knight_' + id)
   return knight
+}
+
+function getMetropolis(developmentArea) {
+  return $('#metropolis_' + developmentArea)
 }
 
 function updateTotalCitiesCount(count) {

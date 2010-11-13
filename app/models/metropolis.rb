@@ -5,7 +5,6 @@ class Metropolis < ActiveRecord::Base
   end
 
   belongs_to :game
-  belongs_to :player
   belongs_to :city
 
   scope :built, where("city_id is not null")
@@ -13,5 +12,9 @@ class Metropolis < ActiveRecord::Base
 
   validates_presence_of :game_id
   validates_inclusion_of :development_area, :in => development_areas
+
+  def player
+    city.try(:player)
+  end
 
 end

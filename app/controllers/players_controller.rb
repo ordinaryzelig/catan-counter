@@ -21,8 +21,14 @@ class PlayersController < ApplicationController
   end
 
   def build_metropolis
-    @player.build_metropolis(params[:development_area])
-    redirect_to @player.game
+    game = @player.game
+    @development_area = params[:development_area]
+    metropolis = game.metropolises.development_area(@development_area)
+    @former_player_with_metropolis = metropolis.player
+    @player.build_metropolis(@development_area)
+    respond_with do |format|
+      format.html { redirect_to @player.game }
+    end
   end
 
   def take_boot

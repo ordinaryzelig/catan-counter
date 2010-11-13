@@ -1,0 +1,19 @@
+var player = <%= get_player(@player) %>
+<% if @former_player_with_metropolis %>
+  var former_player_with_metropolis = <%= get_player(@former_player_with_metropolis) %>
+  var metropolis = getMetropolis('<%= @development_area %>')
+  metropolis.remove()
+  former_player_with_metropolis.adjustVictoryPoints(-2)
+  <% handle_winner_status(@former_player_with_metropolis) %>
+  former_player_with_metropolis.enableBuildMetropolisLinks()
+<% else %>
+  var metropolis = '<%= escape_javascript(metropolis_image_tag(@development_area)).html_safe %>'
+<% end %>
+player.adjustVictoryPoints(2)
+player.bonuses().append(metropolis)
+<% if @player.cities.without_metropolises.empty? %>
+  player.disableBuildMetropolisLinks()
+<% else %>
+  player.disableBuildMetropolisLink('<%= @development_area %>')
+<% end %>
+<% handle_winner_status(@player) %>
