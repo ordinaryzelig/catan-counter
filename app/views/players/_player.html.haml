@@ -5,7 +5,6 @@
   = render :partial => 'players/bonuses', :locals => {:player => player}
   - if @game.uses?(CitiesAndKnights)
     = render :partial => 'merchants/merchant', :locals => {:player => player}
-    = render :partial => 'progress_card_victory_points/progress_card_victory_points', :locals => {:player => player}
   - if @game.uses?(FishermenOfCatan)
     = render :partial => 'boots/boot', :locals => {:player => player}
   - if @game.plays_with_largest_army?
@@ -19,5 +18,7 @@
       = render :partial => 'knights/knights', :locals => {:player => player}
     - else
       = render :partial => 'soldiers/soldiers', :locals => {:player => player}
+    = render 'metropolises/metropolises', :metropolises => @game.metropolises, :player => player
   = render :partial => 'longest_roads/longest_road', :locals => {:player => player}
-  = render 'metropolises/metropolises', :metropolises => @game.metropolises, :player => player
+  - if @game.uses?(CitiesAndKnights)
+    = render :partial => 'progress_card_victory_points/progress_card_victory_points', :locals => {:player => player}

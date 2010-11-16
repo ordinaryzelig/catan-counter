@@ -1,0 +1,7 @@
+var player = <%= get_player(@player) %>
+player.<%= take_progress_card_victory_point %>
+player.adjustVictoryPoints(1)
+<% if @player.game.progress_card_victory_points.not_taken.empty? %>
+  disableTakeProgressCardVictoryPointLinks()
+<% end %>
+<% handle_winner_status(@player) %>

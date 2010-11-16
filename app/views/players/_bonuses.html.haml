@@ -7,3 +7,5 @@
       = image_tag('merchant.png', :title => 'merchant')
     - player.metropolises.each do |metropolis|
       = metropolis_image_tag(metropolis.development_area)
+    - player.progress_card_victory_points.each do
+      = image_tag('victory_point.png')

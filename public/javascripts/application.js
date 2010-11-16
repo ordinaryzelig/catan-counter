@@ -219,6 +219,12 @@ function adjustTotalActivatedKnights(offset) {
   count.html(count.toInt() + offset)
 }
 
+function disableTakeProgressCardVictoryPointLinks() {
+  $('.progressCardVictoryPoints a').each(function() {
+    disableLink($(this))
+  })
+}
+
 function disableDisabledLinks() {
   $('a.disabled').each(function() {
     disableLink($(this))
