@@ -58,4 +58,8 @@ module ApplicationHelper
     image_tag("metropolis_#{development_area}.png", :id => "metropolis_#{development_area}", :width => '10%')
   end
 
+  def merchant_image
+    image_tag('merchant.png', :id => 'merchant')
+  end
+
 end

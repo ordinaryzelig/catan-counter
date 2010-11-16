@@ -37,8 +37,11 @@ class PlayersController < ApplicationController
   end
 
   def take_merchant
+    @former_player_with_merchant = @player.game.merchant.player
     @player.take_merchant
-    redirect_to @player.game
+    respond_with do |format|
+      format.html { redirect_to @player.game }
+    end
   end
 
   def take_progress_card_victory_point

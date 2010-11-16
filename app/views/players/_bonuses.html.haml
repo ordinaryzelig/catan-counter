@@ -4,8 +4,10 @@
     = image_tag('boot.png', :title => 'boot')
   - if @game.uses?(CitiesAndKnights)
     - if player.merchant
-      = image_tag('merchant.png', :title => 'merchant')
+      = merchant_image
     - player.metropolises.each do |metropolis|
       = metropolis_image_tag(metropolis.development_area)
     - player.progress_card_victory_points.each do
       = image_tag('victory_point.png')
+    - player.defenders_of_catan.each do
+      = image_tag('defender_of_catan.png')

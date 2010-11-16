@@ -1,0 +1,15 @@
+<% if @former_player_with_merchant %>
+  var formerPlayer = <%= get_player(@former_player_with_merchant) %>
+  var merchant = getMerchant()
+  merchant.remove()
+  formerPlayer.adjustVictoryPoints(-1)
+  <% handle_winner_status(@former_player_with_merchant) %>
+  formerPlayer.enablePlayMerchantCardLink()
+<% else %>
+  var merchant = '<%= escape_javascript(merchant_image).html_safe %>'
+<% end %>
+var player = <%= get_player(@player) %>
+player.adjustVictoryPoints(1)
+player.bonuses().append(merchant)
+player.disablePlayMerchantCardLink()
+<% handle_winner_status(@player) %>

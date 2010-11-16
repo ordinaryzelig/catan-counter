@@ -80,6 +80,7 @@ function getPlayer(playerId) {
   player.buildKnightLink = function() {
     return this.find('a.buildKnight:first')
   }
+  player.playMerchantCardLink = function() { return this.find('a.playMerchantCard:first') }
 
   // AJAX actions.
 
@@ -187,6 +188,14 @@ function getPlayer(playerId) {
     player.knights().level(level).append(html)
   }
 
+  // merchant AJAX.
+  player.enablePlayMerchantCardLink = function() {
+    enableLink(this.playMerchantCardLink())
+  }
+  player.disablePlayMerchantCardLink = function() {
+    disableLink(this.playMerchantCardLink())
+  }
+
   return player
 }
 
@@ -201,6 +210,10 @@ function getMetropolis(developmentArea) {
 
 function updateTotalCitiesCount(count) {
   $('#gameCounts').find('.cities:first').find('.count:first').html(count)
+}
+
+function getMerchant() {
+  return $('#merchant')
 }
 
 function totalActivatedKnights() {

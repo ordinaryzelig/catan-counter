@@ -3,14 +3,10 @@
     %span= player.name
   = render :partial => 'players/victory_points', :locals => {:player => player}
   = render :partial => 'players/bonuses', :locals => {:player => player}
-  - if @game.uses?(CitiesAndKnights)
-    = render :partial => 'merchants/merchant', :locals => {:player => player}
   - if @game.uses?(FishermenOfCatan)
     = render :partial => 'boots/boot', :locals => {:player => player}
   - if @game.plays_with_largest_army?
     = render 'largest_armies/largest_army', :show => @game.largest_army.player_id == player.id
-  - if @game.uses?(CitiesAndKnights)
-    = render :partial => 'players/defenders_of_catan', :locals => {:player => player}
   .buildings
     = render :partial => 'cities/cities', :locals => {:player => player}
     = render :partial => 'settlements/settlements', :locals => {:player => player}
@@ -22,3 +18,4 @@
   = render :partial => 'longest_roads/longest_road', :locals => {:player => player}
   - if @game.uses?(CitiesAndKnights)
     = render :partial => 'progress_card_victory_points/progress_card_victory_points', :locals => {:player => player}
+    = render :partial => 'merchants/merchant', :locals => {:player => player}
