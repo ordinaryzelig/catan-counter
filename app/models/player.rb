@@ -30,7 +30,6 @@ class Player < ActiveRecord::Base
   has_one :boot
   has_one :merchant
   has_many :progress_card_victory_points
-  has_many :gold_point_victory_points
   attr_reader :just_acquired_largest_army
   attr_reader :just_acquired_largest_army_from
 
