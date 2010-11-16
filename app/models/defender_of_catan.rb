@@ -5,7 +5,7 @@ class DefenderOfCatan < ActiveRecord::Base
 
   scope :not_taken, where(:player_id => nil)
 
-  validates_presence_of :game_id
+  validates :game_id, :presence => true
 
   def self.limit_per_game
     8

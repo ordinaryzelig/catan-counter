@@ -1,12 +1,12 @@
 class Settlement < ActiveRecord::Base
-  
+
   belongs_to :player
-  
-  validates_presence_of :player_id
-  
+
+  validates :player_id, :presence => true
+
   def upgrade_to_city
     destroy
     player.cities.create!
   end
-  
+
 end

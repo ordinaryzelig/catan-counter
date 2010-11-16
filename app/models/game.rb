@@ -92,7 +92,7 @@ class Game < ActiveRecord::Base
     game.victory_points_to_win ||= game.default_victory_points_to_win
   end
 
-  validates_numericality_of :victory_points_to_win
+  validates :victory_points_to_win, :numericality => true
 
   # save players from players_attributes.
   after_save do |game|

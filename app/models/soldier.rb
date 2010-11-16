@@ -6,7 +6,7 @@ class Soldier < ActiveRecord::Base
 
   scope :not_taken, where(:player_id => nil)
 
-  validates_presence_of :game_id
+  validates :game_id, :presence => true
 
   # award largest army?
   after_update do |soldier|

@@ -41,15 +41,15 @@ class Player < ActiveRecord::Base
     player.name ||= player.color
   end
 
-  validates_presence_of :game_id
-  validates_presence_of :name
+  validates :game_id, :presence => true
+  validates :name, :presence => true
   # custom validates_inclusion_of.
   validate do |player|
     unless player.errors[:game_id]
       player.errors.add(:color, 'is not in the list') unless player.game.colors.include?(player.color)
     end
   end
-  validates_uniqueness_of :color, :scope => :game_id
+  validates :color, :uniqueness => {:scope => :game_id}
 
   after_create :create_starter_buildings
 

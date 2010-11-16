@@ -7,10 +7,9 @@ class Knight < ActiveRecord::Base
   scope :activated, where(:activated => true)
   scope :level, proc { |level| where(:level => level) }
 
-  validates_presence_of :player_id
-  validates_presence_of :level
-  validates_inclusion_of :activated, :in => [true, false]
-  validates_inclusion_of :level, :in => LEVELS
+  validates :player_id, :presence => true
+  validates :level, :presence => true, :inclusion => LEVELS
+  validates :activated, :inclusion => [true, false]
 
   # only 2 knights per level.
   validate do |knight|
