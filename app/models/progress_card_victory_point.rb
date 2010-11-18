@@ -8,7 +8,7 @@ class ProgressCardVictoryPoint < ActiveRecord::Base
   validates :game_id, :presence => true
 
   def self.limit_per_game
-    3
+    2
   end
 
 end

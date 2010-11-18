@@ -84,7 +84,6 @@ class Game < ActiveRecord::Base
   has_one :boot
   has_one :merchant
   has_many :progress_card_victory_points
-  has_many :gold_point_victory_points
 
   # assign default victory points.
   before_validation do |game|

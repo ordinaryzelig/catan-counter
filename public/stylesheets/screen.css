@@ -20,18 +20,6 @@ table.centered {
 .hidden {
   display: none; }
 
-.flash {
-  border-size: 2px;
-  border-style: solid;
-  text-align: center;
-  margin-bottom: 5mm; }
-  .flash div {
-    padding: 2px; }
-  .flash .notice {
-    background-color: yellow; }
-  .flash .error {
-    background-color: red; }
-
 body {
   background-color: #9999ff; }
 

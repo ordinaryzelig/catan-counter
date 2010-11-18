@@ -48,9 +48,9 @@ class CitiesAndKnightsTest < ActionDispatch::IntegrationTest
     assert_equal 0, @player.knights.strength
   end
 
-  test 'take merchant' do
+  test 'play merchant card' do
     visit game_url(@game)
-    click_link 'take merchant', :method => 'put'
+    click_link 'play merchant card', :method => 'put'
     @player.reload
     assert @player.merchant
   end

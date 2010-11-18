@@ -1,7 +1,3 @@
-function updateFlash(type, content) {
-  $('#flash_' + type).html(content)
-}
-
 // Add class 'disabled' to element.
 // Add special click event to link that will determine whether it sends request or not.
 function disableLink(link) {
@@ -80,6 +76,7 @@ function getPlayer(playerId) {
   player.buildKnightLink = function() {
     return this.find('a.buildKnight:first')
   }
+  player.playMerchantCardLink = function() { return this.find('a.playMerchantCard:first') }
 
   // AJAX actions.
 
@@ -106,6 +103,10 @@ function getPlayer(playerId) {
   }
   player.disableDowngradeCityLink = function() {
     disableLink(this.cities().downgradeLink())
+  }
+  player.adjustCitiesCount = function(offset) {
+    var number = this.cities().number()
+    number.html(parseInt(number.html()) + offset)
   }
 
   // settlement AJAX.
@@ -187,6 +188,14 @@ function getPlayer(playerId) {
     player.knights().level(level).append(html)
   }
 
+  // merchant AJAX.
+  player.enablePlayMerchantCardLink = function() {
+    enableLink(this.playMerchantCardLink())
+  }
+  player.disablePlayMerchantCardLink = function() {
+    disableLink(this.playMerchantCardLink())
+  }
+
   return player
 }
 
@@ -201,6 +210,10 @@ function getMetropolis(developmentArea) {
 
 function updateTotalCitiesCount(count) {
   $('#gameCounts').find('.cities:first').find('.count:first').html(count)
+}
+
+function getMerchant() {
+  return $('#merchant')
 }
 
 function totalActivatedKnights() {
@@ -219,6 +232,12 @@ function adjustTotalActivatedKnights(offset) {
   count.html(count.toInt() + offset)
 }
 
+function disableTakeProgressCardVictoryPointLinks() {
+  $('.progressCardVictoryPoints a').each(function() {
+    disableLink($(this))
+  })
+}
+
 function disableDisabledLinks() {
   $('a.disabled').each(function() {
     disableLink($(this))
@@ -228,7 +247,12 @@ function disableDisabledLinks() {
 function injectOverlayForAjaxLinks() {
   $('a[data-remote="true"]').each(function() {
     $(this).click(function(event) {
-      $('#overlay').bPopup({opacity: 0.4, escClose: false, fadeSpeed: 0, modalClose: false})
+      if($(this).hasClass('disabled')) {
+        return false
+      }
+      else {
+        $('#overlay').bPopup({opacity: 0.4, escClose: false, fadeSpeed: 0, modalClose: false})
+      }
     })
   })
 }

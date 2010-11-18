@@ -21,7 +21,7 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
     2.times { player.knights.make.activate }
     assert_difference('player.reload.victory_points') do
       outcome = @game.barbarians.attack
-      assert outcome.catan_is_saved?
+      assert outcome.catan_is_safe?
       assert_equal 2, outcome.strength_of_victorious_party
       assert_equal 2, outcome.strength_of_defeated_party
       assert_equal player, outcome.defender_of_catan
@@ -31,7 +31,7 @@ class BarbarianAttackOutcomeTest < ActiveSupport::TestCase
   def test_attack_and_settlers_successfully_defend_with_multiple_players_defending
     @game.players.each { |player| player.knights.make.activate }
     outcome = @game.barbarians.attack
-    assert outcome.catan_is_saved?
+    assert outcome.catan_is_safe?
     assert_equal 2, outcome.strength_of_victorious_party
     assert_equal 2, outcome.strength_of_defeated_party
     assert_equal @game.players, outcome.players_with_strongest_army

@@ -26,20 +26,12 @@ module ApplicationHelper
     link_to action_partial(action_label, image_file_name), url, options
   end
 
-  # Javascript builder to update flash through AJAX.
-  # If flash type doesn't exist, replace with empty string so previous message will go away.
-  def update_flash
-    ['notice', 'error'].each do |type|
-      concat_js "updateFlash('#{type}', '#{flash[type]}')"
-      flash.discard
-    end
-  end
-
   def get_player(player)
     "getPlayer('#{player.id}')"
   end
 
   # return javascript string for whether player has won or has been stripped of winner status.
+  # TODO: if player loses points but still has enough points to win, don't alert.
   def handle_winner_status(player)
     player_js = "getPlayer('#{player.id}')"
     if player.has_enough_victory_points_to_win?
@@ -56,6 +48,10 @@ module ApplicationHelper
 
   def metropolis_image_tag(development_area)
     image_tag("metropolis_#{development_area}.png", :id => "metropolis_#{development_area}", :width => '10%')
+  end
+
+  def merchant_image
+    image_tag('merchant.png', :id => 'merchant')
   end
 
 end
