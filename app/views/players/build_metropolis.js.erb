@@ -4,8 +4,9 @@ var player = <%= get_player(@player) %>
   var metropolis = getMetropolis('<%= @development_area %>')
   metropolis.remove()
   former_player_with_metropolis.adjustVictoryPoints(-2)
-  <% handle_winner_status(@former_player_with_metropolis) %>
   former_player_with_metropolis.enableBuildMetropolisLinks()
+  former_player_with_metropolis.enableDowngradeCityLink()
+  <% handle_winner_status(@former_player_with_metropolis) %>
 <% else %>
   var metropolis = '<%= escape_javascript(metropolis_image_tag(@development_area)).html_safe %>'
 <% end %>
@@ -13,6 +14,7 @@ player.adjustVictoryPoints(2)
 player.bonuses().append(metropolis)
 <% if @player.cities.without_metropolises.empty? %>
   player.disableBuildMetropolisLinks()
+  player.disableDowngradeCityLink()
 <% else %>
   player.disableBuildMetropolisLink('<%= @development_area %>')
 <% end %>

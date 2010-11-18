@@ -17,8 +17,8 @@
       %th activated knights
       %td.count= @game.barbarians.strength_defended_against
     %tr.barbariansAttack
-      %th= link_to image_tag('barbarians.png'), attack_game_barbarians_url(@game), :method => :put
-      %th{:colspan => 2}= link_to 'barbarians attack', attack_game_barbarians_url(@game), :method => :put
+      %th= image_tag('barbarians.png')
+      %th{:colspan => 2}= link_to 'barbarians attack', attack_game_barbarians_url(@game), :method => :put, :remote => true
 
 #players
   - @game.players.each do |player|

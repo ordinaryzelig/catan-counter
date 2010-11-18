@@ -16,9 +16,5 @@
     #overlay
       = image_tag('progress.gif')
 
-    -# flash.
-    - ['notice', 'error'].each do |type|
-      %div{:id => "flash_#{type}"}= flash[type]
-
     #main
       = yield

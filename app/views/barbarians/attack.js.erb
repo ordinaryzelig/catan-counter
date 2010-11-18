@@ -1,0 +1,19 @@
+alert('<%= escape_javascript(@outcome.message) %>')
+
+<% if @outcome.barbarians_are_victorious? %>
+  <% @outcome.players_with_weakest_army.each do |player| %>
+    var player = <%= get_player(player) %>
+    player.adjustVictoryPoints(-1)
+    player.adjustCitiesCount(-1)
+    <% handle_winner_status(player) %>
+  <% end %>
+<% end %>
+
+<% if @outcome.defender_of_catan %>
+  var player = <%= get_player(@outcome.defender_of_catan) %>
+  player.bonuses().append('<%= escape_javascript(image_tag('defender_of_catan.png')).html_safe %>')
+  player.adjustVictoryPoints(1)
+  <% handle_winner_status(@outcome.defender_of_catan) %>
+<% end %>
+
+alert('TODO: deactivate all knights')

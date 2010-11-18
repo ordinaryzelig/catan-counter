@@ -1,7 +1,3 @@
-function updateFlash(type, content) {
-  $('#flash_' + type).html(content)
-}
-
 // Add class 'disabled' to element.
 // Add special click event to link that will determine whether it sends request or not.
 function disableLink(link) {
@@ -107,6 +103,10 @@ function getPlayer(playerId) {
   }
   player.disableDowngradeCityLink = function() {
     disableLink(this.cities().downgradeLink())
+  }
+  player.adjustCitiesCount = function(offset) {
+    var number = this.cities().number()
+    number.html(parseInt(number.html()) + offset)
   }
 
   // settlement AJAX.
@@ -247,7 +247,12 @@ function disableDisabledLinks() {
 function injectOverlayForAjaxLinks() {
   $('a[data-remote="true"]').each(function() {
     $(this).click(function(event) {
-      $('#overlay').bPopup({opacity: 0.4, escClose: false, fadeSpeed: 0, modalClose: false})
+      if($(this).hasClass('disabled')) {
+        return false
+      }
+      else {
+        $('#overlay').bPopup({opacity: 0.4, escClose: false, fadeSpeed: 0, modalClose: false})
+      }
     })
   })
 }
