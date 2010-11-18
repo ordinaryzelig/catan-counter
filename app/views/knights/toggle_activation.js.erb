@@ -1,5 +1,6 @@
 var knight = <%= get_knight(@knight) %>
 // Replace partial with fresh partial.
-// Would like to do a nice flip animation, but switching images is a little difficult.
+// TODO: would like to do a nice flip animation, but switching images is a little difficult.
+// If this is possible, it would help with deactivating knights after barbarians attack.
 knight.html('<%= escape_javascript(render(@knight)).html_safe %>')
 <%= update_total_activated_knights_count(@knight) %>

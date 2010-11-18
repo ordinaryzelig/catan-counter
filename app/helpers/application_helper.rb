@@ -31,6 +31,7 @@ module ApplicationHelper
   end
 
   # return javascript string for whether player has won or has been stripped of winner status.
+  # TODO: if player loses points but still has enough points to win, don't alert.
   def handle_winner_status(player)
     player_js = "getPlayer('#{player.id}')"
     if player.has_enough_victory_points_to_win?
